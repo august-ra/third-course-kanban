@@ -3,12 +3,14 @@ import { Colors } from "../../colors.js"
 
 
 const Card = ({ tag, title, date }) => {
+  const color = Colors[tag]
+
   return (
     <div className="cards__item">
       <div className="cards__card card">
         <div className="card__group">
-          <div className={`card__theme ${Colors[tag]}`}>
-            <p className={Colors[tag]}>{tag}</p>
+          <div className={`card__theme ${color}`}>
+            <p className={color}>{tag}</p>
           </div>
 
           <a href="#popBrowse" target="_self">
