@@ -26,6 +26,7 @@ const PopNewCard = () => {
 
               <Calendar />
             </div>
+
             <div className="pop-new-card__categories categories">
               <p className="categories__p subttl">Категория</p>
               <div className="categories__themes">
