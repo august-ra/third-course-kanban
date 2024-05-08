@@ -14,13 +14,11 @@ const PopNewCard = () => {
               <form className="pop-new-card__form form-new" id="formNewCard" action="#">
                 <div className="form-new__block">
                   <label htmlFor="formTitle" className="subttl">Название задачи</label>
-                  <input className="form-new__input" type="text" name="name" id="formTitle"
-                         placeholder="Введите название задачи..." autoFocus={true}/>
+                  <input className="form-new__input" type="text" name="name" id="formTitle" placeholder="Введите название задачи..." autoFocus={true} />
                 </div>
                 <div className="form-new__block">
                   <label htmlFor="textArea" className="subttl">Описание задачи</label>
-                  <textarea className="form-new__area" name="text" id="textArea"
-                            placeholder="Введите описание задачи..."></textarea>
+                  <textarea className="form-new__area" name="text" id="textArea" placeholder="Введите описание задачи..."></textarea>
                 </div>
               </form>
 
@@ -29,6 +27,7 @@ const PopNewCard = () => {
 
             <div className="pop-new-card__categories categories">
               <p className="categories__p subttl">Категория</p>
+
               <div className="categories__themes">
                 <div className="categories__theme _orange _active-category">
                   <p className="_orange">Web Design</p>
@@ -41,6 +40,7 @@ const PopNewCard = () => {
                 </div>
               </div>
             </div>
+
             <button className="form-new__create _hover01" id="btnCreate">Создать задачу</button>
           </div>
         </div>

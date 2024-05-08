@@ -8,6 +8,7 @@ const Column = ({ title }) => {
       <div className="column__title">
         <p>{title}</p>
       </div>
+
       <div className="cards">
         <Card tag="Web Design" title="Название задачи" date="30.10.23" />
         <Card tag="Research" title="Название задачи" date="30.10.23" />
