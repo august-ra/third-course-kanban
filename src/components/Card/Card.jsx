@@ -1,5 +1,5 @@
 import React from "react"
-import { Colors } from "../../colors.js"
+import { Colors } from "../../data/colors.js"
 
 
 const Card = ({ tag, title, date }) => {
