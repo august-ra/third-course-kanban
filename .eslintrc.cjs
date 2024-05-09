@@ -19,7 +19,7 @@ module.exports = {
     '@stylistic/js/arrow-spacing': [ 'error', { 'before': true, 'after': true } ],
     '@stylistic/js/comma-dangle': [ 'error', 'always-multiline' ],
     '@stylistic/js/function-call-spacing': [ 'error', 'never' ],
-    '@stylistic/js/indent': [ 'error', 2 ],
+    '@stylistic/js/indent': [ 'error', 2, { 'SwitchCase': 1 } ],
     '@stylistic/js/key-spacing': [ 'error', { 'align': 'value' } ],
     '@stylistic/js/no-trailing-spaces': 'error',
     '@stylistic/js/object-curly-spacing': [ 'error', 'always' ],
