@@ -1,7 +1,7 @@
 import React from "react"
 
 
-const CalendarCell = ({ day, isCurrentMonth = true, isWeekend = false, isNow = false, isSelected = false }) => {
+const CalendarCell = ({ date, day, isCurrentMonth = true, isWeekend = false, isNow = false, isSelected = false }) => {
   const classNameSuffixes = []
   classNameSuffixes.push(isCurrentMonth ? "_cell-day" : "_other-month")
   classNameSuffixes.push(     isWeekend ? "_weekend"  : ""            )
@@ -9,7 +9,7 @@ const CalendarCell = ({ day, isCurrentMonth = true, isWeekend = false, isNow = f
   classNameSuffixes.push(    isSelected ? "_selected" : ""            )
 
   return (
-    <div className={`calendar__cell ${classNameSuffixes.join(" ").trim()}`}>{day}</div>
+    <div data-id={date} className={`calendar__cell ${classNameSuffixes.join(" ").trim()}`}>{day}</div>
   )
 }
 
