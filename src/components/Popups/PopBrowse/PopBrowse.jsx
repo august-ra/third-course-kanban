@@ -42,7 +42,7 @@ const PopBrowse = () => {
                 </div>
               </form>
 
-              <Calendar />
+              <Calendar activeDate={new Date()} /> {/* TODO: fix the temporary solution */}
             </div>
             <div className="theme-down__categories theme-down">
               <p className="categories__p subttl">Категория</p>

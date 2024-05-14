@@ -2,7 +2,7 @@ import React from "react"
 import CalendarCell from "./CalendarCell/CalendarCell.jsx"
 
 
-const CalendarCells = ({ monthAsDate }) => {
+const CalendarCells = ({ activeDate, monthAsDate }) => {
   const month = monthAsDate.getMonth()
 
   const getFiveOrSixWeeks = (date) => {
@@ -71,11 +71,12 @@ const CalendarCells = ({ monthAsDate }) => {
   return (
     <div className="calendar__cells">
       {getFiveOrSixWeeks(new Date(monthAsDate)).map((item) => {
-        const isNow = item.date.getDate() === monthAsDate.getDate() && item.date.getMonth() === month
+        const isNow = item.date.getDate() === monthAsDate.getDate() && item.date.getMonth() === month && item.date.getFullYear() === monthAsDate.getFullYear()
         const isWeekend = item.day > 5
-        const key = item.date.shortPrint()
+        const isActive = item.date === activeDate
+        const key = item.date.shortBackwardPrint()
 
-        return <CalendarCell key={key} date={key} day={item.number} isCurrentMonth={!item.other} isWeekend={isWeekend} isNow={isNow} />
+        return <CalendarCell key={key} date={key} day={item.number} isCurrentMonth={!item.other} isWeekend={isWeekend} isNow={isNow} isActive={isActive} />
       })}
     </div>
   )
