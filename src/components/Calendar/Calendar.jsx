@@ -1,11 +1,11 @@
-import React from "react"
-import CalendarHeader from "./CalendarHeader/CalendarHeader.jsx"
-import CalendarCells from "./CalendarCells/CalendarCells.jsx"
+import { useState } from "react"
+import CalendarHeader from "./CalendarHeader/CalendarHeader"
+import CalendarCells from "./CalendarCells/CalendarCells"
 import { Months } from "../../data/months.js"
 
 
 const Calendar = ({ activeDate }) => {
-  const [monthAsDate, setMonthAsDate] = React.useState(new Date())
+  const [monthAsDate, setMonthAsDate] = useState(new Date())
 
   Date.prototype.printMonthAndYear = function () {
     return `${Months[this.getMonth()]} ${this.getFullYear()}`
