@@ -5,8 +5,9 @@ import PopUser from "../Popups/PopUser/PopUser"
 const Header = () => {
   const [isOpened, setIsOpened] = useState(false)
 
-  const handleOpen = () => {
-    console.log(isOpened)
+  const handleOpen = (event) => {
+    event.preventDefault()
+
     setIsOpened((prev) => !prev)
   }
 
