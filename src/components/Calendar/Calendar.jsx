@@ -1,15 +1,10 @@
 import { useState } from "react"
 import CalendarHeader from "./CalendarHeader/CalendarHeader"
 import CalendarCells from "./CalendarCells/CalendarCells"
-import { Months } from "../../data/months.js"
 
 
 const Calendar = ({ activeDate }) => {
   const [monthAsDate, setMonthAsDate] = useState(new Date())
-
-  Date.prototype.printMonthAndYear = function () {
-    return `${Months[this.getMonth()]} ${this.getFullYear()}`
-  }
 
   // TODO: 'prev' and 'next' buttons
   // TODO: day click
@@ -42,15 +37,13 @@ const Calendar = ({ activeDate }) => {
         <input type="hidden" id="datepick_value" value="08.09.2023" />
 
         <div className="calendar__period">
-          {
-            activeDate
-              ? <p className="calendar__p date-end">
-                Срок исполнения: <span className="date-control">{activeDate.printShort()}</span>
-              </p>
-              : <p className="calendar__p date-end">
-                Выберите срок исполнения <span className="date-control"></span>.
-              </p>
-          }
+          <p className="calendar__p date-end">
+            {
+              activeDate
+                ? <>Срок исполнения: <span className="date-control">{activeDate.printShort()}</span></>
+                : <>Выберите срок исполнения <span className="date-control"></span>.</>
+            }
+          </p>
         </div>
       </div>
     </div>

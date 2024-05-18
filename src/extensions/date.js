@@ -1,3 +1,5 @@
+import { Months } from "../data/months"
+
 
 function zeroPad(num, places = 2) {
   return String(num).padStart(places, "0")
@@ -5,6 +7,10 @@ function zeroPad(num, places = 2) {
 
 Date.prototype.shortBackwardPrint = function () {
   return `${this.getFullYear()}-${zeroPad(this.getMonth() + 1)}-${zeroPad(this.getDate())}`
+}
+
+Date.prototype.printMonthAndYear = function () {
+  return `${Months[this.getMonth()]} ${this.getFullYear()}`
 }
 
 Date.prototype.printShort = function () {
@@ -38,10 +44,6 @@ Date.prototype.print = function (withSeconds = false) {
   return parts.join("")
 }
 
-String.prototype.sterilize = function () {
-  return this
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll("/", "&sol;")
+Date.prototype.copy = function () {
+  return new Date(this.getTime())
 }

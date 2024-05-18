@@ -14,12 +14,12 @@ const CalendarCells = ({ activeDate, monthAsDate }) => {
       const dayOfWeek = date.getDay()
 
       if (dayOfWeek > 1) {
-        const date2 = new Date(date)
+        const date2 = date.copy()
         fillLeftPart(new Date(date2.setDate(date2.getDate() - 1)), true)
       }
 
       result.push({
-        date:   new Date(date),
+        date:   date.copy(),
         number: day,
         day:    dayOfWeek,
         other:  other,
@@ -35,7 +35,7 @@ const CalendarCells = ({ activeDate, monthAsDate }) => {
       fillLeftPart(date)
     else
       result.push({
-        date:   new Date(date),
+        date:   date.copy(),
         number: day,
         day:    dayOfWeek,
         other:  false,
@@ -48,7 +48,7 @@ const CalendarCells = ({ activeDate, monthAsDate }) => {
       ++day
       dayOfWeek = dayOfWeek > 6 ? 1 : dayOfWeek + 1
 
-      const isOtherMonth = date.getMonth() !== month
+      const isOtherMonth = date.getMonth() !== month || date.getFullYear() !== monthAsDate.getFullYear()
 
       if (isOtherMonth) {
         day = date.getDate()
@@ -58,7 +58,7 @@ const CalendarCells = ({ activeDate, monthAsDate }) => {
       }
 
       result.push({
-        date:   new Date(date),
+        date:   date.copy(),
         number: day,
         day:    dayOfWeek,
         other:  isOtherMonth,
@@ -70,10 +70,10 @@ const CalendarCells = ({ activeDate, monthAsDate }) => {
 
   return (
     <div className="calendar__cells">
-      {getFiveOrSixWeeks(new Date(monthAsDate)).map((item) => {
-        const isNow = item.date.getDate() === monthAsDate.getDate() && item.date.getMonth() === month && item.date.getFullYear() === monthAsDate.getFullYear()
+      {getFiveOrSixWeeks(monthAsDate.copy()).map((item) => {
+        const isNow = item.date.getTime() === monthAsDate.getTime()
         const isWeekend = item.day > 5
-        const isActive = item.date === activeDate
+        const isActive = item.date.getTime() === dt.getTime()
         const key = item.date.shortBackwardPrint()
 
         return <CalendarCell key={key} date={key} day={item.number} isCurrentMonth={!item.other} isWeekend={isWeekend} isNow={isNow} isActive={isActive} />
