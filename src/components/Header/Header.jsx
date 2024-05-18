@@ -2,10 +2,25 @@ import { useState } from "react"
 import PopUser from "../Popups/PopUser/PopUser"
 
 
-const Header = () => {
+const Header = ({ onAddTask }) => {
   const [isOpened, setIsOpened] = useState(false)
 
-  const handleOpen = (event) => {
+  function handleAddTask(event) {
+    event.preventDefault()
+
+    const date = new Date()
+    const newTask = {
+      id:     date.getTime(),
+      theme:  "Web Design",
+      title:  "Test",
+      date:   date.printShort(),
+      status: "Без статуса",
+    }
+
+    onAddTask(newTask)
+  }
+
+  function handleOpen(event) {
     event.preventDefault()
 
     setIsOpened((prev) => !prev)
@@ -23,7 +38,7 @@ const Header = () => {
           </div>
 
           <nav className="header__nav">
-            <button className="header__btn-main-new _hover01" id="btnMainNew">
+            <button className="header__btn-main-new _hover01" id="btnMainNew" onClick={handleAddTask}>
               <a href="#popNewCard">Создать новую задачу</a>
             </button>
 
