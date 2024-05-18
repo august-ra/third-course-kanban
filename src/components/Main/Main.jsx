@@ -1,5 +1,6 @@
 import React from "react"
 import Column from "../Column/Column"
+import { Statuses } from "../../data/statuses.js"
 
 
 const Main = () => {
@@ -8,11 +9,9 @@ const Main = () => {
       <div className="container">
         <div className="main__block">
           <div className="main__content">
-            <Column title="Без статуса" />
-            <Column title="Нужно сделать" />
-            <Column title="В работе" />
-            <Column title="Тестирование" />
-            <Column title="Готово" />
+            {Statuses.map((item, index) => {
+              return <Column key={index} title={item} />
+            })}
           </div>
         </div>
       </div>

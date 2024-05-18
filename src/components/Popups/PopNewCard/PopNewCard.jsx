@@ -1,5 +1,6 @@
 import React from "react"
 import Calendar from "../../Calendar/Calendar"
+import { Themes, ThemesColors } from "../../../data/themes.js"
 
 
 const PopNewCard = () => {
@@ -29,15 +30,15 @@ const PopNewCard = () => {
               <p className="categories__p subttl">Категория</p>
 
               <div className="categories__themes">
-                <div className="categories__theme _orange _active-category">
-                  <p className="_orange">Web Design</p>
-                </div>
-                <div className="categories__theme _green">
-                  <p className="_green">Research</p>
-                </div>
-                <div className="categories__theme _purple">
-                  <p className="_purple">Copywriting</p>
-                </div>
+                {Themes.map((item, index) => {
+                  const color = ThemesColors[item]
+
+                  return (
+                    <div key={index} className={`categories__theme ${color} _active-category`}>
+                      <p className={color}>{item}</p>
+                    </div>
+                  )
+                })}
               </div>
             </div>
 
