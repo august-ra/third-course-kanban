@@ -70,14 +70,16 @@ const CalendarCells = ({ activeDate, monthAsDate }) => {
 
   return (
     <div className="calendar__cells">
-      {getFiveOrSixWeeks(monthAsDate.copy()).map((item) => {
-        const isNow = item.date.getTime() === monthAsDate.getTime()
-        const isWeekend = item.day > 5
-        const isActive = item.date.getTime() === dt.getTime()
-        const key = item.date.shortBackwardPrint()
+      {
+        getFiveOrSixWeeks(monthAsDate.copy()).map((item) => {
+          const isNow = item.date.getTime() === monthAsDate.getTime()
+          const isWeekend = item.day > 5
+          const isActive = item.date.getTime() === dt.getTime()
+          const key = item.date.shortBackwardPrint()
 
-        return <CalendarCell key={key} date={key} day={item.number} isCurrentMonth={!item.other} isWeekend={isWeekend} isNow={isNow} isActive={isActive} />
-      })}
+          return <CalendarCell key={key} date={key} day={item.number} isCurrentMonth={!item.other} isWeekend={isWeekend} isNow={isNow} isActive={isActive} />
+        })
+      }
     </div>
   )
 }

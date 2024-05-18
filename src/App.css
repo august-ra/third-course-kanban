@@ -464,6 +464,9 @@ body {
   letter-spacing: -0.2px;
   cursor: pointer;
 }
+._weekend {
+  color: #BE94A6;
+}
 .calendar__nav {
   width: 100%;
   display: flex;

@@ -9,9 +9,11 @@ const Main = () => {
       <div className="container">
         <div className="main__block">
           <div className="main__content">
-            {Statuses.map((item, index) => {
-              return <Column key={index} title={item} />
-            })}
+            {
+              Statuses.map((item, index) => {
+                return <Column key={index} title={item} />
+              })
+            }
           </div>
         </div>
       </div>

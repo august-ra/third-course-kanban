@@ -30,15 +30,17 @@ const PopNewCard = () => {
               <p className="categories__p subttl">Категория</p>
 
               <div className="categories__themes">
-                {Themes.map((item, index) => {
-                  const color = ThemesColors[item]
+                {
+                  Themes.map((item, index) => {
+                    const color = ThemesColors[item]
 
-                  return (
-                    <div key={index} className={`categories__theme ${color} _active-category`}>
-                      <p className={color}>{item}</p>
-                    </div>
-                  )
-                })}
+                    return (
+                      <div key={index} className={`categories__theme ${color} _active-category`}>
+                        <p className={color}>{item}</p>
+                      </div>
+                    )
+                  })
+                }
               </div>
             </div>
 
