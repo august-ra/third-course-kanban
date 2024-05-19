@@ -3,7 +3,7 @@ import Calendar from "../../Calendar/Calendar"
 import { Themes, ThemesColors } from "../../../data/themes"
 
 
-const PopNewCard = () => {
+function PopNewCard() {
   return (
     <div className="pop-new-card" id="popNewCard">
       <div className="pop-new-card__container">

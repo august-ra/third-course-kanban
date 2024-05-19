@@ -2,7 +2,7 @@ import React from "react"
 import { ThemesColors } from "../../data/themes"
 
 
-const Card = ({ tag, title, date }) => {
+function Card({ tag, title, date }) {
   const color = ThemesColors[tag]
 
   return (

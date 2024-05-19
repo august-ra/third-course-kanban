@@ -2,7 +2,7 @@ import { useState } from "react"
 import PopUser from "../Popups/PopUser/PopUser"
 
 
-const Header = ({ onAddTask }) => {
+function Header({ onAddTask }) {
   const [isPopUserOpened, setPopUserIsOpened] = useState(false)
 
   function handleAddTask(event) {

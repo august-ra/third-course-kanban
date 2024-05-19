@@ -2,7 +2,7 @@ import React from "react"
 import CalendarCell from "../CalendarCell/CalendarCell"
 
 
-const CalendarCells = ({ activeDate, monthAsDate }) => {
+function CalendarCells({ activeDate, monthAsDate }) {
   const month = monthAsDate.getMonth()
 
   const getFiveOrSixWeeks = (date) => {

@@ -2,7 +2,7 @@ import React from "react"
 import { ShortDaysOfWeek } from "../../../data/datesParts"
 
 
-const CalendarHeader = () => {
+function CalendarHeader() {
   return (
     <div className="calendar__days-names">
       {

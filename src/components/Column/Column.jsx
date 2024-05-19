@@ -2,7 +2,7 @@ import React from "react"
 import Card from "../Card/Card"
 
 
-const Column = ({ title, tasks }) => {
+function Column({ title, tasks }) {
   return (
     <div className="main__column column">
       <div className="column__title">

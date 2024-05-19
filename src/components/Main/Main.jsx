@@ -3,7 +3,7 @@ import Column from "../Column/Column"
 import { Statuses } from "../../data/statuses"
 
 
-const Main = ({ tasks }) => {
+function Main({ tasks }) {
   return (
     <main className="main">
       <div className="container">
