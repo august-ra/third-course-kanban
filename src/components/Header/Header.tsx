@@ -8,7 +8,7 @@ interface HeaderProps {
 }
 
 function Header({ onAddTask }: HeaderProps): JSX.Element {
-  const [isOpened, setIsOpened]: [boolean, Dispatch<SetStateAction<boolean>>] = useState<boolean>(false)
+  const [isPopUserOpened, setIsPopUserOpened]: [boolean, Dispatch<SetStateAction<boolean>>] = useState<boolean>(false)
 
   function handleAddTask(event) {
     event.preventDefault()
@@ -25,10 +25,10 @@ function Header({ onAddTask }: HeaderProps): JSX.Element {
     onAddTask(newTask)
   }
 
-  function handleOpen(event) {
+  function handleOpenPopUser(event) {
     event.preventDefault()
 
-    setIsOpened((prev) => !prev)
+    setIsPopUserOpened((prev) => !prev)
   }
 
   return (
@@ -47,9 +47,9 @@ function Header({ onAddTask }: HeaderProps): JSX.Element {
               <a href="#popNewCard">Создать новую задачу</a>
             </button>
 
-            <a href="#user-set-target" className="header__user _hover02" onClick={handleOpen}>Ivan Ivanov</a>
+            <a href="#user-set-target" className="header__user _hover02" onClick={handleOpenPopUser}>Ivan Ivanov</a>
 
-            { isOpened && <PopUser /> }
+            { isPopUserOpened && <PopUser /> }
           </nav>
         </div>
       </div>
