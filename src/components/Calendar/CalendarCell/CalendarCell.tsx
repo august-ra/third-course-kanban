@@ -1,7 +1,16 @@
 import { JSX } from "react"
 
 
-function CalendarCell({ date, day, isCurrentMonth = true, isWeekend = false, isNow = false, isActive = false }): JSX.Element {
+interface CalendarCellProps {
+  date:           string
+  day:            number
+  isCurrentMonth: boolean
+  isWeekend:      boolean
+  isNow:          boolean
+  isActive:       boolean
+}
+
+function CalendarCell({ date, day, isCurrentMonth = true, isWeekend = false, isNow = false, isActive = false }: CalendarCellProps): JSX.Element {
   const classNameSuffixes = []
   classNameSuffixes.push(isCurrentMonth ? "_cell-day"   : "_other-month")
   classNameSuffixes.push(     isWeekend ? "_weekend"    : ""            )

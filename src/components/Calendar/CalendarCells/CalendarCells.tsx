@@ -2,11 +2,24 @@ import { JSX } from "react"
 import CalendarCell from "../CalendarCell/CalendarCell"
 
 
-function CalendarCells({ activeDate, monthAsDate }): JSX.Element {
+interface CalendarCellsProps {
+  activeDate:   Date
+  currentDate?: Date // TODO: check it again about <?>
+  monthAsDate:  Date
+}
+
+interface CalendarCellData {
+  date:   Date
+  number: number
+  day:    number
+  other:  boolean
+}
+
+function CalendarCells({ activeDate, monthAsDate }: CalendarCellsProps): JSX.Element {
   const month = monthAsDate.getMonth()
 
   const getFiveOrSixWeeks = (date) => {
-    const result = []
+    const result: CalendarCellData[] = []
 
     /* recursion */
     const fillLeftPart = function (date, other = false) {
@@ -70,10 +83,10 @@ function CalendarCells({ activeDate, monthAsDate }): JSX.Element {
 
   return (
     <div className="calendar__cells">
-      {getFiveOrSixWeeks(monthAsDate.copy()).map((item) => {
+      {getFiveOrSixWeeks(monthAsDate.copy()).map((item: CalendarCellData) => {
         const isNow = item.date.getTime() === monthAsDate.getTime()
         const isWeekend = item.day > 5
-        const isActive = item.date.getTime() === dt.getTime()
+        const isActive = item.date.getTime() === activeDate.getTime()
         const key = item.date.shortBackwardPrint()
 
         return <CalendarCell key={key} date={key} day={item.number} isCurrentMonth={!item.other} isWeekend={isWeekend} isNow={isNow} isActive={isActive} />

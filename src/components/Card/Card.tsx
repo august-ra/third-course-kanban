@@ -2,7 +2,13 @@ import { JSX } from "react"
 import { ThemesColors } from "../../data/themes"
 
 
-function Card({ tag, title, date }): JSX.Element {
+interface CardProps {
+  tag:   string
+  title: string
+  date:  string
+}
+
+function Card({ tag, title, date }: CardProps): JSX.Element {
   const color = ThemesColors[tag]
 
   return (

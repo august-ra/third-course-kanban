@@ -2,7 +2,11 @@ import { JSX } from "react"
 import Card from "../Card/Card"
 
 
-function Column({ title }): JSX.Element {
+interface ColumnProps {
+  title: string
+}
+
+function Column({ title }: ColumnProps): JSX.Element {
   return (
     <div className="main__column column">
       <div className="column__title">

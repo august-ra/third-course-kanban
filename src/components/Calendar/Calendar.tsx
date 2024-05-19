@@ -3,7 +3,11 @@ import CalendarHeader from "./CalendarHeader/CalendarHeader"
 import CalendarCells from "./CalendarCells/CalendarCells"
 
 
-function Calendar({ activeDate }): JSX.Element {
+interface CalendarProps {
+  activeDate?: Date
+}
+
+function Calendar({ activeDate }: CalendarProps): JSX.Element {
   const [monthAsDate, setMonthAsDate] = useState(new Date())
 
   // TODO: 'prev' and 'next' buttons
