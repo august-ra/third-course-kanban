@@ -1,8 +1,8 @@
-import React from "react"
+import { JSX } from "react"
 import PopUser from "../Popups/PopUser/PopUser.js"
 
 
-const Header = () => {
+function Header(): JSX.Element {
   return (
     <header className="header">
       <div className="container">

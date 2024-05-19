@@ -1,8 +1,8 @@
-import React from "react"
+import { JSX } from "react"
 import Column from "../Column/Column"
 
 
-const Main = () => {
+function Main(): JSX.Element {
   return (
     <main className="main">
       <div className="container">

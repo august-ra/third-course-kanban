@@ -1,7 +1,7 @@
-import React from "react"
+import { JSX } from "react"
 
 
-const CalendarHeader = () => {
+function CalendarHeader(): JSX.Element {
   return (
     <div className="calendar__days-names">
       <div className="calendar__day-name">пн</div>

@@ -1,8 +1,8 @@
-import React from "react"
+import { JSX } from "react"
 import Calendar from "../../Calendar/Calendar"
 
 
-const PopBrowse = () => {
+function PopBrowse(): JSX.Element {
   return (
     <div className="pop-browse" id="popBrowse">
       <div className="pop-browse__container">

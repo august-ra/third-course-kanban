@@ -1,7 +1,7 @@
-import React from "react"
+import { JSX } from "react"
 
 
-const PopUser = () => {
+function PopUser(): JSX.Element {
   return (
     <div className="header__pop-user-set pop-user-set" id="user-set-target">
       {/*<!-- <a href="">x</a> -->*/}

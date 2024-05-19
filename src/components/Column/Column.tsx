@@ -1,8 +1,8 @@
-import React from "react"
+import { JSX } from "react"
 import Card from "../Card/Card"
 
 
-const Column = ({ title }) => {
+function Column({ title }): JSX.Element {
   return (
     <div className="main__column column">
       <div className="column__title">

@@ -1,7 +1,7 @@
-import React from "react"
+import { JSX } from "react"
 
 
-const CalendarCell = ({ date, day, isCurrentMonth = true, isWeekend = false, isNow = false, isActive = false }) => {
+function CalendarCell({ date, day, isCurrentMonth = true, isWeekend = false, isNow = false, isActive = false }): JSX.Element {
   const classNameSuffixes = []
   classNameSuffixes.push(isCurrentMonth ? "_cell-day"   : "_other-month")
   classNameSuffixes.push(     isWeekend ? "_weekend"    : ""            )

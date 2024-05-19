@@ -1,8 +1,8 @@
-import React from "react"
+import { JSX } from "react"
 import CalendarCell from "./CalendarCell/CalendarCell"
 
 
-const CalendarCells = ({ activeDate, monthAsDate }) => {
+function CalendarCells({ activeDate, monthAsDate }): JSX.Element {
   const month = monthAsDate.getMonth()
 
   const getFiveOrSixWeeks = (date) => {

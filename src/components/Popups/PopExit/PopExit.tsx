@@ -1,7 +1,7 @@
-import React from "react"
+import { JSX } from "react"
 
 
-const PopExit = () => {
+function PopExit(): JSX.Element {
   return (
     <div className="pop-exit" id="popExit">
       <div className="pop-exit__container">

@@ -1,4 +1,4 @@
-import React from "react"
+import { JSX } from "react"
 import "./App.css"
 import Header from "./components/Header/Header"
 import Main from "./components/Main/Main"
@@ -7,7 +7,7 @@ import PopExit from "./components/Popups/PopExit/PopExit"
 import PopNewCard from "./components/Popups/PopNewCard/PopNewCard"
 
 
-function App() {
+function App(): JSX.Element {
   return (
     <div className="wrapper">
       {/* <!--pop - up start--> */}
