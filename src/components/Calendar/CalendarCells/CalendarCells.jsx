@@ -1,5 +1,5 @@
 import React from "react"
-import CalendarCell from "./CalendarCell/CalendarCell"
+import CalendarCell from "../CalendarCell/CalendarCell"
 
 
 const CalendarCells = ({ activeDate, monthAsDate }) => {
@@ -74,7 +74,7 @@ const CalendarCells = ({ activeDate, monthAsDate }) => {
         getFiveOrSixWeeks(monthAsDate.copy()).map((item) => {
           const isNow = item.date.getTime() === monthAsDate.getTime()
           const isWeekend = item.day > 5
-          const isActive = item.date.getTime() === dt.getTime()
+          const isActive = activeDate && item.date.getTime() === activeDate.getTime()
           const key = item.date.shortBackwardPrint()
 
           return <CalendarCell key={key} date={key} day={item.number} isCurrentMonth={!item.other} isWeekend={isWeekend} isNow={isNow} isActive={isActive} />

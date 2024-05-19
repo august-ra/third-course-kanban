@@ -1,7 +1,6 @@
 import React from "react"
 import Column from "../Column/Column"
 import { Statuses } from "../../data/statuses.js"
-import { Tasks } from "../../data/tasks.js"
 
 
 const Main = ({ tasks }) => {
