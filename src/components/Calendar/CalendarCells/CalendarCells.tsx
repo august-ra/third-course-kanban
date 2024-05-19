@@ -1,5 +1,5 @@
 import { JSX } from "react"
-import CalendarCell from "./CalendarCell/CalendarCell"
+import CalendarCell from "../CalendarCell/CalendarCell"
 
 
 function CalendarCells({ activeDate, monthAsDate }): JSX.Element {
