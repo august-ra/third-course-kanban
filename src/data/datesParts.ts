@@ -1,5 +1,5 @@
 
-export const Months = [
+export const Months: string[] = [
   "Январь",
   "Февраль",
   "Март",
