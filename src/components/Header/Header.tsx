@@ -1,17 +1,22 @@
 import { JSX } from "react"
-import PopUser from "../Popups/PopUser/PopUser.js"
+import PopUser from "../Popups/PopUser/PopUser"
+import { TaskData } from "../../data/tasks"
 
 
-function Header(): JSX.Element {
+interface HeaderProps {
+  onAddTask: (task: TaskData) => void
+}
+
+function Header({ onAddTask }: HeaderProps): JSX.Element {
   return (
     <header className="header">
       <div className="container">
         <div className="header__block">
           <div className="header__logo _show _light">
-            <a href="" target="_self"><img src="images/logo.png" alt="logo" /></a>
+            <a href="" target="_self"><img src="/images/logo.png" alt="logo" /></a>
           </div>
           <div className="header__logo _dark">
-            <a href="" target="_self"><img src="images/logo_dark.png" alt="logo" /></a>
+            <a href="" target="_self"><img src="/images/logo_dark.png" alt="logo" /></a>
           </div>
 
           <nav className="header__nav">
