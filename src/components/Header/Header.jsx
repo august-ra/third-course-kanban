@@ -3,7 +3,7 @@ import PopUser from "../Popups/PopUser/PopUser"
 
 
 const Header = ({ onAddTask }) => {
-  const [isOpened, setIsOpened] = useState(false)
+  const [isPopUserOpened, setPopUserIsOpened] = useState(false)
 
   function handleAddTask(event) {
     event.preventDefault()
@@ -20,10 +20,10 @@ const Header = ({ onAddTask }) => {
     onAddTask(newTask)
   }
 
-  function handleOpen(event) {
+  function handleOpenPopUser(event) {
     event.preventDefault()
 
-    setIsOpened((prev) => !prev)
+    setPopUserIsOpened((prev) => !prev)
   }
 
   return (
@@ -42,9 +42,9 @@ const Header = ({ onAddTask }) => {
               <a href="#popNewCard">Создать новую задачу</a>
             </button>
 
-            <a href="#user-set-target" className="header__user _hover02" onClick={handleOpen}>Ivan Ivanov</a>
+            <a href="#user-set-target" className="header__user _hover02" onClick={handleOpenPopUser}>Ivan Ivanov</a>
 
-            { isOpened && <PopUser /> }
+            { isPopUserOpened && <PopUser /> }
           </nav>
         </div>
       </div>
