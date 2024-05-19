@@ -1,4 +1,4 @@
-import { JSX, useState } from "react"
+import { Dispatch, JSX, SetStateAction, useState } from "react"
 import CalendarHeader from "./CalendarHeader/CalendarHeader"
 import CalendarCells from "./CalendarCells/CalendarCells"
 
@@ -8,7 +8,7 @@ interface CalendarProps {
 }
 
 function Calendar({ activeDate }: CalendarProps): JSX.Element {
-  const [monthAsDate, setMonthAsDate] = useState(new Date())
+  const [monthAsDate, setMonthAsDate]: [Date, Dispatch<SetStateAction<Date>>] = useState<Date>(new Date())
 
   // TODO: 'prev' and 'next' buttons
   // TODO: day click

@@ -11,7 +11,7 @@ interface CalendarCellProps {
 }
 
 function CalendarCell({ date, day, isCurrentMonth = true, isWeekend = false, isNow = false, isActive = false }: CalendarCellProps): JSX.Element {
-  const classNameSuffixes = []
+  const classNameSuffixes: string[] = []
   classNameSuffixes.push(isCurrentMonth ? "_cell-day"   : "_other-month")
   classNameSuffixes.push(     isWeekend ? "_weekend"    : ""            )
   classNameSuffixes.push(         isNow ? "_current"    : ""            )

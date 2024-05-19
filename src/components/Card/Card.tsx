@@ -9,7 +9,7 @@ interface CardProps {
 }
 
 function Card({ tag, title, date }: CardProps): JSX.Element {
-  const color = ThemesColors[tag]
+  const color: string = ThemesColors[tag]
 
   return (
     <div className="cards__item">

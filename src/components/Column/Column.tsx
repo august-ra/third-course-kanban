@@ -1,12 +1,14 @@
 import { JSX } from "react"
 import Card from "../Card/Card"
+import { TaskData } from "../../data/tasks"
 
 
 interface ColumnProps {
   title: string
+  tasks: TaskData[]
 }
 
-function Column({ title }: ColumnProps): JSX.Element {
+function Column({ title, tasks }: ColumnProps): JSX.Element {
   return (
     <div className="main__column column">
       <div className="column__title">
@@ -14,9 +16,11 @@ function Column({ title }: ColumnProps): JSX.Element {
       </div>
 
       <div className="cards">
-        <Card tag="Web Design" title="Название задачи" date="30.10.23" />
-        <Card tag="Research" title="Название задачи" date="30.10.23" />
-        <Card tag="Copywriting" title="Название задачи" date="30.10.23" />
+        {
+          tasks.map((item: TaskData) => {
+            return <Card key={item.id} tag={item.theme} title={item.title} date={item.date} />
+          })
+        }
       </div>
     </div>
   )

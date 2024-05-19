@@ -15,19 +15,19 @@ interface CalendarCellData {
   other:  boolean
 }
 
-function CalendarCells({ activeDate, monthAsDate }: CalendarCellsProps): JSX.Element {
-  const month = monthAsDate.getMonth()
+function CalendarCells({ activeDate, currentDate, monthAsDate }: CalendarCellsProps): JSX.Element {
+  const month: number = monthAsDate.getMonth()
 
-  const getFiveOrSixWeeks = (date) => {
+  const getFiveOrSixWeeks = (date: Date): CalendarCellData[] => {
     const result: CalendarCellData[] = []
 
     /* recursion */
-    const fillLeftPart = function (date, other = false) {
-      const day       = date.getDate()
-      const dayOfWeek = date.getDay()
+    const fillLeftPart = function (date: Date, other: boolean = false) {
+      const day:       number = date.getDate()
+      const dayOfWeek: number = date.getDay()
 
       if (dayOfWeek > 1) {
-        const date2 = date.copy()
+        const date2: Date = date.copy()
         fillLeftPart(new Date(date2.setDate(date2.getDate() - 1)), true)
       }
 
@@ -41,8 +41,8 @@ function CalendarCells({ activeDate, monthAsDate }: CalendarCellsProps): JSX.Ele
 
     date.setDate(1)
 
-    let dayOfWeek = date.getDay()
-    let day       = 1
+    let dayOfWeek: number = date.getDay()
+    let day:       number = 1
 
     if (dayOfWeek > 1)
       fillLeftPart(date)
@@ -54,14 +54,14 @@ function CalendarCells({ activeDate, monthAsDate }: CalendarCellsProps): JSX.Ele
         other:  false,
       })
 
-    let calendarLimit = 42
+    let calendarLimit: number = 42
 
     while (result.length < calendarLimit) {
       date.setDate(date.getDate() + 1)
       ++day
       dayOfWeek = dayOfWeek > 6 ? 1 : dayOfWeek + 1
 
-      const isOtherMonth = date.getMonth() !== month || date.getFullYear() !== monthAsDate.getFullYear()
+      const isOtherMonth: boolean = date.getMonth() !== month || date.getFullYear() !== monthAsDate.getFullYear()
 
       if (isOtherMonth) {
         day = date.getDate()
@@ -83,14 +83,16 @@ function CalendarCells({ activeDate, monthAsDate }: CalendarCellsProps): JSX.Ele
 
   return (
     <div className="calendar__cells">
-      {getFiveOrSixWeeks(monthAsDate.copy()).map((item: CalendarCellData) => {
-        const isNow = item.date.getTime() === monthAsDate.getTime()
-        const isWeekend = item.day > 5
-        const isActive = item.date.getTime() === activeDate.getTime()
-        const key = item.date.shortBackwardPrint()
+      {
+        getFiveOrSixWeeks(monthAsDate.copy()).map((item: CalendarCellData) => {
+          const isNow:     boolean = item.date.getTime() === monthAsDate.getTime()
+          const isWeekend: boolean = item.day > 5
+          const isActive:  boolean = activeDate && item.date.getTime() === activeDate.getTime()
+          const key:       string  = item.date.shortBackwardPrint()
 
-        return <CalendarCell key={key} date={key} day={item.number} isCurrentMonth={!item.other} isWeekend={isWeekend} isNow={isNow} isActive={isActive} />
-      })}
+          return <CalendarCell key={key} date={key} day={item.number} isCurrentMonth={!item.other} isWeekend={isWeekend} isNow={isNow} isActive={isActive} />
+        })
+      }
     </div>
   )
 }

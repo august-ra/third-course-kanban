@@ -1,4 +1,4 @@
-import { JSX } from "react"
+import { Dispatch, JSX, SetStateAction, useState } from "react"
 import PopUser from "../Popups/PopUser/PopUser"
 import { TaskData } from "../../data/tasks"
 
@@ -8,6 +8,29 @@ interface HeaderProps {
 }
 
 function Header({ onAddTask }: HeaderProps): JSX.Element {
+  const [isOpened, setIsOpened]: [boolean, Dispatch<SetStateAction<boolean>>] = useState<boolean>(false)
+
+  function handleAddTask(event) {
+    event.preventDefault()
+
+    const date:    Date     = new Date()
+    const newTask: TaskData = {
+      id:     date.getTime(),
+      theme:  "Web Design",
+      title:  "Test",
+      date:   date.printShort(),
+      status: "Без статуса",
+    }
+
+    onAddTask(newTask)
+  }
+
+  function handleOpen(event) {
+    event.preventDefault()
+
+    setIsOpened((prev) => !prev)
+  }
+
   return (
     <header className="header">
       <div className="container">
@@ -20,13 +43,13 @@ function Header({ onAddTask }: HeaderProps): JSX.Element {
           </div>
 
           <nav className="header__nav">
-            <button className="header__btn-main-new _hover01" id="btnMainNew">
+            <button className="header__btn-main-new _hover01" id="btnMainNew" onClick={handleAddTask}>
               <a href="#popNewCard">Создать новую задачу</a>
             </button>
 
-            <a href="#user-set-target" className="header__user _hover02">Ivan Ivanov</a>
+            <a href="#user-set-target" className="header__user _hover02" onClick={handleOpen}>Ivan Ivanov</a>
 
-            <PopUser />
+            { isOpened && <PopUser /> }
           </nav>
         </div>
       </div>
