@@ -1,5 +1,5 @@
 import React from "react"
-import PopUser from "../Popups/PopUser/PopUser"
+import PopUser from "../Popups/PopUser/PopUser.js"
 
 
 const Header = () => {
