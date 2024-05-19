@@ -1,6 +1,6 @@
 import React from "react"
 import Column from "../Column/Column"
-import { Statuses } from "../../data/statuses.js"
+import { Statuses } from "../../data/statuses"
 
 
 const Main = ({ tasks }) => {

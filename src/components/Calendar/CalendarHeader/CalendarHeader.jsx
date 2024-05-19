@@ -1,5 +1,5 @@
 import React from "react"
-import { ShortDaysOfWeek } from "../../../data/datesParts.js"
+import { ShortDaysOfWeek } from "../../../data/datesParts"
 
 
 const CalendarHeader = () => {

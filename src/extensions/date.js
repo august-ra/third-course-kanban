@@ -1,4 +1,4 @@
-import { Months } from "../data/datesParts.js"
+import { Months } from "../data/datesParts"
 
 
 function zeroPad(num, places = 2) {

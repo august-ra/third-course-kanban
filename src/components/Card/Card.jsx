@@ -1,5 +1,5 @@
 import React from "react"
-import { ThemesColors } from "../../data/themes.js"
+import { ThemesColors } from "../../data/themes"
 
 
 const Card = ({ tag, title, date }) => {

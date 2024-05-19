@@ -1,6 +1,6 @@
 import React from "react"
 import Calendar from "../../Calendar/Calendar"
-import { Themes, ThemesColors } from "../../../data/themes.js"
+import { Themes, ThemesColors } from "../../../data/themes"
 
 
 const PopNewCard = () => {
