@@ -1,9 +1,9 @@
 import React from "react"
-import { ThemesColors } from "../../data/themes"
+import { TopicsColors } from "../../data/topics"
 
 
 function Card({ tag, title, date }) {
-  const color = ThemesColors[tag]
+  const color = TopicsColors[tag]
 
   return (
     <div className="cards__item">

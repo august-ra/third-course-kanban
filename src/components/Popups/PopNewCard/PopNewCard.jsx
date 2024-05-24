@@ -1,6 +1,6 @@
 import React from "react"
 import Calendar from "../../Calendar/Calendar"
-import { Themes, ThemesColors } from "../../../data/themes"
+import { Topics, TopicsColors } from "../../../data/topics"
 
 
 function PopNewCard() {
@@ -31,8 +31,8 @@ function PopNewCard() {
 
               <div className="categories__themes">
                 {
-                  Themes.map((item, index) => {
-                    const color = ThemesColors[item]
+                  Topics.map((item, index) => {
+                    const color = TopicsColors[item]
 
                     return (
                       <div key={index} className={`categories__theme ${color} _active-category`}>
