@@ -1,18 +1,18 @@
 
-export const Themes: string[] = [
+export const Topics: string[] = [
   "Web Design",
   "Research",
   "Copywriting",
 ]
 
 
-interface ThemesColorsData {
+interface TopicsColorsData {
   "Web Design":  string
   "Research":    string
   "Copywriting": string
 }
 
-export const ThemesColors: ThemesColorsData = {
+export const TopicsColors: TopicsColorsData = {
   "Web Design":  "_orange",
   "Research":    "_green",
   "Copywriting": "_purple",

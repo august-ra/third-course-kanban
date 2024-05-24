@@ -1,6 +1,6 @@
 import { FC as ReactFC } from "react"
 import Calendar from "../../Calendar/Calendar"
-import { Themes, ThemesColors } from "../../../data/themes"
+import { Topics, TopicsColors } from "../../../data/topics"
 
 
 function PopNewCard(): ReactFC {
@@ -31,8 +31,8 @@ function PopNewCard(): ReactFC {
 
               <div className="categories__themes">
                 {
-                  Themes.map((item: string, index: number) => {
-                    const color: string = ThemesColors[item]
+                  Topics.map((item: string, index: number) => {
+                    const color: string = TopicsColors[item]
 
                     return (
                       <div key={index} className={`categories__theme ${color} _active-category`}>

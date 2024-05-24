@@ -1,6 +1,6 @@
 import { FC as ReactFC } from "react"
 import Graphics from "../Graphics/Graphics"
-import { ThemesColors } from "../../data/themes"
+import { TopicsColors } from "../../data/topics"
 
 
 interface CardProps {
@@ -10,7 +10,7 @@ interface CardProps {
 }
 
 function Card({ tag, title, date }: CardProps): ReactFC {
-  const color: string = ThemesColors[tag]
+  const color: string = TopicsColors[tag]
 
   return (
     <div className="cards__item">
