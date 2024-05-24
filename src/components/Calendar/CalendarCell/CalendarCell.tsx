@@ -1,4 +1,4 @@
-import { JSX } from "react"
+import { FC as ReactFC } from "react"
 
 
 interface CalendarCellProps {
@@ -10,7 +10,7 @@ interface CalendarCellProps {
   isActive:       boolean
 }
 
-function CalendarCell({ date, day, isCurrentMonth = true, isWeekend = false, isNow = false, isActive = false }: CalendarCellProps): JSX.Element {
+function CalendarCell({ date, day, isCurrentMonth = true, isWeekend = false, isNow = false, isActive = false }: CalendarCellProps): ReactFC {
   const classNameSuffixes: string[] = []
   classNameSuffixes.push(isCurrentMonth ? "_cell-day"   : "_other-month")
   classNameSuffixes.push(     isWeekend ? "_weekend"    : ""            )

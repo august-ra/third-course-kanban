@@ -1,4 +1,4 @@
-import { Dispatch, JSX, SetStateAction, useEffect, useState } from "react"
+import { Dispatch, FC as ReactFC, SetStateAction, useEffect, useState } from "react"
 import "./App.css"
 import Header from "./components/Header/Header"
 import Loader from "./components/Loader/Loader"
@@ -9,7 +9,7 @@ import PopNewCard from "./components/Popups/PopNewCard/PopNewCard"
 import { TaskData, Tasks } from "./data/tasks"
 
 
-function App(): JSX.Element {
+function App(): ReactFC {
   const [isLoading, setIsLoading]: [boolean, Dispatch<SetStateAction<boolean>>] = useState<boolean>(true)
   const [tasks, setTasks]: [TaskData[], Dispatch<SetStateAction<TaskData[]>>] = useState<TaskData[]>(Tasks)
 

@@ -1,8 +1,8 @@
-import { JSX } from "react"
+import { FC as ReactFC } from "react"
 import Calendar from "../../Calendar/Calendar"
 
 
-function PopBrowse(): JSX.Element {
+function PopBrowse(): ReactFC {
   return (
     <div className="pop-browse" id="popBrowse">
       <div className="pop-browse__container">

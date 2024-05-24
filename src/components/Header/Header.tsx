@@ -1,4 +1,4 @@
-import { Dispatch, JSX, SetStateAction, useState } from "react"
+import { Dispatch, FC as ReactFC, SetStateAction, useState } from "react"
 import PopUser from "../Popups/PopUser/PopUser"
 import { TaskData } from "../../data/tasks"
 
@@ -7,7 +7,7 @@ interface HeaderProps {
   onAddTask: (task: TaskData) => void
 }
 
-function Header({ onAddTask }: HeaderProps): JSX.Element {
+function Header({ onAddTask }: HeaderProps): ReactFC {
   const [isPopUserOpened, setIsPopUserOpened]: [boolean, Dispatch<SetStateAction<boolean>>] = useState<boolean>(false)
 
   function handleAddTask(event) {

@@ -1,7 +1,7 @@
-import { JSX } from "react"
+import { FC as ReactFC } from "react"
 
 
-function PopUser(): JSX.Element {
+function PopUser(): ReactFC {
   return (
     <div className="header__pop-user-set pop-user-set" id="user-set-target">
       {/*<!-- <a href="">x</a> -->*/}

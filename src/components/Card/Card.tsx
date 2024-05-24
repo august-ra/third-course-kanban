@@ -1,4 +1,4 @@
-import { JSX } from "react"
+import { FC as ReactFC } from "react"
 import Graphics from "../Graphics/Graphics"
 import { ThemesColors } from "../../data/themes"
 
@@ -9,7 +9,7 @@ interface CardProps {
   date:  string
 }
 
-function Card({ tag, title, date }: CardProps): JSX.Element {
+function Card({ tag, title, date }: CardProps): ReactFC {
   const color: string = ThemesColors[tag]
 
   return (

@@ -1,4 +1,4 @@
-import { JSX } from "react"
+import { FC as ReactFC } from "react"
 import CalendarCell from "../CalendarCell/CalendarCell"
 
 
@@ -15,7 +15,7 @@ interface CalendarCellData {
   other:  boolean
 }
 
-function CalendarCells({ activeDate, currentDate, monthAsDate }: CalendarCellsProps): JSX.Element {
+function CalendarCells({ activeDate, currentDate, monthAsDate }: CalendarCellsProps): ReactFC {
   const month: number = monthAsDate.getMonth()
 
   const getFiveOrSixWeeks = (date: Date): CalendarCellData[] => {

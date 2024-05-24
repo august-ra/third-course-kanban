@@ -1,4 +1,4 @@
-import { JSX } from "react"
+import { FC as ReactFC } from "react"
 import Column from "../Column/Column"
 import { Statuses } from "../../data/statuses"
 import { TaskData } from "../../data/tasks"
@@ -8,7 +8,7 @@ interface MainProps {
   tasks: TaskData[]
 }
 
-function Main({ tasks }: MainProps): JSX.Element {
+function Main({ tasks }: MainProps): ReactFC {
   return (
     <main className="main">
       <div className="container">

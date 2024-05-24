@@ -1,4 +1,4 @@
-import { Dispatch, JSX, SetStateAction, useState } from "react"
+import { Dispatch, FC as ReactFC, SetStateAction, useState } from "react"
 import CalendarHeader from "./CalendarHeader/CalendarHeader"
 import CalendarCells from "./CalendarCells/CalendarCells"
 import Graphics from "../Graphics/Graphics"
@@ -8,7 +8,7 @@ interface CalendarProps {
   activeDate?: Date
 }
 
-function Calendar({ activeDate }: CalendarProps): JSX.Element {
+function Calendar({ activeDate }: CalendarProps): ReactFC {
   const [monthAsDate, setMonthAsDate]: [Date, Dispatch<SetStateAction<Date>>] = useState<Date>(new Date())
 
   // TODO: 'prev' and 'next' buttons

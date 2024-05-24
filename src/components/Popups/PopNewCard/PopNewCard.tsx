@@ -1,9 +1,9 @@
-import { JSX } from "react"
+import { FC as ReactFC } from "react"
 import Calendar from "../../Calendar/Calendar"
 import { Themes, ThemesColors } from "../../../data/themes"
 
 
-function PopNewCard(): JSX.Element {
+function PopNewCard(): ReactFC {
   return (
     <div className="pop-new-card" id="popNewCard">
       <div className="pop-new-card__container">

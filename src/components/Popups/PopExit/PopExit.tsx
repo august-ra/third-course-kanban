@@ -1,7 +1,7 @@
-import { JSX } from "react"
+import { FC as ReactFC } from "react"
 
 
-function PopExit(): JSX.Element {
+function PopExit(): ReactFC {
   return (
     <div className="pop-exit" id="popExit">
       <div className="pop-exit__container">

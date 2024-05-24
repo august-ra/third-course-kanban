@@ -1,8 +1,8 @@
-import { JSX } from "react"
+import { FC as ReactFC } from "react"
 import { ShortDaysOfWeek } from "../../../data/datesParts"
 
 
-function CalendarHeader(): JSX.Element {
+function CalendarHeader(): ReactFC {
   return (
     <div className="calendar__days-names">
       {

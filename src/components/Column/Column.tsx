@@ -1,4 +1,4 @@
-import { JSX } from "react"
+import { FC as ReactFC } from "react"
 import Card from "../Card/Card"
 import { TaskData } from "../../data/tasks"
 
@@ -8,7 +8,7 @@ interface ColumnProps {
   tasks: TaskData[]
 }
 
-function Column({ title, tasks }: ColumnProps): JSX.Element {
+function Column({ title, tasks }: ColumnProps): ReactFC {
   return (
     <div className="main__column column">
       <div className="column__title">
