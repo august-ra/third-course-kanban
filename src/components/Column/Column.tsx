@@ -18,7 +18,7 @@ function Column({ title, tasks }: ColumnProps): ReactFC {
       <div className="cards">
         {
           tasks.map((item: TaskData) => {
-            return <Card key={item.id} tag={item.theme} title={item.title} date={item.date} />
+            return <Card key={item.id} topic={item.topic} title={item.title} date={item.date} />
           })
         }
       </div>

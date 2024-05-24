@@ -16,7 +16,7 @@ function Header({ onAddTask }: HeaderProps): ReactFC {
     const date:    Date     = new Date()
     const newTask: TaskData = {
       id:     date.getTime(),
-      theme:  "Web Design",
+      topic:  "Web Design",
       title:  "Test",
       date:   date.printShort(),
       status: "Без статуса",
