@@ -14,7 +14,9 @@ function App() {
   const [tasks, setTasks] = useState(Tasks)
 
   useEffect(() => {
-    setTimeout(() => setIsLoading(false), 2000)
+    const id = setTimeout(() => setIsLoading(false), 2000)
+
+    return () => clearTimeout(id)
   }, [])
 
   function onAddTask(newTask) {
@@ -35,7 +37,7 @@ function App() {
       {
         isLoading
           ? <Loader />
-          : <Main tasks={tasks}/>
+          : <Main tasks={tasks} />
       }
     </div>
   )
