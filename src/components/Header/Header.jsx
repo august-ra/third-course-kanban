@@ -11,7 +11,7 @@ function Header({ onAddTask }) {
     const date = new Date()
     const newTask = {
       id:     date.getTime(),
-      theme:  "Web Design",
+      topic:  "Web Design",
       title:  "Test",
       date:   date.printShort(),
       status: "Без статуса",

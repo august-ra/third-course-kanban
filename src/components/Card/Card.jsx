@@ -2,15 +2,15 @@ import React from "react"
 import { TopicsColors } from "../../data/topics"
 
 
-function Card({ tag, title, date }) {
-  const color = TopicsColors[tag]
+function Card({ topic, title, date }) {
+  const color = TopicsColors[topic]
 
   return (
     <div className="cards__item">
       <div className="cards__card card">
         <div className="card__group">
           <div className={`card__theme ${color}`}>
-            <p className={color}>{tag}</p>
+            <p className={color}>{topic}</p>
           </div>
 
           <a href="#popBrowse" target="_self">
