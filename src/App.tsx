@@ -14,7 +14,9 @@ function App(): ReactFC {
   const [tasks, setTasks]: [TaskData[], Dispatch<SetStateAction<TaskData[]>>] = useState<TaskData[]>(Tasks)
 
   useEffect(() => {
-    setTimeout(() => setIsLoading(false), 2000)
+    const id: number = setTimeout(() => setIsLoading(false), 2000)
+
+    return () => clearTimeout(id)
   }, [])
 
   function onAddTask(newTask: TaskData) {
