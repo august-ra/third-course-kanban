@@ -2,7 +2,7 @@ import React from "react"
 import Calendar from "../../Calendar/Calendar"
 
 
-const PopBrowse = () => {
+function PopBrowse() {
   return (
     <div className="pop-browse" id="popBrowse">
       <div className="pop-browse__container">

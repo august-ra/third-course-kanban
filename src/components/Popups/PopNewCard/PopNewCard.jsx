@@ -1,8 +1,9 @@
 import React from "react"
 import Calendar from "../../Calendar/Calendar"
+import { Topics, TopicsColors } from "../../../data/topics"
 
 
-const PopNewCard = () => {
+function PopNewCard() {
   return (
     <div className="pop-new-card" id="popNewCard">
       <div className="pop-new-card__container">
@@ -29,15 +30,17 @@ const PopNewCard = () => {
               <p className="categories__p subttl">Категория</p>
 
               <div className="categories__themes">
-                <div className="categories__theme _orange _active-category">
-                  <p className="_orange">Web Design</p>
-                </div>
-                <div className="categories__theme _green">
-                  <p className="_green">Research</p>
-                </div>
-                <div className="categories__theme _purple">
-                  <p className="_purple">Copywriting</p>
-                </div>
+                {
+                  Topics.map((item, index) => {
+                    const color = TopicsColors[item]
+
+                    return (
+                      <div key={index} className={`categories__theme ${color} _active-category`}>
+                        <p className={color}>{item}</p>
+                      </div>
+                    )
+                  })
+                }
               </div>
             </div>
 

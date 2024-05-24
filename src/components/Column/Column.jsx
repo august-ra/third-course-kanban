@@ -2,7 +2,7 @@ import React from "react"
 import Card from "../Card/Card"
 
 
-const Column = ({ title }) => {
+function Column({ title, tasks }) {
   return (
     <div className="main__column column">
       <div className="column__title">
@@ -10,9 +10,11 @@ const Column = ({ title }) => {
       </div>
 
       <div className="cards">
-        <Card tag="Web Design" title="Название задачи" date="30.10.23" />
-        <Card tag="Research" title="Название задачи" date="30.10.23" />
-        <Card tag="Copywriting" title="Название задачи" date="30.10.23" />
+        {
+          tasks.map((item) => {
+            return <Card key={item.id} topic={item.topic} title={item.title} date={item.date} />
+          })
+        }
       </div>
     </div>
   )

@@ -1,4 +1,14 @@
 
+export const ShortDaysOfWeek = [
+  "пн",
+  "вт",
+  "ср",
+  "чт",
+  "пт",
+  "сб",
+  "вс",
+]
+
 export const Months = [
   "Январь",
   "Февраль",

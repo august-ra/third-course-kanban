@@ -3,7 +3,7 @@ import CalendarHeader from "./CalendarHeader/CalendarHeader"
 import CalendarCells from "./CalendarCells/CalendarCells"
 
 
-const Calendar = ({ activeDate }) => {
+function Calendar({ activeDate }) {
   const [monthAsDate, setMonthAsDate] = useState(new Date())
 
   // TODO: 'prev' and 'next' buttons

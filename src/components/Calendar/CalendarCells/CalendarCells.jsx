@@ -1,8 +1,8 @@
 import React from "react"
-import CalendarCell from "./CalendarCell/CalendarCell"
+import CalendarCell from "../CalendarCell/CalendarCell"
 
 
-const CalendarCells = ({ activeDate, monthAsDate }) => {
+function CalendarCells({ activeDate, monthAsDate }) {
   const month = monthAsDate.getMonth()
 
   const getFiveOrSixWeeks = (date) => {
@@ -70,14 +70,16 @@ const CalendarCells = ({ activeDate, monthAsDate }) => {
 
   return (
     <div className="calendar__cells">
-      {getFiveOrSixWeeks(monthAsDate.copy()).map((item) => {
-        const isNow = item.date.getTime() === monthAsDate.getTime()
-        const isWeekend = item.day > 5
-        const isActive = item.date.getTime() === dt.getTime()
-        const key = item.date.shortBackwardPrint()
+      {
+        getFiveOrSixWeeks(monthAsDate.copy()).map((item) => {
+          const isNow = item.date.getTime() === monthAsDate.getTime()
+          const isWeekend = item.day > 5
+          const isActive = activeDate && item.date.getTime() === activeDate.getTime()
+          const key = item.date.shortBackwardPrint()
 
-        return <CalendarCell key={key} date={key} day={item.number} isCurrentMonth={!item.other} isWeekend={isWeekend} isNow={isNow} isActive={isActive} />
-      })}
+          return <CalendarCell key={key} date={key} day={item.number} isCurrentMonth={!item.other} isWeekend={isWeekend} isNow={isNow} isActive={isActive} />
+        })
+      }
     </div>
   )
 }
