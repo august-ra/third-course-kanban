@@ -7,7 +7,7 @@ import { Statuses } from "../../data/statuses"
 function Main({ tasks }) {
   return (
     <Styled.Main>
-      <Styled.MainContainer>
+      <Styled.Container>
         <Styled.MainBlock>
           <Styled.MainContent>
             {
@@ -19,7 +19,7 @@ function Main({ tasks }) {
             }
           </Styled.MainContent>
         </Styled.MainBlock>
-      </Styled.MainContainer>
+      </Styled.Container>
     </Styled.Main>
   )
 }

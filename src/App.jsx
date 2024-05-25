@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import "./App.css"
+import GlobalStyle, * as Styled from "./components/Global.styled"
 import Header from "./components/Header/Header"
 import Loader from "./components/Loader/Loader"
 import Main from "./components/Main/Main"
@@ -24,7 +25,9 @@ function App() {
   }
 
   return (
-    <div className="wrapper">
+    <Styled.Wrapper>
+      <GlobalStyle />
+
       {/* <!--pop - up start--> */}
 
       <PopExit />
@@ -39,7 +42,7 @@ function App() {
           ? <Loader />
           : <Main tasks={tasks} />
       }
-    </div>
+    </Styled.Wrapper>
   )
 }
 
