@@ -31,3 +31,9 @@ export const Hover03 = css`
     color: #FFFFFF;
   }
 `
+
+export const PopTarget = css`
+  &:target {
+    display: block;
+  }
+`

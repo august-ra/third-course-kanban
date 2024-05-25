@@ -1,20 +1,23 @@
 import React from "react"
+import * as Styled from "./PopUser.styled"
 
 
 function PopUser() {
   return (
-    <div className="header__pop-user-set pop-user-set" id="user-set-target">
+    <Styled.PopUserHeader id="user-set-target">
       {/*<!-- <a href="">x</a> -->*/}
-      <p className="pop-user-set__name">Ivan Ivanov</p>
-      <p className="pop-user-set__mail">ivan.ivanov@gmail.com</p>
+      <Styled.PopUserName>Ivan Ivanov</Styled.PopUserName>
+      <Styled.PopUserMail>ivan.ivanov@gmail.com</Styled.PopUserMail>
 
-      <div className="pop-user-set__theme">
-        <p>Темная тема</p>
-        <input type="checkbox" className="checkbox" name="checkbox"/>
-      </div>
+      <Styled.PopUserTheme>
+        <Styled.PopUserThemeName>Темная тема</Styled.PopUserThemeName>
+        <Styled.PopUserThemeCheckbox type="checkbox" className="checkbox" name="checkbox" />
+      </Styled.PopUserTheme>
 
-      <button type="button" className="_hover03"><a href="#popExit">Выйти</a></button>
-    </div>
+      <Styled.PopUserButtonExit type="button" className="_hover03">
+        <a href="#popExit">Выйти</a>
+      </Styled.PopUserButtonExit>
+    </Styled.PopUserHeader>
   )
 }
 
