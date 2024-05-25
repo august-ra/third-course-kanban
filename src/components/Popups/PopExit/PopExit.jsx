@@ -1,28 +1,27 @@
 import React from "react"
+import * as Styled from "./PopExit.styled"
 
 
 function PopExit() {
   return (
-    <div className="pop-exit" id="popExit">
-      <div className="pop-exit__container">
-        <div className="pop-exit__block">
-          <div className="pop-exit__ttl">
-            <h2>Выйти из аккаунта?</h2>
-          </div>
+    <Styled.PopExit id="popExit">
+      <Styled.PopExitContainer>
+        <Styled.PopExitBlock>
+          <Styled.PopExitTitle>Выйти из аккаунта?</Styled.PopExitTitle>
 
-          <form className="pop-exit__form" id="formExit" action="#">
-            <div className="pop-exit__form-group">
-              <button className="pop-exit__exit-yes _hover01" id="exitYes">
+          <Styled.PopExitForm id="formExit" action="#">
+            <Styled.PopExitFormGroup>
+              <Styled.PopExitFormButton $yes={true} id="exitYes">
                 <a href="modal/signin.html">Да, выйти</a>
-              </button>
-              <button className="pop-exit__exit-no _hover03" id="exitNo">
+              </Styled.PopExitFormButton>
+              <Styled.PopExitFormButton $yes={false} id="exitNo">
                 <a href="main.html">Нет, остаться</a>
-              </button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
+              </Styled.PopExitFormButton>
+            </Styled.PopExitFormGroup>
+          </Styled.PopExitForm>
+        </Styled.PopExitBlock>
+      </Styled.PopExitContainer>
+    </Styled.PopExit>
   )
 }
 
