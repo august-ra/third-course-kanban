@@ -1,4 +1,5 @@
 import React from "react"
+import * as Styled from "./Card.styled"
 import * as Graphics from "../Graphics/Graphics"
 import { TopicsColors } from "../../data/topics"
 
@@ -7,35 +8,35 @@ function Card({ topic, title, date }) {
   const color = TopicsColors[topic]
 
   return (
-    <div className="cards__item">
-      <div className="cards__card card">
-        <div className="card__group">
-          <div className={`card__theme ${color}`}>
-            <p className={color}>{topic}</p>
-          </div>
+    <Styled.CardItem>
+      <Styled.Card>
+        <Styled.CardGroup>
+          <Styled.CardTheme $color={color}>
+            <Styled.CardThemeText>{topic}</Styled.CardThemeText>
+          </Styled.CardTheme>
 
           <a href="#popBrowse" target="_self">
-            <div className="card__btn">
-              <div></div>
-              <div></div>
-              <div></div>
-            </div>
+            <Styled.CardButton>
+              <Styled.CardButtonDot />
+              <Styled.CardButtonDot />
+              <Styled.CardButtonDot />
+            </Styled.CardButton>
           </a>
-        </div>
+        </Styled.CardGroup>
 
-        <div className="card__content">
+        <Styled.CardContent>
           <a href="" target="_blank">
-            <h3 className="card__title">{title}</h3>
+            <Styled.CardTitle>{title}</Styled.CardTitle>
           </a>
 
-          <div className="card__date">
+          <Styled.CardDate>
             <Graphics.Calendar />
 
-            <p>{date}</p>
-          </div>
-        </div>
-      </div>
-    </div>
+            <Styled.CardDateValue>{date}</Styled.CardDateValue>
+          </Styled.CardDate>
+        </Styled.CardContent>
+      </Styled.Card>
+    </Styled.CardItem>
   )
 }
 
