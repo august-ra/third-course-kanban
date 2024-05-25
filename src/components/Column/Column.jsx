@@ -1,22 +1,23 @@
 import React from "react"
+import * as Styled from "./Column.styled"
 import Card from "../Card/Card"
 
 
 function Column({ title, tasks }) {
   return (
-    <div className="main__column column">
-      <div className="column__title">
-        <p>{title}</p>
-      </div>
+    <Styled.Column>
+      <Styled.ColumnTitle>
+        <Styled.ColumnTitleText>{title}</Styled.ColumnTitleText>
+      </Styled.ColumnTitle>
 
-      <div className="cards">
+      <Styled.ColumnCards>
         {
           tasks.map((item) => {
-            return <Card key={item.id} topic={item.topic} title={item.title} date={item.date} />
+            return <Card key={item.id} topic={item.topic} title={item.title} date={item.date}/>
           })
         }
-      </div>
-    </div>
+      </Styled.ColumnCards>
+    </Styled.Column>
   )
 }
 
