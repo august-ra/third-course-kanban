@@ -16,7 +16,7 @@ export const CalendarTitle = styled.p`
   margin-bottom: 14px;
   padding: 0 7px;
 
-  ${Styled.CommonSubtitle}
+  ${Styled.CommonSubtitle};
 
   @media screen and (max-width: 660px) {
     padding: 0;
@@ -84,7 +84,7 @@ export const CalendarPeriodText = styled.p`
   line-height: 1;
 
   & span {
-    color: #000000;
+    color: ${(props) => props.theme.text};
   }
 
   @media screen and (max-width: 660px) {
@@ -109,7 +109,7 @@ export const CalendarDayName = styled.div`
   line-height: normal;
   letter-spacing: -0.2px;
 
-  ${(props) => props.$weekend && CalendarWeekend}
+  ${(props) => props.$weekend && CalendarWeekend};
 
   @media screen and (max-width: 660px) {
     font-size: 14px;
@@ -144,14 +144,10 @@ export const CalendarCell = styled.div`
   letter-spacing: -0.2px;
   cursor: pointer;
 
-  ${(props) => props.$currentMonth
-    ? CalendarNormalCell
-    : CalendarOtherMonth
-  }
-
-  ${(props) => props.$weekend && CalendarWeekend}
-  ${(props) => props.$active && CalendarActiveCell}
-  ${(props) => props.$current && CalendarCurrentDay}
+  ${(props) => props.$currentMonth ? CalendarNormalCell : CalendarOtherMonth};
+  ${(props) => props.$weekend && CalendarWeekend};
+  ${(props) => props.$active && CalendarActiveCell};
+  ${(props) => props.$current && CalendarCurrentDay};
 
   @media screen and (max-width: 660px) {
     width: 42px;
@@ -163,13 +159,13 @@ export const CalendarCell = styled.div`
 export const CalendarNormalCell = css`
   &:hover {
     color: #94A6BE;
-    background-color: #EAEEF6;
+    background-color: ${(props) => props.theme.body};
   }
 `
 
 export const CalendarActiveCell = css`
   background-color: #94A6BE;
-  color: #FFFFFF;
+  color: ${(props) => props.theme.isLigth() ? "#FFFFFF" : "#151419"};
 `
 
 export const CalendarCurrentDay = css`

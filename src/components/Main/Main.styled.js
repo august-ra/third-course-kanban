@@ -6,7 +6,7 @@ export const Container = Styled.Container
 
 export const Main = styled.main`
   width: 100%;
-  background-color: #EAEEF6;
+  background-color: ${(props) => props.theme.body};
 `
 
 export const MainBlock = styled.div`

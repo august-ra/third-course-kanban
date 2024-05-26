@@ -1,4 +1,4 @@
-import styled from "styled-components"
+import styled, { css } from "styled-components"
 import * as Styled from "../../SharedStyles"
 
 
@@ -17,11 +17,17 @@ export const PopUser = styled.div`
   text-align: center;
   z-index: 2;
 
+  ${(props) => props.theme.isDark() && css`
+    border: 0.7px solid #4E5566;
+    background: #202229;
+    box-shadow: 0 10px 39px 0 rgba(148, 166, 190, 0.40);
+  `};
+
   ${Styled.PopTarget}
 `
 
 export const PopUserName = styled.p`
-  color: #000;
+  color: ${(props) => props.theme.text};
   font-size: 14px;
   font-weight: 500;
   line-height: 21px;
@@ -45,7 +51,7 @@ export const PopUserTheme = styled.div`
 `
 
 export const PopUserThemeName = styled.p`
-  color: #000;
+  color: ${(props) => props.theme.text};
   font-size: 14px;
   line-height: 21px;
   letter-spacing: -0.14px;
@@ -56,7 +62,7 @@ export const PopUserThemeCheckbox = styled.input`
   width: 24px;
   height: 13px;
   border-radius: 100px;
-  background: #EAEEF6;
+  background: ${(props) => props.theme.body};
   outline: none;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -70,7 +76,7 @@ export const PopUserThemeCheckbox = styled.input`
     width: 11px;
     height: 11px;
     border-radius: 50%;
-    background-color: #94A6BE;
+    background-color: ${(props) => props.theme.isLight() ? "#94A6BE" : "#565EEF"};
     transition: 0.5s;
   }
 
@@ -83,11 +89,11 @@ export const PopUserButtonExit = styled.button`
   width: 72px;
   height: 30px;
   background: transparent;
-  color: #565EEF;
+  color: ${(props) => props.theme.extra};
   border-radius: 4px;
-  border: 1px solid #565EEF;
+  border: 1px solid ${(props) => props.theme.extra};
 
   & a {
-    color: #565EEF;
+    color: inherit;
   }
 `

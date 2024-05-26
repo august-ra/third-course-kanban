@@ -14,7 +14,7 @@ export const PopNewCard = styled.div`
   left: 0;
   z-index: 6;
 
-  ${Styled.PopTarget}
+  ${Styled.PopTarget};
 
   @media screen and (max-width: 660px) {
     top: 70px;
@@ -30,7 +30,7 @@ export const PopNewCardContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(0, 0, 0, 0.${(props) => props.theme.isLight() ? "4" : "8"});
 
   @media screen and (max-width: 660px) {
     padding: 0;
@@ -41,13 +41,15 @@ export const PopNewCardContainer = styled.div`
 export const PopNewCardBlock = styled.div`
   display: block;
   margin: 0 auto;
-  background-color: #FFFFFF;
+  background-color: ${(props) => props.theme.back};
   max-width: 630px;
   width: 100%;
   padding: 40px 30px 48px;
   border-radius: 10px;
-  border: 0.7px solid #D4DBE5;
+  border: 0.7px solid ${(props) => props.theme.popBlock};
   position: relative;
+
+  ${(props) => props.theme.isDark() && css`box-shadow: 0 4px 67px -12px rgba(0, 0, 0, 0.13);`};
 
   @media screen and (max-width: 660px) {
     border-radius: 0;
@@ -110,7 +112,7 @@ export const PopNewCardFormBlock = styled.div`
 `
 
 export const PopNewCardFormLabel = styled.label`
-  ${Styled.CommonSubtitle}
+  ${Styled.CommonSubtitle};
 `
 
 const PopNewCardFormInput = css`
@@ -142,7 +144,7 @@ const PopNewCardFormInput = css`
 export const PopNewCardFormTaskName = styled.input`
   margin: 20px 0;
 
-  ${PopNewCardFormInput}
+  ${PopNewCardFormInput};
 `
 
 export const PopNewCardFormTaskDescription = styled.textarea`
@@ -150,7 +152,7 @@ export const PopNewCardFormTaskDescription = styled.textarea`
   margin-top: 14px;
   height: 200px;
 
-  ${PopNewCardFormInput}
+  ${PopNewCardFormInput};
 `
 
 export const PopNewCardCategories = styled.div`
@@ -160,7 +162,7 @@ export const PopNewCardCategories = styled.div`
 export const PopNewCardCategoriesSubtitle = styled.p`
   margin-bottom: 14px;
 
-  ${Styled.CommonSubtitle}
+  ${Styled.CommonSubtitle};
 `
 
 export const PopNewCardCategoriesThemes = styled.div`
@@ -177,13 +179,9 @@ export const PopNewCardCategoriesTheme = styled.div`
   padding: 8px 20px;
   border-radius: 24px;
   margin-right: 7px;
+  opacity: ${(props) => props.$active ? "1 !important;" : "opacity: 0.4;"};
 
-  ${(props) => props.$active
-    ? css`opacity: 1 !important;`
-    : css`opacity: 0.4;`
-  }
-
-  ${(props) => getCSSForColor(props.$color)}
+  ${(props) => getCSSForColor(props.theme, props.$color)};
 `
 
 export const PopNewCardCategoriesThemeText = styled.p`
@@ -206,7 +204,7 @@ export const PopNewCardButtonCreate = styled.button`
   color: #FFFFFF;
   float: right;
 
-  ${Styled.Hover01}
+  ${Styled.Hover01};
 
   @media screen and (max-width: 495px) {
     width: 100%;

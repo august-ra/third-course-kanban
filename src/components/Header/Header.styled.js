@@ -7,7 +7,7 @@ export const Container = Styled.Container
 export const Header = styled.header`
   width: 100%;
   margin: 0 auto;
-  background-color: #FFFFFF;
+  background-color: ${(props) => props.theme.back};
 `
 
 export const HeaderBlock = styled.div`
@@ -52,7 +52,7 @@ export const HeaderNavButton = styled.button`
     color: #FFFFFF;
   }
 
-  ${Styled.Hover01}
+  ${Styled.Hover01};
 
   @media screen and (max-width: 495px) {
     z-index: 3;
@@ -74,9 +74,9 @@ export const HeaderNavUser = styled.a`
   justify-content: center;
   font-size: 14px;
   line-height: 20px;
-  color: #565EEF;
+  color: ${(props) => props.theme.extra};
 
-  ${Styled.Hover02}
+  ${Styled.Hover02};
 
   &::after {
     content: "";
@@ -84,8 +84,8 @@ export const HeaderNavUser = styled.a`
     width: 6px;
     height: 6px;
     border-radius: 1px;
-    border-left: 1.9px solid #565EEF;
-    border-bottom: 1.9px solid #565EEF;
+    border-left: 1.9px solid ${(props) => props.theme.extra};
+    border-bottom: 1.9px solid ${(props) => props.theme.extra};
     transform: rotate(-45deg);
     margin: -6px 0 0 5px;
     padding: 0;

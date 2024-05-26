@@ -31,8 +31,10 @@ export const Hover02 = css`
 
 export const Hover03 = css`
   &:hover {
-    background-color: #33399b;
+    background-color: ${(props) => props.theme.hover03};
     color: #FFFFFF;
+
+    ${(props) => props.theme.isDark() && css`border-color: #565EEF;`};
   }
 `
 
@@ -41,14 +43,29 @@ export const Orange = css`
   color: #FF6D00;
 `
 
+export const OrangeNegative = css`
+    background-color: #FF6D00;
+    color: #FFE4C2;
+`
+
 export const Green = css`
   background-color: #B4FDD1;
   color: #06B16E;
 `
 
+export const GreenNegative = css`
+    background-color: #06B16E;
+    color: #B4FDD1;
+`
+
 export const Purple = css`
   background-color: #E9D4FF;
   color: #9A48F1;
+`
+
+export const PurpleNegative = css`
+    background-color: #9A48F1;
+    color: #E9D4FF;
 `
 
 export const Gray = css`
@@ -64,7 +81,7 @@ export const PopTarget = css`
 `
 
 export const CommonSubtitle = css`
-  color: #000;
+  color: ${(props) => props.theme.text};
   font-size: 14px;
   font-weight: 600;
   line-height: 1;
