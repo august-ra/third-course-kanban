@@ -14,7 +14,9 @@ function Main({ tasks }) {
               Statuses.map((item, index) => {
                 const filteredTasks = tasks.filter((task) => task.status === item)
 
-                return <Column key={index} title={item} tasks={filteredTasks} />
+                return (
+                  <Column key={index} title={item} tasks={filteredTasks} />
+                )
               })
             }
           </Styled.MainContent>

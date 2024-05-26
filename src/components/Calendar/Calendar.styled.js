@@ -65,7 +65,7 @@ export const CalendarPeriodText = styled.p`
   color: #94A6BE;
   font-size: 10px;
   line-height: 1;
-  
+
   & span {
     color: #000000;
   }

@@ -2,7 +2,7 @@ import styled from "styled-components"
 import * as Styled from "../../SharedStyles"
 
 
-export const PopUserHeader = styled.div`
+export const PopUser = styled.div`
   display: block;
   position: absolute;
   top: 61px;

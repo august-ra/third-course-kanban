@@ -55,7 +55,7 @@ export const HeaderNavButton = styled.button`
   ${Styled.Hover01}
 `
 
-export const HeaderNavUser = styled.nav`
+export const HeaderNavUser = styled.a`
   height: 20px;
   display: flex;
   flex-wrap: nowrap;

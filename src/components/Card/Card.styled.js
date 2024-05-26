@@ -103,7 +103,7 @@ export const CardDate = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  
+
   & svg {
     width: 13px;
   }

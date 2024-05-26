@@ -13,7 +13,9 @@ function Column({ title, tasks }) {
       <Styled.ColumnCards>
         {
           tasks.map((item) => {
-            return <Card key={item.id} topic={item.topic} title={item.title} date={item.date}/>
+            return (
+              <Card key={item.id} topic={item.topic} title={item.title} date={item.date} />
+            )
           })
         }
       </Styled.ColumnCards>

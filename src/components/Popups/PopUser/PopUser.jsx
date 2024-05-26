@@ -4,7 +4,7 @@ import * as Styled from "./PopUser.styled"
 
 function PopUser() {
   return (
-    <Styled.PopUserHeader id="user-set-target">
+    <Styled.PopUser id="user-set-target">
       {/*<!-- <a href="">x</a> -->*/}
       <Styled.PopUserName>Ivan Ivanov</Styled.PopUserName>
       <Styled.PopUserMail>ivan.ivanov@gmail.com</Styled.PopUserMail>
@@ -17,7 +17,7 @@ function PopUser() {
       <Styled.PopUserButtonExit type="button" className="_hover03">
         <a href="#popExit">Выйти</a>
       </Styled.PopUserButtonExit>
-    </Styled.PopUserHeader>
+    </Styled.PopUser>
   )
 }
 
