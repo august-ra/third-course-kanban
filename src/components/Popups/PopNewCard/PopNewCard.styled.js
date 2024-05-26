@@ -1,5 +1,6 @@
 import styled, { css } from "styled-components"
 import * as Styled from "../../SharedStyles"
+import { getCSSForColor } from "../../hooks.js"
 
 
 export const PopNewCard = styled.div`
@@ -150,17 +151,7 @@ export const PopNewCardCategoriesTheme = styled.div`
 
   ${(props) => props.$active && css`opacity: 1 !important;`}
 
-  ${(props) => {
-    switch (props.$color) {
-      case "orange":
-        return Styled.Orange
-      case "purple":
-        return Styled.Purple
-      case "green":
-      default:
-        return Styled.Green
-    }
-  }}
+  ${(props) => getCSSForColor(props.$color)}
 `
 
 export const PopNewCardCategoriesThemeText = styled.p`

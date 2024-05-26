@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import * as Styled from "../SharedStyles"
+import { getCSSForColor } from "../hooks.js"
 
 
 export const CardItem = styled.div`
@@ -48,17 +48,7 @@ export const CardTheme = styled.div`
   padding: 5px 14px;
   border-radius: 18px;
 
-  ${(props) => {
-    switch (props.$color) {
-      case "orange":
-        return Styled.Orange
-      case "purple":
-        return Styled.Purple
-      case "green":
-      default:
-        return Styled.Green
-    }
-  }}
+  ${(props) => getCSSForColor(props.$color)}
 `
 
 export const CardThemeText = styled.p`
