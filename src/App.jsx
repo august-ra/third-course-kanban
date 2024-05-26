@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import "./App.css"
+import { ThemeProvider } from "styled-components"
 import GlobalStyle, * as Styled from "./components/Global.styled"
 import Header from "./components/Header/Header"
 import Loader from "./components/Loader/Loader"
@@ -7,11 +8,13 @@ import Main from "./components/Main/Main"
 import PopBrowse from "./components/Popups/PopBrowse/PopBrowse"
 import PopExit from "./components/Popups/PopExit/PopExit"
 import PopNewCard from "./components/Popups/PopNewCard/PopNewCard"
+import { darkTheme, lightTheme } from "./components/Themes"
 import { Tasks } from "./data/tasks"
 
 
 function App() {
   const [isLoading, setIsLoading] = useState(true)
+  const [theme, setTheme] = useState("light")
   const [tasks, setTasks] = useState(Tasks)
 
   useEffect(() => {
@@ -20,29 +23,39 @@ function App() {
     return () => clearTimeout(id)
   }, [])
 
+  function onToggleTheme() {
+    if (theme === "light") {
+      setTheme("dark")
+    } else {
+      setTheme("light")
+    }
+  }
+
   function onAddTask(newTask) {
     setTasks([...tasks, newTask])
   }
 
   return (
-    <Styled.Wrapper>
-      <GlobalStyle />
+    <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
+      <Styled.Wrapper>
+        <GlobalStyle />
 
-      {/* <!--pop - up start--> */}
+        {/* <!--pop - up start--> */}
 
-      <PopExit />
-      <PopNewCard />
-      <PopBrowse />
+        <PopExit />
+        <PopNewCard />
+        <PopBrowse />
 
-      {/* <!-- pop-up end--> */}
+        {/* <!-- pop-up end--> */}
 
-      <Header onAddTask={onAddTask} />
-      {
-        isLoading
-          ? <Loader />
-          : <Main tasks={tasks} />
-      }
-    </Styled.Wrapper>
+        <Header theme={theme} onToggleTheme={onToggleTheme} onAddTask={onAddTask} />
+        {
+          isLoading
+            ? <Loader />
+            : <Main tasks={tasks} />
+        }
+      </Styled.Wrapper>
+    </ThemeProvider>
   )
 }
 

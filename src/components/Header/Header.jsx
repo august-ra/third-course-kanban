@@ -3,7 +3,7 @@ import * as Styled from "./Header.styled"
 import PopUser from "../Popups/PopUser/PopUser"
 
 
-function Header({ onAddTask }) {
+function Header({ theme, onToggleTheme, onAddTask }) {
   const [isPopUserOpened, setPopUserIsOpened] = useState(false)
 
   function handleAddTask(event) {
@@ -33,15 +33,9 @@ function Header({ onAddTask }) {
         <Styled.HeaderBlock>
           <Styled.HeaderLogoWrapper>
             <a href="" target="_self">
-              <Styled.HeaderLogo src="/images/logo.png" alt="logo" />
+              <Styled.HeaderLogo src={`/images/logo${theme === "light" ? "" : "_dark"}.png`} alt="logo" />
             </a>
           </Styled.HeaderLogoWrapper>
-          {/*<div className="header__logo _show _light">*/}
-          {/*  <a href="" target="_self"><img src="/images/logo.png" alt="logo" /></a>*/}
-          {/*</div>*/}
-          {/*<div className="header__logo _dark">*/}
-          {/*  <a href="" target="_self"><img src="/images/logo_dark.png" alt="logo" /></a>*/}
-          {/*</div>*/}
 
           <Styled.HeaderNav>
             <Styled.HeaderNavButton id="btnMainNew" onClick={handleAddTask}>
@@ -52,7 +46,7 @@ function Header({ onAddTask }) {
               Ivan Ivanov
             </Styled.HeaderNavUser>
 
-            { isPopUserOpened && <PopUser /> }
+            { isPopUserOpened && <PopUser theme={theme} onToggleTheme={onToggleTheme} /> }
           </Styled.HeaderNav>
         </Styled.HeaderBlock>
       </Styled.Container>
