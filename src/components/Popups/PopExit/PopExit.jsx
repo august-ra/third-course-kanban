@@ -11,12 +11,12 @@ function PopExit() {
 
           <Styled.PopExitForm id="formExit" action="#">
             <Styled.PopExitFormGroup>
-              <Styled.PopExitFormButton $yes={true} id="exitYes">
+              <Styled.PopExitFormButtonYes id="exitYes">
                 <a href="modal/signin.html">Да, выйти</a>
-              </Styled.PopExitFormButton>
-              <Styled.PopExitFormButton $yes={false} id="exitNo">
+              </Styled.PopExitFormButtonYes>
+              <Styled.PopExitFormButtonNo id="exitNo">
                 <a href="main.html">Нет, остаться</a>
-              </Styled.PopExitFormButton>
+              </Styled.PopExitFormButtonNo>
             </Styled.PopExitFormGroup>
           </Styled.PopExitForm>
         </Styled.PopExitBlock>

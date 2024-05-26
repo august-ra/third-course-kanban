@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components"
+import styled from "styled-components"
 import * as Styled from "../../SharedStyles"
 
 
@@ -87,35 +87,33 @@ export const PopExitFormButton = styled.button`
     align-items: center;
     justify-content: center;
   }
+`
 
-  ${(props) => props.$yes
-    ? css`
-      color: #FFFFFF;
-      background-color: #565EEF;
-      border: none;
-      margin-right: 10px;
+export const PopExitFormButtonYes = styled(PopExitFormButton)`
+  color: #FFFFFF;
+  background-color: #565EEF;
+  border: none;
+  margin-right: 10px;
 
-      @media only screen and (max-width: 375px) {
-        margin-right: 0;
-        margin-bottom: 10px;
-      }
-    `
-    : css`
-      color: #565EEF;
-      background-color: transparent;
-      border: 0.7px solid var(--palette-navy-60, #565EEF);
-    `
-  }
-
-  ${(props) => props.$yes
-    ? Styled.Hover01
-    : Styled.Hover03
-  }
+  ${Styled.Hover01}
 
   @media only screen and (max-width: 375px) {
     width: 100%;
     height: 40px;
     margin-right: 0;
     margin-bottom: 10px;
+  }
+`
+
+export const PopExitFormButtonNo = styled(PopExitFormButton)`
+  color: #565EEF;
+  background-color: transparent;
+  border: 0.7px solid var(--palette-navy-60, #565EEF);
+
+  ${Styled.Hover03}
+
+  @media only screen and (max-width: 375px) {
+    width: 100%;
+    height: 40px;
   }
 `
