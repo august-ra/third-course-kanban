@@ -1,7 +1,8 @@
 import { useState } from "react"
+import * as Styled from "./Calendar.styled"
 import * as Graphics from "../Graphics/Graphics"
-import CalendarHeader from "./CalendarHeader/CalendarHeader"
 import CalendarCells from "./CalendarCells/CalendarCells"
+import { ShortDaysOfWeek } from "../../data/datesParts"
 
 
 function Calendar({ activeDate }) {
@@ -11,39 +12,48 @@ function Calendar({ activeDate }) {
   // TODO: day click
 
   return (
-    <div className="pop-new-card__calendar calendar">
-      <p className="calendar__ttl subttl">Даты</p>
-      <div className="calendar__block">
-        <div className="calendar__nav">
-          <div className="calendar__month">{monthAsDate.printMonthAndYear()}</div>
-          <div className="nav__actions">
-            <div className="nav__action" data-action="prev">
+    <Styled.Calendar>
+      <Styled.CalendarTitle>Даты</Styled.CalendarTitle>
+      <Styled.CalendarBlock>
+        <Styled.CalendarNav>
+          <Styled.CalendarMonth>{monthAsDate.printMonthAndYear()}</Styled.CalendarMonth>
+          <Styled.CalendarNavActions>
+            <Styled.CalendarNavAction data-action="prev">
               <Graphics.LeftArrow />
-            </div>
-            <div className="nav__action" data-action="next">
+            </Styled.CalendarNavAction>
+            <Styled.CalendarNavAction data-action="next">
               <Graphics.RightArrow />
-            </div>
-          </div>
-        </div>
+            </Styled.CalendarNavAction>
+          </Styled.CalendarNavActions>
+        </Styled.CalendarNav>
 
-        <div className="calendar__content">
-          <CalendarHeader />
+        <Styled.CalendarContent>
+          <Styled.CalendarDaysNames>
+            {
+              ShortDaysOfWeek.map((item, index) => {
+                return (
+                  <Styled.CalendarDayName key={index} $weekend={index > 4}>{item}</Styled.CalendarDayName>
+                )
+              })
+            }
+          </Styled.CalendarDaysNames>
+
           <CalendarCells activeDate={activeDate} monthAsDate={monthAsDate} />
-        </div>
+        </Styled.CalendarContent>
 
         <input type="hidden" id="datepick_value" value="08.09.2023" />
 
-        <div className="calendar__period">
-          <p className="calendar__p date-end">
+        <Styled.CalendarPeriod>
+          <Styled.CalendarPeriodText>
             {
               activeDate
                 ? <>Срок исполнения: <span className="date-control">{activeDate.printShort()}</span></>
                 : <>Выберите срок исполнения <span className="date-control"></span>.</>
             }
-          </p>
-        </div>
-      </div>
-    </div>
+          </Styled.CalendarPeriodText>
+        </Styled.CalendarPeriod>
+      </Styled.CalendarBlock>
+    </Styled.Calendar>
   )
 }
 

@@ -1,5 +1,5 @@
 import React from "react"
-import CalendarCell from "../CalendarCell/CalendarCell"
+import * as Styled from "../Calendar.styled"
 
 
 function CalendarCells({ activeDate, monthAsDate }) {
@@ -69,7 +69,7 @@ function CalendarCells({ activeDate, monthAsDate }) {
   }
 
   return (
-    <div className="calendar__cells">
+    <Styled.CalendarCells>
       {
         getFiveOrSixWeeks(monthAsDate.copy()).map((item) => {
           const isNow = item.date.getTime() === monthAsDate.getTime()
@@ -77,10 +77,14 @@ function CalendarCells({ activeDate, monthAsDate }) {
           const isActive = activeDate && item.date.getTime() === activeDate.getTime()
           const key = item.date.shortBackwardPrint()
 
-          return <CalendarCell key={key} date={key} day={item.number} isCurrentMonth={!item.other} isWeekend={isWeekend} isNow={isNow} isActive={isActive} />
+          return (
+            <Styled.CalendarCell key={key} $currentMonth={!item.other} $weekend={isWeekend} $active={isActive} $current={isNow}>
+              {item.number}
+            </Styled.CalendarCell>
+          )
         })
       }
-    </div>
+    </Styled.CalendarCells>
   )
 }
 
