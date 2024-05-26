@@ -147,9 +147,11 @@ export const PopNewCardCategoriesTheme = styled.div`
   padding: 8px 20px;
   border-radius: 24px;
   margin-right: 7px;
-  opacity: 0.4;
 
-  ${(props) => props.$active && css`opacity: 1 !important;`}
+  ${(props) => props.$active
+    ? css`opacity: 1 !important;`
+    : css`opacity: 0.4;`
+  }
 
   ${(props) => getCSSForColor(props.$color)}
 `
