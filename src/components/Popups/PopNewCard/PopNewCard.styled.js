@@ -15,6 +15,10 @@ export const PopNewCard = styled.div`
   z-index: 6;
 
   ${Styled.PopTarget}
+
+  @media screen and (max-width: 660px) {
+    top: 70px;
+  }
 `
 
 export const PopNewCardContainer = styled.div`
@@ -27,6 +31,11 @@ export const PopNewCardContainer = styled.div`
   align-items: center;
   justify-content: center;
   background: rgba(0, 0, 0, 0.4);
+
+  @media screen and (max-width: 660px) {
+    padding: 0;
+    justify-content: flex-start;
+  }
 `
 
 export const PopNewCardBlock = styled.div`
@@ -39,6 +48,14 @@ export const PopNewCardBlock = styled.div`
   border-radius: 10px;
   border: 0.7px solid #D4DBE5;
   position: relative;
+
+  @media screen and (max-width: 660px) {
+    border-radius: 0;
+  }
+
+  @media screen and (max-width: 495px) {
+    padding: 20px 16px 32px;
+  }
 `
 
 export const PopNewCardContent = styled.div`
@@ -70,6 +87,10 @@ export const PopNewCardWrap = styled.div`
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
+
+  @media screen and (max-width: 768px) {
+    display: block;
+  }
 `
 
 export const PopNewCardForm = styled.form`
@@ -77,6 +98,10 @@ export const PopNewCardForm = styled.form`
   width: 100%;
   display: block;
   margin-bottom: 20px;
+
+  @media screen and (max-width: 495px) {
+    max-width: 100%;
+  }
 `
 
 export const PopNewCardFormBlock = styled.div`
@@ -106,6 +131,11 @@ const PopNewCardFormInput = css`
     line-height: 1px;
     color: #94A6BE;
     letter-spacing: -0.14px;
+  }
+
+  @media screen and (max-width: 495px) {
+    max-width: 100%;
+    height: 34px;
   }
 `
 
@@ -177,4 +207,9 @@ export const PopNewCardButtonCreate = styled.button`
   float: right;
 
   ${Styled.Hover01}
+
+  @media screen and (max-width: 495px) {
+    width: 100%;
+    height: 40px;
+  }
 `

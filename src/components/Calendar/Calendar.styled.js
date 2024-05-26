@@ -5,6 +5,11 @@ import * as Styled from "../SharedStyles"
 export const Calendar = styled.div`
   width: 182px;
   margin-bottom: 20px;
+
+  @media screen and (max-width: 660px) {
+    max-width: 340px;
+    width: 100%;
+  }
 `
 
 export const CalendarTitle = styled.p`
@@ -12,6 +17,10 @@ export const CalendarTitle = styled.p`
   padding: 0 7px;
 
   ${Styled.CommonSubtitle}
+
+  @media screen and (max-width: 660px) {
+    padding: 0;
+  }
 `
 
 export const CalendarBlock = styled.div`
@@ -25,6 +34,10 @@ export const CalendarNav = styled.div`
   justify-content: space-between;
   margin-top: 14px;
   padding: 0 7px;
+
+  @media screen and (max-width: 660px) {
+    padding: 0;
+  }
 `
 
 export const CalendarMonth = styled.div`
@@ -59,6 +72,10 @@ export const CalendarContent = styled.div`
 
 export const CalendarPeriod = styled.div`
   padding: 0 7px;
+
+  @media screen and (max-width: 660px) {
+    padding: 0;
+  }
 `
 
 export const CalendarPeriodText = styled.p`
@@ -68,6 +85,10 @@ export const CalendarPeriodText = styled.p`
 
   & span {
     color: #000000;
+  }
+
+  @media screen and (max-width: 660px) {
+    font-size: 14px;
   }
 `
 
@@ -89,6 +110,10 @@ export const CalendarDayName = styled.div`
   letter-spacing: -0.2px;
 
   ${(props) => props.$weekend && CalendarWeekend}
+
+  @media screen and (max-width: 660px) {
+    font-size: 14px;
+  }
 `
 
 export const CalendarCells = styled.div`
@@ -96,6 +121,12 @@ export const CalendarCells = styled.div`
   height: 126px;
   display: flex;
   flex-wrap: wrap;
+
+  @media screen and (max-width: 660px) {
+    width: 344px;
+    height: auto;
+    justify-content: space-around;
+  }
 `
 
 export const CalendarCell = styled.div`
@@ -121,6 +152,12 @@ export const CalendarCell = styled.div`
   ${(props) => props.$weekend && CalendarWeekend}
   ${(props) => props.$active && CalendarActiveCell}
   ${(props) => props.$current && CalendarCurrentDay}
+
+  @media screen and (max-width: 660px) {
+    width: 42px;
+    height: 42px;
+    font-size: 14px;
+  }
 `
 
 export const CalendarNormalCell = css`

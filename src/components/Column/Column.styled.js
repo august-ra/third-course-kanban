@@ -3,8 +3,12 @@ import styled from "styled-components"
 
 export const Column = styled.div`
   width: 20%;
-  //margin: 0 auto;
+  margin: 0 auto;
   display: block;
+
+  @media screen and (max-width: 1200px) {
+    width: 100%;
+  }
 `
 
 export const ColumnTitle = styled.div`
@@ -24,4 +28,9 @@ export const ColumnCards = styled.div`
   width: 100%;
   display: block;
   position: relative;
+
+  @media screen and (max-width: 1200px) {
+    display: flex;
+    overflow-y: auto;
+  }
 `

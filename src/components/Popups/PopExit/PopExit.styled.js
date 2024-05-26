@@ -38,6 +38,10 @@ export const PopExitBlock = styled.div`
   border-radius: 10px;
   border: 0.7px solid #D4DBE5;
   box-shadow: 0 4px 67px -12px rgba(0, 0, 0, 0.13);
+
+  @media only screen and (max-width: 375px) {
+    padding: 50px 20px;
+  }
 `
 
 export const PopExitTitle = styled.h2`
@@ -56,6 +60,10 @@ export const PopExitFormGroup = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  @media only screen and (max-width: 375px) {
+    display: block;
+  }
 `
 
 export const PopExitFormButton = styled.button`
@@ -86,6 +94,11 @@ export const PopExitFormButton = styled.button`
       background-color: #565EEF;
       border: none;
       margin-right: 10px;
+
+      @media only screen and (max-width: 375px) {
+        margin-right: 0;
+        margin-bottom: 10px;
+      }
     `
     : css`
       color: #565EEF;
@@ -97,5 +110,12 @@ export const PopExitFormButton = styled.button`
   ${(props) => props.$yes
     ? Styled.Hover01
     : Styled.Hover03
+  }
+
+  @media only screen and (max-width: 375px) {
+    width: 100%;
+    height: 40px;
+    margin-right: 0;
+    margin-bottom: 10px;
   }
 `

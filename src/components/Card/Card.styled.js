@@ -13,7 +13,6 @@ const animation = keyframes`
   }
 `
 
-
 export const CardItem = styled.div`
   padding: 5px;
   animation: ${animation} 0.5s linear;
