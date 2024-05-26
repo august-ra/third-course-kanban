@@ -147,9 +147,9 @@ export const PopNewCardCategoriesTheme = styled.div`
   border-radius: 24px;
   margin-right: 7px;
   opacity: 0.4;
-  
+
   ${(props) => props.$active && css`opacity: 1 !important;`}
-  
+
   ${(props) => {
     switch (props.$color) {
       case "orange":
@@ -163,7 +163,7 @@ export const PopNewCardCategoriesTheme = styled.div`
   }}
 `
 
-export const PopNewCardCategoriesThemeText = styled.div`
+export const PopNewCardCategoriesThemeText = styled.p`
   font-size: 14px;
   font-weight: 600;
   line-height: 14px;
