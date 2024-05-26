@@ -1,4 +1,4 @@
-import * as Styled from "../components/SharedStyles.js"
+import * as Styled from "../components/SharedStyles"
 
 
 export function getCSSForColor(color) {

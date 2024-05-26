@@ -1,23 +1,22 @@
-import styled from "styled-components"
-import { getCSSForColor } from "../../lib/hooks.js"
+import styled, { keyframes } from "styled-components"
+import { getCSSForColor } from "../../lib/hooks"
+
+
+const animation = keyframes`
+  0% {
+    height: 0;
+    opacity: 0;
+  }
+  100% {
+    height: auto;
+    opacity: 1;
+  }
+`
 
 
 export const CardItem = styled.div`
   padding: 5px;
-  animation-name: card-animation;
-  animation-duration: 500ms;
-  animation-timing-function: linear;
-
-  @keyframes card-animation {
-    0% {
-      height: 0;
-      opacity: 0;
-    }
-    100% {
-      height: auto;
-      opacity: 1;
-    }
-  }
+  animation: ${animation} 0.5s linear;
 `
 
 export const Card = styled.div`
