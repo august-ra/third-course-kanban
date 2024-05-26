@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components"
 import * as Styled from "../../SharedStyles"
-import { getCSSForColor } from "../../hooks.js"
+import { getCSSForColor } from "../../../lib/hooks.js"
 
 
 export const PopNewCard = styled.div`

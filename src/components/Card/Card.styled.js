@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { getCSSForColor } from "../hooks.js"
+import { getCSSForColor } from "../../lib/hooks.js"
 
 
 export const CardItem = styled.div`
