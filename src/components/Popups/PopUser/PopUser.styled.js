@@ -23,7 +23,7 @@ export const PopUser = styled.div`
     box-shadow: 0 10px 39px 0 rgba(148, 166, 190, 0.40);
   `};
 
-  ${Styled.PopTarget}
+  ${Styled.PopTarget};
 `
 
 export const PopUserName = styled.p`

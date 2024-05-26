@@ -11,7 +11,7 @@ function PopNewCard() {
         <Styled.PopNewCardBlock>
           <Styled.PopNewCardContent>
             <Styled.PopNewCardTitle>Создание задачи</Styled.PopNewCardTitle>
-            <Styled.PopNewCardClose>&#10006;</Styled.PopNewCardClose>
+            <Styled.PopNewCardClose href="#">&#10006;</Styled.PopNewCardClose>
 
             <Styled.PopNewCardWrap>
               <Styled.PopNewCardForm id="formNewCard" action="#">

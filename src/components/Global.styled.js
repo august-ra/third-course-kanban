@@ -42,7 +42,7 @@ const GlobalStyle = createGlobalStyle`
     width: 100%;
     height: 100%;
     font-family: "Roboto", Arial, Helvetica, sans-serif;
-    color: #000000;
+    color: ${(props) => props.theme.text};
   }
 `
 

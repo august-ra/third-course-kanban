@@ -66,7 +66,7 @@ export const PopNewCardContent = styled.div`
 `
 
 export const PopNewCardTitle = styled.h3`
-  color: #000;
+  //color: #000;
   font-size: 20px;
   font-weight: 600;
   line-height: 24px;
@@ -119,9 +119,11 @@ const PopNewCardFormInput = css`
   width: 100%;
   outline: none;
   padding: 14px;
+  color: inherit;
   background: transparent;
   border: 0.7px solid rgba(148, 166, 190, 0.4);
   border-radius: 8px;
+  font-family: inherit;
   font-size: 14px;
   line-height: 1;
   letter-spacing: -0.14px;
@@ -179,7 +181,7 @@ export const PopNewCardCategoriesTheme = styled.div`
   padding: 8px 20px;
   border-radius: 24px;
   margin-right: 7px;
-  opacity: ${(props) => props.$active ? "1 !important;" : "opacity: 0.4;"};
+  opacity: ${(props) => props.$active ? "1 !important;" : "0.4;"};
 
   ${(props) => getCSSForColor(props.theme, props.$color)};
 `
