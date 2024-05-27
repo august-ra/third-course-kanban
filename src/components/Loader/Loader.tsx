@@ -1,15 +1,16 @@
-import React from "react"
+import { FC as ReactFC } from "react"
+import * as Styled from "./Loader.styled"
 
 
-function Loader() {
+function Loader(): ReactFC {
   return (
-    <div className="loading">
-      <div className="loader">
-        <div></div>
-        <div></div>
-        <div></div>
-      </div>
-    </div>
+    <Styled.LoaderContainer>
+      <Styled.LoaderLoading>
+        <Styled.LoaderBar />
+        <Styled.LoaderBar />
+        <Styled.LoaderBar />
+      </Styled.LoaderLoading>
+    </Styled.LoaderContainer>
   )
 }
 
