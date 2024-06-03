@@ -31,10 +31,9 @@ export const Hover02 = css`
 
 export const Hover03 = css`
   &:hover {
-    background-color: ${(props) => props.theme.hover03};
     color: #FFFFFF;
-
-    ${(props) => props.theme.isDark() && css`border-color: #565EEF;`};
+    background-color: #33399b;
+    border-color: #33399b;
   }
 `
 

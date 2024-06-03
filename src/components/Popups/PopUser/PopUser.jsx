@@ -14,7 +14,7 @@ function PopUser({ theme, onToggleTheme }) {
         <Styled.PopUserThemeCheckbox type="checkbox" className="checkbox" name="checkbox" onChange={onToggleTheme} />
       </Styled.PopUserTheme>
 
-      <Styled.PopUserButtonExit type="button" className="_hover03">
+      <Styled.PopUserButtonExit $isAccent={false} type="button" className="_hover03">
         <a href="#popExit">Выйти</a>
       </Styled.PopUserButtonExit>
     </Styled.PopUser>

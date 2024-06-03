@@ -1,5 +1,6 @@
 import React from "react"
 import * as Styled from "./PopExit.styled"
+import { StyledButton } from "../../Shared/Button/StyledButton.js"
 
 
 function PopExit() {
@@ -11,12 +12,12 @@ function PopExit() {
 
           <Styled.PopExitForm id="formExit" action="#">
             <Styled.PopExitFormGroup>
-              <Styled.PopExitFormButtonYes id="exitYes">
+              <StyledButton $isAccent={true} id="exitYes">
                 <a href="modal/signin.html">Да, выйти</a>
-              </Styled.PopExitFormButtonYes>
-              <Styled.PopExitFormButtonNo id="exitNo">
+              </StyledButton>
+              <StyledButton $isAccent={false} id="exitNo">
                 <a href="main.html">Нет, остаться</a>
-              </Styled.PopExitFormButtonNo>
+              </StyledButton>
             </Styled.PopExitFormGroup>
           </Styled.PopExitForm>
         </Styled.PopExitBlock>

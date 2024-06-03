@@ -1,5 +1,6 @@
 import { useState } from "react"
 import * as Styled from "./Header.styled"
+import { StyledButton } from "../Shared/Button/StyledButton.js"
 import PopUser from "../Popups/PopUser/PopUser"
 
 
@@ -38,9 +39,9 @@ function Header({ theme, onToggleTheme, onAddTask }) {
           </Styled.HeaderLogoWrapper>
 
           <Styled.HeaderNav>
-            <Styled.HeaderNavButton id="btnMainNew" onClick={handleAddTask}>
+            <StyledButton $isAccent={true} id="btnMainNew" onClick={handleAddTask}>
               <a href="#popNewCard">Создать новую задачу</a>
-            </Styled.HeaderNavButton>
+            </StyledButton>
 
             <Styled.HeaderNavUser href="#user-set-target" onClick={handleOpenPopUser}>
               Ivan Ivanov
