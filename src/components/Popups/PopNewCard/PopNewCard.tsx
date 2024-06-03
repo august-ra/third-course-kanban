@@ -46,7 +46,7 @@ function PopNewCard(): ReactFC {
               </Styled.PopNewCardCategoriesThemes>
             </Styled.PopNewCardCategories>
 
-            <Styled.PopNewCardButtonCreate id="btnCreate">Создать задачу</Styled.PopNewCardButtonCreate>
+            <Styled.PopNewCardButtonCreate $isAccent={true} id="btnCreate">Создать задачу</Styled.PopNewCardButtonCreate>
           </Styled.PopNewCardContent>
         </Styled.PopNewCardBlock>
       </Styled.PopNewCardContainer>

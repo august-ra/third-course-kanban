@@ -1,5 +1,6 @@
 import styled, { css } from "styled-components"
 import * as Styled from "../../Shared/SharedStyles"
+import { StyledButton } from "../../Shared/StyledButton/StyledButton"
 import { ThemeData } from "../../Themes"
 
 
@@ -65,6 +66,8 @@ export const PopUserThemeCheckbox = styled.input<{ theme: ThemeData }>`
   border-radius: 100px;
   background: ${(props) => props.theme.body};
   outline: none;
+  //-webkit-appearance: none;
+  //-moz-appearance: none;
   appearance: none;
 
   &::before {
@@ -84,15 +87,7 @@ export const PopUserThemeCheckbox = styled.input<{ theme: ThemeData }>`
   }
 `
 
-export const PopUserButtonExit = styled.button<{ theme: ThemeData }>`
+export const PopUserButtonExit = styled(StyledButton)<{ theme: ThemeData }>`
   width: 72px;
   height: 30px;
-  background: transparent;
-  color: ${(props) => props.theme.extra};
-  border-radius: 4px;
-  border: 1px solid ${(props) => props.theme.extra};
-
-  & a {
-    color: inherit;
-  }
 `

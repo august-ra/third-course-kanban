@@ -1,5 +1,6 @@
 import { Dispatch, FC as ReactFC, SetStateAction, useState } from "react"
 import * as Styled from "./Header.styled"
+import { StyledButton } from "../Shared/StyledButton/StyledButton"
 import PopUser from "../Popups/PopUser/PopUser"
 import { TaskData } from "../../data/tasks"
 
@@ -45,9 +46,9 @@ function Header({ theme, onToggleTheme, onAddTask }: HeaderProps): ReactFC {
           </Styled.HeaderLogoWrapper>
 
           <Styled.HeaderNav>
-            <Styled.HeaderNavButton id="btnMainNew" onClick={handleAddTask}>
+            <StyledButton $isAccent={true} id="btnMainNew" onClick={handleAddTask}>
               <a href="#popNewCard">Создать новую задачу</a>
-            </Styled.HeaderNavButton>
+            </StyledButton>
 
             <Styled.HeaderNavUser href="#user-set-target" onClick={handleOpenPopUser}>
               Ivan Ivanov
