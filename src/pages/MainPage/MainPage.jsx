@@ -1,11 +1,9 @@
 import { useEffect, useState } from "react"
+import { Outlet } from "react-router-dom"
 import * as Styled from "../../components/Global.styled"
 import Header from "../../components/Header/Header"
 import Loader from "../../components/Loader/Loader"
 import Main from "../../components/Main/Main"
-import PopBrowse from "../Popups/PopBrowse/PopBrowse"
-import PopExit from "../Popups/PopExit/PopExit"
-import PopNewCard from "../Popups/PopNewCard/PopNewCard"
 import { Tasks } from "../../data/tasks"
 
 
@@ -25,14 +23,7 @@ function MainPage({ theme, onToggleTheme }) {
 
   return (
     <Styled.Wrapper>
-      {/* <!--pop - up start--> */}
-
-      <PopExit />
-      <PopNewCard />
-      <PopBrowse />
-
-      {/* <!-- pop-up end--> */}
-
+      <Outlet />
       <Header theme={theme} onToggleTheme={onToggleTheme} onAddTask={onAddTask} />
       {
         isLoading
