@@ -1,4 +1,5 @@
 import { FC as ReactFC } from "react"
+import * as Styled from "./Column.styled"
 import Card from "../Card/Card"
 import { TaskData } from "../../data/tasks"
 
@@ -10,19 +11,21 @@ interface ColumnProps {
 
 function Column({ title, tasks }: ColumnProps): ReactFC {
   return (
-    <div className="main__column column">
-      <div className="column__title">
-        <p>{title}</p>
-      </div>
+    <Styled.Column>
+      <Styled.ColumnTitle>
+        <Styled.ColumnTitleText>{title}</Styled.ColumnTitleText>
+      </Styled.ColumnTitle>
 
-      <div className="cards">
+      <Styled.ColumnCards>
         {
           tasks.map((item: TaskData) => {
-            return <Card key={item.id} topic={item.topic} title={item.title} date={item.date} />
+            return (
+              <Card key={item.id} topic={item.topic} title={item.title} date={item.date} />
+            )
           })
         }
-      </div>
-    </div>
+      </Styled.ColumnCards>
+    </Styled.Column>
   )
 }
 
