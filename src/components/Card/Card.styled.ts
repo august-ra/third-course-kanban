@@ -1,5 +1,6 @@
 import styled, { keyframes } from "styled-components"
 import { getCSSForColor } from "../../lib/hooks"
+import { ThemeData } from "../Themes"
 
 
 const animation = keyframes`
@@ -18,7 +19,7 @@ export const CardItem = styled.div`
   animation: ${animation} 0.5s linear;
 `
 
-export const Card = styled.div`
+export const Card = styled.div<{ theme: ThemeData }>`
   width: 220px;
   height: 130px;
   background-color: ${(props) => props.theme.back};
@@ -39,7 +40,7 @@ export const CardGroup = styled.div`
   justify-content: space-between;
 `
 
-export const CardTheme = styled.div<{ $color?: string }>`
+export const CardTheme = styled.div<{ theme: ThemeData, $color?: string }>`
   width: auto;
   height: 20px;
   padding: 5px 14px;
@@ -78,7 +79,7 @@ export const CardContent = styled.div`
   justify-content: space-between;
 `
 
-export const CardTitle = styled.h3`
+export const CardTitle = styled.h3<{ theme: ThemeData }>`
   font-size: 14px;
   font-weight: 500;
   line-height: 18px;

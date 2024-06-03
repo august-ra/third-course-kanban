@@ -1,10 +1,11 @@
 import styled from "styled-components"
-import * as Styled from "../SharedStyles"
+import * as Styled from "../Shared/SharedStyles"
+import { ThemeData } from "../Themes"
 
 
 export const Container = Styled.Container
 
-export const Main = styled.main`
+export const Main = styled.main<{ theme: ThemeData }>`
   width: 100%;
   background-color: ${(props) => props.theme.body};
 `

@@ -1,10 +1,11 @@
 import styled from "styled-components"
-import * as Styled from "../SharedStyles"
+import * as Styled from "../Shared/SharedStyles"
+import { ThemeData } from "../Themes"
 
 
 export const Container = Styled.Container
 
-export const Header = styled.header`
+export const Header = styled.header<{ theme: ThemeData }>`
   width: 100%;
   margin: 0 auto;
   background-color: ${(props) => props.theme.back};
@@ -66,7 +67,7 @@ export const HeaderNavButton = styled.button`
   }
 `
 
-export const HeaderNavUser = styled.a`
+export const HeaderNavUser = styled.a<{ theme: ThemeData }>`
   height: 20px;
   display: flex;
   flex-wrap: nowrap;

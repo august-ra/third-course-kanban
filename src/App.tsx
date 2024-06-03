@@ -1,7 +1,7 @@
 import { Dispatch, FC as ReactFC, SetStateAction, useEffect, useState } from "react"
 import "./App.css"
 import { ThemeProvider } from "styled-components"
-import GlobalStyle, * as Styled from "./components/Global.styled"
+import GlobalStyle, * as Styled from "./components/Shared/Global.styled"
 import Header from "./components/Header/Header"
 import Loader from "./components/Loader/Loader"
 import Main from "./components/Main/Main"

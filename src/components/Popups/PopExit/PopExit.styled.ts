@@ -1,5 +1,6 @@
 import styled from "styled-components"
-import * as Styled from "../../SharedStyles"
+import * as Styled from "../../Shared/SharedStyles"
+import { ThemeData } from "../../Themes"
 
 
 export const PopExit = styled.div`
@@ -16,7 +17,7 @@ export const PopExit = styled.div`
   ${Styled.PopTarget};
 `
 
-export const PopExitContainer = styled.div`
+export const PopExitContainer = styled.div<{ theme: ThemeData }>`
   width: 100%;
   height: 100%;
   min-height: 100vh;
@@ -28,7 +29,7 @@ export const PopExitContainer = styled.div`
   background: rgba(0, 0, 0, 0.${(props) => props.theme.isLight() ? "4" : "8"});
 `
 
-export const PopExitBlock = styled.div`
+export const PopExitBlock = styled.div<{ theme: ThemeData }>`
   display: block;
   margin: 0 auto;
   background-color: ${(props) => props.theme.back};
@@ -105,7 +106,7 @@ export const PopExitFormButtonYes = styled(PopExitFormButton)`
   }
 `
 
-export const PopExitFormButtonNo = styled(PopExitFormButton)`
+export const PopExitFormButtonNo = styled(PopExitFormButton)<{ theme: ThemeData }>`
   color: ${(props) => props.theme.extra};
   background-color: transparent;
   border: 0.7px solid ${(props) => props.theme.extra};

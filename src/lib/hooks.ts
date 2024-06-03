@@ -1,4 +1,4 @@
-import * as Styled from "../components/SharedStyles"
+import * as Styled from "../components/Shared/SharedStyles"
 import { RuleSet } from "styled-components/dist/types"
 import { ThemeData } from "../components/Themes"
 

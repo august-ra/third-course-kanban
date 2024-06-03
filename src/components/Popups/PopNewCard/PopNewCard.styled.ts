@@ -1,6 +1,7 @@
 import styled, { css } from "styled-components"
-import * as Styled from "../../SharedStyles"
+import * as Styled from "../../Shared/SharedStyles"
 import { getCSSForColor } from "../../../lib/hooks"
+import { ThemeData } from "../../Themes"
 
 
 export const PopNewCard = styled.div`
@@ -21,7 +22,7 @@ export const PopNewCard = styled.div`
   }
 `
 
-export const PopNewCardContainer = styled.div`
+export const PopNewCardContainer = styled.div<{ theme: ThemeData }>`
   width: 100%;
   height: 100%;
   min-height: 100vh;
@@ -38,7 +39,7 @@ export const PopNewCardContainer = styled.div`
   }
 `
 
-export const PopNewCardBlock = styled.div`
+export const PopNewCardBlock = styled.div<{ theme: ThemeData }>`
   display: block;
   margin: 0 auto;
   background-color: ${(props) => props.theme.back};
@@ -73,7 +74,7 @@ export const PopNewCardTitle = styled.h3`
   margin-bottom: 20px;
 `
 
-export const PopNewCardClose = styled.a`
+export const PopNewCardClose = styled.a<{ theme: ThemeData }>`
   position: absolute;
   top: 20px;
   right: 30px;
@@ -81,7 +82,7 @@ export const PopNewCardClose = styled.a`
   cursor: pointer;
 
   &:hover {
-    color: #000000;
+    color: ${(props) => props.theme.isLight() ? "#000000" : "#EF565E"};
   }
 `
 
@@ -174,7 +175,7 @@ export const PopNewCardCategoriesThemes = styled.div`
   justify-content: flex-start;
 `
 
-export const PopNewCardCategoriesTheme = styled.div<{ $color: string, $active: boolean }>`
+export const PopNewCardCategoriesTheme = styled.div<{ theme: ThemeData, $color: string, $active: boolean }>`
   display: inline-block;
   width: auto;
   height: 30px;

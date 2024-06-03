@@ -1,7 +1,8 @@
 import styled, { createGlobalStyle } from "styled-components"
+import { ThemeData } from "../Themes"
 
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.div<{ theme: ThemeData }>`
   max-width: 100%;
   width: 100vw;
   min-height: 100vh;
@@ -9,7 +10,7 @@ export const Wrapper = styled.div`
   background-color: ${(props) => props.theme.body};
 `
 
-const GlobalStyle = createGlobalStyle`
+const GlobalStyle = createGlobalStyle<{ theme: ThemeData }>`
   * {
     margin: 0;
     padding: 0;

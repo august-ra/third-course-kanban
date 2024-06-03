@@ -1,5 +1,6 @@
 import styled, { css } from "styled-components"
-import * as Styled from "../SharedStyles"
+import * as Styled from "../Shared/SharedStyles"
+import { ThemeData } from "../Themes"
 
 
 export const Calendar = styled.div`
@@ -78,7 +79,7 @@ export const CalendarPeriod = styled.div`
   }
 `
 
-export const CalendarPeriodText = styled.p`
+export const CalendarPeriodText = styled.p<{ theme: ThemeData }>`
   color: #94A6BE;
   font-size: 10px;
   line-height: 1;
@@ -156,16 +157,16 @@ export const CalendarCell = styled.div<{ $currentMonth?: boolean, $weekend?: boo
   }
 `
 
-export const CalendarNormalCell = css`
+export const CalendarNormalCell = css<{ theme: ThemeData }>`
   &:hover {
     color: #94A6BE;
     background-color: ${(props) => props.theme.body};
   }
 `
 
-export const CalendarActiveCell = css`
+export const CalendarActiveCell = css<{ theme: ThemeData }>`
   background-color: #94A6BE;
-  color: ${(props) => props.theme.isLigth() ? "#FFFFFF" : "#151419"};
+  color: ${(props) => props.theme.isLight() ? "#FFFFFF" : "#151419"};
 `
 
 export const CalendarCurrentDay = css`

@@ -1,4 +1,5 @@
 import styled, { css } from "styled-components"
+import { ThemeData } from "../Themes"
 
 
 export const Container = styled.div`
@@ -29,7 +30,7 @@ export const Hover02 = css`
   }
 `
 
-export const Hover03 = css`
+export const Hover03 = css<{ theme: ThemeData }>`
   &:hover {
     background-color: ${(props) => props.theme.hover03};
     color: #FFFFFF;
@@ -80,7 +81,7 @@ export const PopTarget = css`
   }
 `
 
-export const CommonSubtitle = css`
+export const CommonSubtitle = css<{ theme: ThemeData }>`
   color: ${(props) => props.theme.text};
   font-size: 14px;
   font-weight: 600;

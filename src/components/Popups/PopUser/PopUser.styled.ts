@@ -1,8 +1,9 @@
 import styled, { css } from "styled-components"
-import * as Styled from "../../SharedStyles"
+import * as Styled from "../../Shared/SharedStyles"
+import { ThemeData } from "../../Themes"
 
 
-export const PopUser = styled.div`
+export const PopUser = styled.div<{ theme: ThemeData }>`
   display: block;
   position: absolute;
   top: 61px;
@@ -26,7 +27,7 @@ export const PopUser = styled.div`
   ${Styled.PopTarget};
 `
 
-export const PopUserName = styled.p`
+export const PopUserName = styled.p<{ theme: ThemeData }>`
   color: ${(props) => props.theme.text};
   font-size: 14px;
   font-weight: 500;
@@ -50,22 +51,20 @@ export const PopUserTheme = styled.div`
   margin-bottom: 30px;
 `
 
-export const PopUserThemeName = styled.p`
+export const PopUserThemeName = styled.p<{ theme: ThemeData }>`
   color: ${(props) => props.theme.text};
   font-size: 14px;
   line-height: 21px;
   letter-spacing: -0.14px;
 `
 
-export const PopUserThemeCheckbox = styled.input`
+export const PopUserThemeCheckbox = styled.input<{ theme: ThemeData }>`
   position: relative;
   width: 24px;
   height: 13px;
   border-radius: 100px;
   background: ${(props) => props.theme.body};
   outline: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
   appearance: none;
 
   &::before {
@@ -85,7 +84,7 @@ export const PopUserThemeCheckbox = styled.input`
   }
 `
 
-export const PopUserButtonExit = styled.button`
+export const PopUserButtonExit = styled.button<{ theme: ThemeData }>`
   width: 72px;
   height: 30px;
   background: transparent;
