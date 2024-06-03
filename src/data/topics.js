@@ -6,7 +6,7 @@ export const Topics = [
 ]
 
 export const TopicsColors = {
-  "Web Design":  "_orange",
-  "Research":    "_green",
-  "Copywriting": "_purple",
+  "Web Design":  "orange",
+  "Research":    "green",
+  "Copywriting": "purple",
 }

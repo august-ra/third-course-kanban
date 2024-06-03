@@ -1,15 +1,16 @@
 import React from "react"
+import * as Styled from "./Loader.styled"
 
 
 function Loader() {
   return (
-    <div className="loading">
-      <div className="loader">
-        <div></div>
-        <div></div>
-        <div></div>
-      </div>
-    </div>
+    <Styled.LoaderContainer>
+      <Styled.LoaderLoading>
+        <Styled.LoaderBar />
+        <Styled.LoaderBar />
+        <Styled.LoaderBar />
+      </Styled.LoaderLoading>
+    </Styled.LoaderContainer>
   )
 }
 
