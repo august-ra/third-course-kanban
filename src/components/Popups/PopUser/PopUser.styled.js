@@ -64,8 +64,6 @@ export const PopUserThemeCheckbox = styled.input`
   border-radius: 100px;
   background: ${(props) => props.theme.body};
   outline: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
   appearance: none;
 
   &::before {

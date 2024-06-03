@@ -81,7 +81,7 @@ export const PopNewCardClose = styled.a`
   cursor: pointer;
 
   &:hover {
-    color: #000000;
+    color: ${(props) => props.theme.isLight() ? "#000000" : "#EF565E"};
   }
 `
 

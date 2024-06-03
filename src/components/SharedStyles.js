@@ -44,8 +44,8 @@ export const Orange = css`
 `
 
 export const OrangeNegative = css`
-    background-color: #FF6D00;
-    color: #FFE4C2;
+  background-color: #FF6D00;
+  color: #FFE4C2;
 `
 
 export const Green = css`
@@ -54,8 +54,8 @@ export const Green = css`
 `
 
 export const GreenNegative = css`
-    background-color: #06B16E;
-    color: #B4FDD1;
+  background-color: #06B16E;
+  color: #B4FDD1;
 `
 
 export const Purple = css`
@@ -64,8 +64,8 @@ export const Purple = css`
 `
 
 export const PurpleNegative = css`
-    background-color: #9A48F1;
-    color: #E9D4FF;
+  background-color: #9A48F1;
+  color: #E9D4FF;
 `
 
 export const Gray = css`
