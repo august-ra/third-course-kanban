@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react"
-import * as Styled from "../../Global.styled"
-import Header from "../../Header/Header"
-import Loader from "../../Loader/Loader"
-import Main from "../../Main/Main"
-import PopBrowse from "../../Popups/PopBrowse/PopBrowse"
-import PopExit from "../../Popups/PopExit/PopExit"
-import PopNewCard from "../../Popups/PopNewCard/PopNewCard"
-import { Tasks } from "../../../data/tasks"
+import * as Styled from "../../components/Global.styled"
+import Header from "../../components/Header/Header"
+import Loader from "../../components/Loader/Loader"
+import Main from "../../components/Main/Main"
+import PopBrowse from "../Popups/PopBrowse/PopBrowse"
+import PopExit from "../Popups/PopExit/PopExit"
+import PopNewCard from "../Popups/PopNewCard/PopNewCard"
+import { Tasks } from "../../data/tasks"
 
 
 function MainPage({ theme, onToggleTheme }) {

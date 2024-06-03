@@ -1,6 +1,6 @@
 import React from "react"
 import * as Styled from "./PopNewCard.styled"
-import Calendar from "../../Calendar/Calendar"
+import Calendar from "../../../components/Calendar/Calendar"
 import { Topics, TopicsColors } from "../../../data/topics"
 
 

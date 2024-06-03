@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components"
-import * as Styled from "../../SharedStyles"
-import { StyledButton } from "../../Shared/Button/StyledButton.js"
+import * as Styled from "../../../components/SharedStyles"
+import { StyledButton } from "../../../components/Shared/Button/StyledButton"
 
 
 export const PopUser = styled.div`

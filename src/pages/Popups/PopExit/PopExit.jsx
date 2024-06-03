@@ -1,6 +1,6 @@
 import React from "react"
 import * as Styled from "./PopExit.styled"
-import { StyledButton } from "../../Shared/Button/StyledButton.js"
+import { StyledButton } from "../../../components/Shared/Button/StyledButton"
 
 
 function PopExit() {

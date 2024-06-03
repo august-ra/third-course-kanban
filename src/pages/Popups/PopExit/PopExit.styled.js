@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import * as Styled from "../../SharedStyles"
+import * as Styled from "../../../components/SharedStyles"
 
 
 export const PopExit = styled.div`

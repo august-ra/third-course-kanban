@@ -1,7 +1,7 @@
 import { useState } from "react"
 import * as Styled from "./Header.styled"
-import { StyledButton } from "../Shared/Button/StyledButton.js"
-import PopUser from "../Popups/PopUser/PopUser"
+import { StyledButton } from "../Shared/Button/StyledButton"
+import PopUser from "../../pages/Popups/PopUser/PopUser"
 
 
 function Header({ theme, onToggleTheme, onAddTask }) {

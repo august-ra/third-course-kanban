@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { Route, Routes } from "react-router-dom"
 import PrivateRoutes from "./PrivateRoutes"
-import MainPage from "./components/pages/MainPage/MainPage"
+import MainPage from "./pages/MainPage/MainPage"
 import { Pages } from "./lib/pages"
 
 
