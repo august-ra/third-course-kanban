@@ -1,5 +1,6 @@
 import React from "react"
 import * as Styled from "./Main.styled"
+import * as Shared from "../SharedStyles"
 import Column from "../Column/Column"
 import { Statuses } from "../../data/statuses"
 
@@ -7,7 +8,7 @@ import { Statuses } from "../../data/statuses"
 function Main({ tasks }) {
   return (
     <Styled.Main>
-      <Styled.Container>
+      <Shared.Container>
         <Styled.MainBlock>
           <Styled.MainContent>
             {
@@ -21,7 +22,7 @@ function Main({ tasks }) {
             }
           </Styled.MainContent>
         </Styled.MainBlock>
-      </Styled.Container>
+      </Shared.Container>
     </Styled.Main>
   )
 }

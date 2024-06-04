@@ -1,5 +1,6 @@
 import { useState } from "react"
 import * as Styled from "./Header.styled"
+import * as Shared from "../SharedStyles"
 import { StyledButton } from "../Shared/Button/StyledButton"
 import PopUser from "../../pages/Popups/PopUser/PopUser"
 
@@ -30,7 +31,7 @@ function Header({ theme, onToggleTheme, onAddTask }) {
 
   return (
     <Styled.Header>
-      <Styled.Container>
+      <Shared.Container>
         <Styled.HeaderBlock>
           <Styled.HeaderLogoWrapper>
             <a href="" target="_self">
@@ -50,7 +51,7 @@ function Header({ theme, onToggleTheme, onAddTask }) {
             { isPopUserOpened && <PopUser theme={theme} onToggleTheme={onToggleTheme} /> }
           </Styled.HeaderNav>
         </Styled.HeaderBlock>
-      </Styled.Container>
+      </Shared.Container>
     </Styled.Header>
   )
 }

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { Outlet } from "react-router-dom"
-import * as Styled from "../../components/Global.styled"
+import * as Shared from "../../components/SharedStyles"
 import Header from "../../components/Header/Header"
 import Loader from "../../components/Loader/Loader"
 import Main from "../../components/Main/Main"
@@ -22,7 +22,7 @@ function MainPage({ theme, onToggleTheme }) {
   }
 
   return (
-    <Styled.Wrapper>
+    <Shared.Wrapper>
       <Outlet />
       <Header theme={theme} onToggleTheme={onToggleTheme} onAddTask={onAddTask} />
       {
@@ -30,7 +30,7 @@ function MainPage({ theme, onToggleTheme }) {
           ? <Loader />
           : <Main tasks={tasks} />
       }
-    </Styled.Wrapper>
+    </Shared.Wrapper>
   )
 }
 

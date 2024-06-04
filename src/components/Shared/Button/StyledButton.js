@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components"
-import * as Styled from "../../SharedStyles"
+import * as Shared from "../../SharedStyles"
 
 
 export const StyledButton = styled.button`
@@ -34,7 +34,7 @@ const MasterButton = css`
   border: none;
   margin-right: 10px;
 
-  ${Styled.Hover01};
+  ${Shared.Hover01};
 
   @media only screen and (max-width: 375px) {
     width: 100%;
@@ -49,7 +49,7 @@ const SlaveButton = css`
   background-color: transparent;
   border: 0.7px solid ${(props) => props.theme.extra};
 
-  ${Styled.Hover03};
+  ${Shared.Hover03};
 
   @media only screen and (max-width: 375px) {
     width: 100%;

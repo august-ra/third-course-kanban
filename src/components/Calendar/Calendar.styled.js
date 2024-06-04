@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components"
-import * as Styled from "../SharedStyles"
+import * as Shared from "../SharedStyles"
 
 
 export const Calendar = styled.div`
@@ -16,7 +16,7 @@ export const CalendarTitle = styled.p`
   margin-bottom: 14px;
   padding: 0 7px;
 
-  ${Styled.CommonSubtitle};
+  ${Shared.Subtitle};
 
   @media screen and (max-width: 660px) {
     padding: 0;

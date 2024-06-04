@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import * as Styled from "../../../components/SharedStyles"
+import * as Shared from "../../../components/SharedStyles"
 
 
 export const PopExit = styled.div`
@@ -13,7 +13,7 @@ export const PopExit = styled.div`
   left: 0;
   z-index: 5;
 
-  ${Styled.PopTarget};
+  ${Shared.PopTarget};
 `
 
 export const PopExitContainer = styled.div`

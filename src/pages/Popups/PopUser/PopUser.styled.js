@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components"
-import * as Styled from "../../../components/SharedStyles"
+import * as Shared from "../../../components/SharedStyles"
 import { StyledButton } from "../../../components/Shared/Button/StyledButton"
 
 
@@ -24,7 +24,7 @@ export const PopUser = styled.div`
     box-shadow: 0 10px 39px 0 rgba(148, 166, 190, 0.40);
   `};
 
-  ${Styled.PopTarget};
+  ${Shared.PopTarget};
 `
 
 export const PopUserName = styled.p`

@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components"
-import * as Styled from "../../../components/SharedStyles"
+import * as Shared from "../../../components/SharedStyles"
 import { StyledButton } from "../../../components/Shared/Button/StyledButton"
 import { getCSSForColor } from "../../../lib/hooks"
 
@@ -15,7 +15,7 @@ export const PopNewCard = styled.div`
   left: 0;
   z-index: 6;
 
-  ${Styled.PopTarget};
+  ${Shared.PopTarget};
 
   @media screen and (max-width: 660px) {
     top: 70px;
@@ -113,7 +113,7 @@ export const PopNewCardFormBlock = styled.div`
 `
 
 export const PopNewCardFormLabel = styled.label`
-  ${Styled.CommonSubtitle};
+  ${Shared.Subtitle};
 `
 
 const PopNewCardFormInput = css`
@@ -165,7 +165,7 @@ export const PopNewCardCategories = styled.div`
 export const PopNewCardCategoriesSubtitle = styled.p`
   margin-bottom: 14px;
 
-  ${Styled.CommonSubtitle};
+  ${Shared.Subtitle};
 `
 
 export const PopNewCardCategoriesThemes = styled.div`
