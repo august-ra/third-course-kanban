@@ -1,6 +1,6 @@
 import { useState } from "react"
-import { Link } from "react-router-dom"
-import { Pages } from "../../lib/pages.js"
+import { useNavigate } from "react-router-dom"
+import { Pages } from "../../lib/pages"
 import * as Styled from "./Header.styled"
 import * as Shared from "../SharedStyles"
 import { StyledButton } from "../Shared/Button/StyledButton"
@@ -8,21 +8,24 @@ import PopUser from "../../pages/Popups/PopUser/PopUser"
 
 
 function Header({ theme, onToggleTheme, onAddTask }) {
+  const navigate = useNavigate()
   const [isPopUserOpened, setIsPopUserOpened] = useState(false)
 
   function handleAddTask(event) {
-    event.preventDefault()
+    // event.preventDefault()
+    //
+    // const date = new Date()
+    // const newTask = {
+    //   id:     date.getTime(),
+    //   topic:  "Web Design",
+    //   title:  "Test",
+    //   date:   date.printShort(),
+    //   status: "Без статуса",
+    // }
+    //
+    // onAddTask(newTask)
 
-    const date = new Date()
-    const newTask = {
-      id:     date.getTime(),
-      topic:  "Web Design",
-      title:  "Test",
-      date:   date.printShort(),
-      status: "Без статуса",
-    }
-
-    onAddTask(newTask)
+    navigate(Pages.CREATE)
   }
 
   function handleOpenPopUser(event) {
@@ -42,8 +45,8 @@ function Header({ theme, onToggleTheme, onAddTask }) {
           </Styled.HeaderLogoWrapper>
 
           <Styled.HeaderNav>
-            <StyledButton $isAccent={true} $width={178} id="btnMainNew" onClick={handleAddTask}>
-              <Link to={Pages.CREATE}>Создать новую задачу</Link>
+            <StyledButton $hasAccent={true} $width={178} type="button" onClick={handleAddTask}>
+              Создать новую задачу
             </StyledButton>
 
             <Styled.HeaderNavUser onClick={handleOpenPopUser}>

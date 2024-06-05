@@ -1,16 +1,23 @@
 import React from "react"
-import { Pages } from "../../../lib/pages.js"
+import { useNavigate } from "react-router-dom"
+import { Pages } from "../../../lib/pages"
 import * as Styled from "./PopNewCard.styled"
 import Calendar from "../../../components/Calendar/Calendar"
 import { Topics, TopicsColors } from "../../../data/topics"
-import { Link } from "react-router-dom"
+import { prevent } from "../../../lib/hooks"
 
 
 function PopNewCard() {
+  const navigate = useNavigate()
+
+  function closeThis() {
+    navigate(Pages.MAIN)
+  }
+
   return (
     <Styled.PopNewCard id="popNewCard">
-      <Styled.PopNewCardContainer>
-        <Styled.PopNewCardBlock>
+      <Styled.PopNewCardContainer onClick={closeThis}>
+        <Styled.PopNewCardBlock onClick={prevent}>
           <Styled.PopNewCardContent>
             <Styled.PopNewCardTitle>Создание задачи</Styled.PopNewCardTitle>
             <Styled.PopNewCardClose to={Pages.MAIN}>&#10006;</Styled.PopNewCardClose>
@@ -48,7 +55,7 @@ function PopNewCard() {
               </Styled.PopNewCardCategoriesThemes>
             </Styled.PopNewCardCategories>
 
-            <Styled.PopNewCardButtonCreate $isAccent={true} $width={132} id="btnCreate"><Link to={Pages.MAIN}>Создать задачу</Link></Styled.PopNewCardButtonCreate>
+            <Styled.PopNewCardButtonCreate $hasAccent={true} $width={132} type="button" onClick={closeThis}>Создать задачу</Styled.PopNewCardButtonCreate>
           </Styled.PopNewCardContent>
         </Styled.PopNewCardBlock>
       </Styled.PopNewCardContainer>

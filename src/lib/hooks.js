@@ -21,3 +21,9 @@ export function getCSSForColor(theme, color) {
       return Shared.Gray
   }
 }
+
+
+export function prevent(event) {
+  event.preventDefault()
+  event.stopPropagation()
+}

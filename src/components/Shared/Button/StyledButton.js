@@ -25,7 +25,7 @@ export const StyledButton = styled.button`
   }
 
   ${(props) => {
-    return props.$isAccent
+    return props.$hasAccent
       ? MasterButton
       : SlaveButton
   }}

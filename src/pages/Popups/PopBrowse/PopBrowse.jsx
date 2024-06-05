@@ -1,20 +1,26 @@
 import React from "react"
-import { Link, useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { Pages } from "../../../lib/pages"
 import Calendar from "../../../components/Calendar/Calendar"
 import { StyledButton } from "../../../components/Shared/Button/StyledButton"
 import { Tasks } from "../../../data/tasks"
+import { prevent } from "../../../lib/hooks"
 
 
 function PopBrowse() {
+  const navigate = useNavigate()
   const { id } = useParams()
   const numericId = Number(id)
   const task = Tasks.filter((task) => task.id === numericId)[0]
 
+  function closeThis() {
+    navigate(Pages.MAIN)
+  }
+
   return (
     <div className="pop-browse" id="popBrowse">
-      <div className="pop-browse__container">
-        <div className="pop-browse__block">
+      <div className="pop-browse__container" onClick={closeThis}>
+        <div className="pop-browse__block" onClick={prevent}>
           <div className="pop-browse__content">
             <div className="pop-browse__top-block">
               <h3 className="pop-browse__ttl">{task.title}</h3>
@@ -48,20 +54,19 @@ function PopBrowse() {
             </div>
             <div className="pop-browse__btn-browse ">
               <div className="btn-group">
-                <StyledButton $isAccent={false}>Редактировать задачу</StyledButton>
-                <StyledButton $isAccent={false}>Удалить задачу</StyledButton>
+                <StyledButton $hasAccent={false} type="button">Редактировать задачу</StyledButton>
+                <StyledButton $hasAccent={false} type="button">Удалить задачу</StyledButton>
               </div>
-              <StyledButton $isAccent={true}><Link to={Pages.MAIN}>Закрыть</Link></StyledButton>
+              <StyledButton $hasAccent={true} type="button" onClick={closeThis}>Закрыть</StyledButton>
             </div>
             <div className="pop-browse__btn-edit _hide">
               <div className="btn-group">
-                <StyledButton $isAccent={true}><a href="#">Сохранить</a></StyledButton>
-                <StyledButton $isAccent={false}><a href="#">Отменить</a></StyledButton>
-                <StyledButton $isAccent={false} id="btnDelete">Удалить задачу</StyledButton>
+                <StyledButton $hasAccent={true} type="button"><a href="#">Сохранить</a></StyledButton>
+                <StyledButton $hasAccent={false} type="button"><a href="#">Отменить</a></StyledButton>
+                <StyledButton $hasAccent={false} id="btnDelete" type="button">Удалить задачу</StyledButton>
               </div>
-              <StyledButton $isAccent={true}><Link to={Pages.MAIN}>Закрыть</Link></StyledButton>
+              <StyledButton $hasAccent={true} type="button" onClick={closeThis}>Закрыть</StyledButton>
             </div>
-
           </div>
         </div>
       </div>

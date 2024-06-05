@@ -1,10 +1,10 @@
 
 export const Pages = {
   MAIN:      "/",
-  SIGNIN:    "/sign-in",
-  SIGNUP:    "/sign-up",
+  SIGN_IN:   "/sign-in",
+  SIGN_UP:   "/sign-up",
+  SIGN_OUT:  "/exit",
   CARD:      "/card/:id",
   CREATE:    "/create",
   NOT_FOUND: "/*",
-  EXIT:      "/exit",
 }

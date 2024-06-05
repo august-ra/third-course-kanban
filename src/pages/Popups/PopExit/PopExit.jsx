@@ -1,24 +1,37 @@
 import React from "react"
-import { Link } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { Pages } from "../../../lib/pages"
 import * as Styled from "./PopExit.styled"
 import { StyledButton } from "../../../components/Shared/Button/StyledButton"
+import { prevent } from "../../../lib/hooks"
 
 
 function PopExit({ setIsAuthenticated }) {
+  const navigate = useNavigate()
+
+  function signOut() {
+    setIsAuthenticated(false)
+
+    navigate(Pages.SIGN_IN)
+  }
+
+  function closeThis() {
+    navigate(Pages.MAIN)
+  }
+
   return (
     <Styled.PopExit id="popExit">
-      <Styled.PopExitContainer>
-        <Styled.PopExitBlock>
+      <Styled.PopExitContainer onClick={closeThis}>
+        <Styled.PopExitBlock onClick={prevent}>
           <Styled.PopExitTitle>Выйти из аккаунта?</Styled.PopExitTitle>
 
-          <Styled.PopExitForm id="formExit" action="#">
+          <Styled.PopExitForm action="#">
             <Styled.PopExitFormGroup>
-              <StyledButton $isAccent={true} $doWidth={true} id="exitYes" onClick={setIsAuthenticated(false)}>
-                <Link to={Pages.SIGNIN}>Да, выйти</Link>
+              <StyledButton $hasAccent={true} $doWidth={true} type="button" onClick={signOut}>
+                Да, выйти
               </StyledButton>
-              <StyledButton $isAccent={false} $doWidth={true} id="exitNo">
-                <Link to={Pages.MAIN}>Нет, остаться</Link>
+              <StyledButton $hasAccent={false} $doWidth={true} type="button" onClick={closeThis}>
+                Нет, остаться
               </StyledButton>
             </Styled.PopExitFormGroup>
           </Styled.PopExitForm>

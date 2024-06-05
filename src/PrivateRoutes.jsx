@@ -7,7 +7,7 @@ function PrivateRoutes({ isAuthenticated }) {
   return (
     isAuthenticated
       ? <Outlet />
-      : <Navigate to={Pages.SIGNIN} />
+      : <Navigate to={Pages.SIGN_IN} />
   )
 }
 
