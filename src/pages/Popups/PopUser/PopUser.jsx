@@ -1,5 +1,8 @@
 import React from "react"
+import { Link } from "react-router-dom"
+import { Pages } from "../../../lib/pages"
 import * as Styled from "./PopUser.styled"
+import { StyledButton } from "../../../components/Shared/Button/StyledButton"
 
 
 function PopUser({ theme, onToggleTheme }) {
@@ -14,9 +17,7 @@ function PopUser({ theme, onToggleTheme }) {
         <Styled.PopUserThemeCheckbox type="checkbox" className="checkbox" name="checkbox" onChange={onToggleTheme} />
       </Styled.PopUserTheme>
 
-      <Styled.PopUserButtonExit $isAccent={false} type="button" className="_hover03">
-        <a href="#popExit">Выйти</a>
-      </Styled.PopUserButtonExit>
+      <StyledButton $isAccent={false} $width={72}><Link to={Pages.EXIT}>Выйти</Link></StyledButton>
     </Styled.PopUser>
   )
 }

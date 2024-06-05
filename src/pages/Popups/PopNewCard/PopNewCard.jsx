@@ -1,7 +1,9 @@
 import React from "react"
+import { Pages } from "../../../lib/pages.js"
 import * as Styled from "./PopNewCard.styled"
 import Calendar from "../../../components/Calendar/Calendar"
 import { Topics, TopicsColors } from "../../../data/topics"
+import { Link } from "react-router-dom"
 
 
 function PopNewCard() {
@@ -11,7 +13,7 @@ function PopNewCard() {
         <Styled.PopNewCardBlock>
           <Styled.PopNewCardContent>
             <Styled.PopNewCardTitle>Создание задачи</Styled.PopNewCardTitle>
-            <Styled.PopNewCardClose href="#">&#10006;</Styled.PopNewCardClose>
+            <Styled.PopNewCardClose to={Pages.MAIN}>&#10006;</Styled.PopNewCardClose>
 
             <Styled.PopNewCardWrap>
               <Styled.PopNewCardForm id="formNewCard" action="#">
@@ -46,7 +48,7 @@ function PopNewCard() {
               </Styled.PopNewCardCategoriesThemes>
             </Styled.PopNewCardCategories>
 
-            <Styled.PopNewCardButtonCreate $isAccent={true} id="btnCreate">Создать задачу</Styled.PopNewCardButtonCreate>
+            <Styled.PopNewCardButtonCreate $isAccent={true} $width={132} id="btnCreate"><Link to={Pages.MAIN}>Создать задачу</Link></Styled.PopNewCardButtonCreate>
           </Styled.PopNewCardContent>
         </Styled.PopNewCardBlock>
       </Styled.PopNewCardContainer>

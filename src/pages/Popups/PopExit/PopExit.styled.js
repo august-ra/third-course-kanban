@@ -3,7 +3,6 @@ import * as Shared from "../../../components/SharedStyles"
 
 
 export const PopExit = styled.div`
-  display: none;
   width: 100%;
   height: 100%;
   min-width: 320px;

@@ -1,4 +1,6 @@
 import { useState } from "react"
+import { Link } from "react-router-dom"
+import { Pages } from "../../lib/pages.js"
 import * as Styled from "./Header.styled"
 import * as Shared from "../SharedStyles"
 import { StyledButton } from "../Shared/Button/StyledButton"
@@ -40,11 +42,11 @@ function Header({ theme, onToggleTheme, onAddTask }) {
           </Styled.HeaderLogoWrapper>
 
           <Styled.HeaderNav>
-            <StyledButton $isAccent={true} id="btnMainNew" onClick={handleAddTask}>
-              <a href="#popNewCard">Создать новую задачу</a>
+            <StyledButton $isAccent={true} $width={178} id="btnMainNew" onClick={handleAddTask}>
+              <Link to={Pages.CREATE}>Создать новую задачу</Link>
             </StyledButton>
 
-            <Styled.HeaderNavUser href="#user-set-target" onClick={handleOpenPopUser}>
+            <Styled.HeaderNavUser onClick={handleOpenPopUser}>
               Ivan Ivanov
             </Styled.HeaderNavUser>
 

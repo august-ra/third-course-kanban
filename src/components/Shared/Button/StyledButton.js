@@ -3,7 +3,10 @@ import * as Shared from "../../SharedStyles"
 
 
 export const StyledButton = styled.button`
-  width: 153px;
+  ${(props) => props.$width
+    ? css`width: ${props.$width}px;`
+    : props.$doWidth && css`width: 153px;`
+  };
   height: 30px;
   border-radius: 4px;
   outline: none;

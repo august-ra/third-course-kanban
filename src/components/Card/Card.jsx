@@ -1,10 +1,11 @@
 import React from "react"
+import { Link } from "react-router-dom"
 import * as Styled from "./Card.styled"
 import * as Graphics from "../Graphics/Graphics"
 import { TopicsColors } from "../../data/topics"
 
 
-function Card({ topic, title, date }) {
+function Card({ id, topic, title, date }) {
   const color = TopicsColors[topic]
 
   return (
@@ -15,13 +16,13 @@ function Card({ topic, title, date }) {
             <Styled.CardThemeText>{topic}</Styled.CardThemeText>
           </Styled.CardTheme>
 
-          <a href="#popBrowse" target="_self">
+          <Link to={`/card/${id}`}>
             <Styled.CardButton>
               <Styled.CardButtonDot />
               <Styled.CardButtonDot />
               <Styled.CardButtonDot />
             </Styled.CardButton>
-          </a>
+          </Link>
         </Styled.CardGroup>
 
         <Styled.CardContent>

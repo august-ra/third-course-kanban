@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import styled, { css } from "styled-components"
 import * as Shared from "../../../components/SharedStyles"
 import { StyledButton } from "../../../components/Shared/Button/StyledButton"
@@ -5,7 +6,6 @@ import { getCSSForColor } from "../../../lib/hooks"
 
 
 export const PopNewCard = styled.div`
-  display: none;
   width: 100%;
   min-width: 375px;
   height: 100%;
@@ -74,7 +74,7 @@ export const PopNewCardTitle = styled.h3`
   margin-bottom: 20px;
 `
 
-export const PopNewCardClose = styled.a`
+export const PopNewCardClose = styled(Link)`
   position: absolute;
   top: 20px;
   right: 30px;
@@ -195,6 +195,5 @@ export const PopNewCardCategoriesThemeText = styled.p`
 `
 
 export const PopNewCardButtonCreate = styled(StyledButton)`
-  width: 132px;
   float: right;
 `

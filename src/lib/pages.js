@@ -1,8 +1,8 @@
 
 export const Pages = {
   MAIN:      "/",
-  LOGIN:     "/login",
-  REGISTER:  "/register",
+  SIGNIN:    "/sign-in",
+  SIGNUP:    "/sign-up",
   CARD:      "/card/:id",
   CREATE:    "/create",
   NOT_FOUND: "/*",

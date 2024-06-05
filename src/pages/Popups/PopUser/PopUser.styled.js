@@ -1,6 +1,5 @@
 import styled, { css } from "styled-components"
 import * as Shared from "../../../components/SharedStyles"
-import { StyledButton } from "../../../components/Shared/Button/StyledButton"
 
 
 export const PopUser = styled.div`
@@ -82,9 +81,4 @@ export const PopUserThemeCheckbox = styled.input`
   &:checked::before {
     left: 12px;
   }
-`
-
-export const PopUserButtonExit = styled(StyledButton)`
-  width: 72px;
-  height: 30px;
 `
