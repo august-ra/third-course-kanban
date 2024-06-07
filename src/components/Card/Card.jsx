@@ -26,9 +26,9 @@ function Card({ id, topic, title, date }) {
         </Styled.CardGroup>
 
         <Styled.CardContent>
-          <a href="" target="_blank">
+          <Link to={`/card/${id}`}>
             <Styled.CardTitle>{title}</Styled.CardTitle>
-          </a>
+          </Link>
 
           <Styled.CardDate>
             <Graphics.Calendar />

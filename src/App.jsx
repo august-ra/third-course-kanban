@@ -6,7 +6,6 @@ import GlobalStyle from "./components/Global.styled"
 import { darkTheme, lightTheme } from "./components/Themes"
 
 
-
 function App() {
   const [theme, setTheme] = useState("light")
 

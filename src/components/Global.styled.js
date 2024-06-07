@@ -23,6 +23,7 @@ const GlobalStyle = createGlobalStyle`
   ._btn {
     cursor: pointer;
     outline: none;
+    font-family: "Roboto", Arial, Helvetica, sans-serif;
   }
 
   ul li {

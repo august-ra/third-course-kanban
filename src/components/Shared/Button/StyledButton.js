@@ -5,8 +5,11 @@ import * as Shared from "../../SharedStyles"
 export const StyledButton = styled.button`
   ${(props) => props.$width
     ? css`width: ${props.$width}px;`
-    : props.$doWidth && css`width: 153px;`
+    : props.$width === 0
+      ? css`width: 100%;`
+      : props.$doWidth && css`width: 153px;`
   };
+
   height: 30px;
   border-radius: 4px;
   outline: none;
@@ -35,7 +38,6 @@ const MasterButton = css`
   color: #FFFFFF;
   background-color: #565EEF;
   border: none;
-  margin-right: 10px;
 
   ${Shared.Hover01};
 
