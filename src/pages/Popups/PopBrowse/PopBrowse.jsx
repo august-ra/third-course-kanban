@@ -3,15 +3,14 @@ import { useNavigate, useParams } from "react-router-dom"
 import { Pages } from "../../../lib/pages"
 import Calendar from "../../../components/Calendar/Calendar"
 import { StyledButton } from "../../../components/Shared/Button/StyledButton"
-import { Tasks } from "../../../data/tasks"
 import { prevent } from "../../../lib/hooks"
 
 
-function PopBrowse() {
+function PopBrowse({ tasks }) {
   const navigate = useNavigate()
   const { id } = useParams()
   const numericId = Number(id)
-  const task = Tasks.filter((task) => task.id === numericId)[0]
+  const task = tasks.filter((task) => task.id === numericId)[0]
 
   function closeThis() {
     navigate(Pages.MAIN)
