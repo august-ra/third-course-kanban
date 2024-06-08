@@ -7,24 +7,11 @@ import { StyledButton } from "../Shared/Button/StyledButton"
 import PopUser from "../../pages/Popups/PopUser/PopUser"
 
 
-function Header({ theme, onToggleTheme, onAddTask }) {
+function Header({ theme, onToggleTheme }) {
   const navigate = useNavigate()
   const [isPopUserOpened, setIsPopUserOpened] = useState(false)
 
-  function handleAddTask(event) {
-    // event.preventDefault()
-    //
-    // const date = new Date()
-    // const newTask = {
-    //   id:     date.getTime(),
-    //   topic:  "Web Design",
-    //   title:  "Test",
-    //   date:   date.printShort(),
-    //   status: "Без статуса",
-    // }
-    //
-    // onAddTask(newTask)
-
+  function handleAddTask() {
     navigate(Pages.CREATE)
   }
 

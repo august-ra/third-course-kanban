@@ -1,4 +1,4 @@
-import React from "react"
+import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { Pages } from "../../../lib/pages"
 import * as Styled from "./PopNewCard.styled"
@@ -7,8 +7,53 @@ import { Topics, TopicsColors } from "../../../data/topics"
 import { prevent } from "../../../lib/hooks"
 
 
-function PopNewCard() {
+function PopNewCard({ onAddTask }) {
   const navigate = useNavigate()
+  const [formData, setFormData] = useState({
+    topic:       "",
+    title:       "",
+    description: "",
+    date:        "",
+    isModified:  "",
+  })
+
+  function updateFormData(name, value) {
+    setFormData({
+      ...formData,
+      [name]:     value,
+      isModified: true,
+    })
+  }
+
+  function handleChangeText(event) {
+    const { name, value } = event.target
+
+    updateFormData(name, value)
+  }
+
+  function handleChangeTopic(topic) {
+    if (!topic || formData.topic === topic)
+      return
+
+    updateFormData("topic", topic)
+  }
+
+  function handleAddTask(event) {
+    event.preventDefault()
+
+    const date = new Date()
+    const newTask = {
+      id:          date.getTime(),
+      topic:       formData.topic,
+      title:       formData.title,
+      description: formData.description,
+      date:        date.printShort(), // TODO: take a date from the calendar
+      status:      "Без статуса",
+    }
+
+    onAddTask(newTask)
+    closeThis()
+  }
 
   function closeThis() {
     navigate(Pages.MAIN)
@@ -26,11 +71,11 @@ function PopNewCard() {
               <Styled.PopNewCardForm id="formNewCard" action="#">
                 <Styled.PopNewCardFormBlock>
                   <Styled.PopNewCardFormLabel htmlFor="formTitle">Название задачи</Styled.PopNewCardFormLabel>
-                  <Styled.PopNewCardFormTaskName $name={true} type="text" name="name" id="formTitle" placeholder="Введите название задачи..." autoFocus={true} />
+                  <Styled.PopNewCardFormTaskName $name={true} type="text" name="title" id="formTitle" placeholder="Введите название задачи..." autoFocus={true} value={formData.title} onChange={handleChangeText} />
                 </Styled.PopNewCardFormBlock>
                 <Styled.PopNewCardFormBlock>
                   <Styled.PopNewCardFormLabel htmlFor="textArea">Описание задачи</Styled.PopNewCardFormLabel>
-                  <Styled.PopNewCardFormTaskDescription $name={false} name="text" id="textArea" placeholder="Введите описание задачи..." />
+                  <Styled.PopNewCardFormTaskDescription $name={false} name="description" id="textArea" placeholder="Введите описание задачи..." value={formData.description} onChange={handleChangeText} />
                 </Styled.PopNewCardFormBlock>
               </Styled.PopNewCardForm>
 
@@ -44,10 +89,13 @@ function PopNewCard() {
                 {
                   Topics.map((item, index) => {
                     const color = TopicsColors[item]
+                    const isActive = formData.topic === item
+
+                    const handleClick = () => handleChangeTopic(item)
 
                     return (
-                      <Styled.PopNewCardCategoriesTheme key={index} $color={color} $active={false}>
-                        <Styled.PopNewCardCategoriesThemeText>{item}</Styled.PopNewCardCategoriesThemeText>
+                      <Styled.PopNewCardCategoriesTheme key={index} $color={color} $active={isActive} onClick={handleClick}>
+                        <Styled.PopNewCardCategoriesThemeText onClick={handleClick}>{item}</Styled.PopNewCardCategoriesThemeText>
                       </Styled.PopNewCardCategoriesTheme>
                     )
                   })
@@ -55,7 +103,7 @@ function PopNewCard() {
               </Styled.PopNewCardCategoriesThemes>
             </Styled.PopNewCardCategories>
 
-            <Styled.PopNewCardButtonCreate $hasAccent={true} $width={132} type="button" onClick={closeThis}>Создать задачу</Styled.PopNewCardButtonCreate>
+            <Styled.PopNewCardButtonCreate $hasAccent={true} $width={132} type="button" onClick={handleAddTask}>Создать задачу</Styled.PopNewCardButtonCreate>
           </Styled.PopNewCardContent>
         </Styled.PopNewCardBlock>
       </Styled.PopNewCardContainer>

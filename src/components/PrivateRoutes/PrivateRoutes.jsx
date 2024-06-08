@@ -1,6 +1,6 @@
 import React from "react"
 import { Navigate, Outlet } from "react-router-dom"
-import { Pages } from "./lib/pages"
+import { Pages } from "../../lib/pages"
 
 
 function PrivateRoutes({ isAuthenticated }) {
