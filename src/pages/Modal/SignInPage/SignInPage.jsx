@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom"
 import Pages from "../../../data/pages"
 import * as Styled from "../Modal.styled"
 import * as Shared from "../../../components/SharedStyles"
+import API from "../../../lib/api"
 
 
 function SignInPage({ setAuthentication }) {
@@ -25,9 +26,15 @@ function SignInPage({ setAuthentication }) {
   }
 
   function submit() {
-    setAuthentication(true)
+    API.signIn(formData.login, formData.password)
+      .then((data) => {
+        if (data?.hasOwnProperty("error"))
+          return setError(`<b>код ошибки ${data.code}:</b> ${data.error}`)
 
-    navigate(Pages.MAIN)
+        setError("")
+        setAuthentication(data.user)
+        navigate(Pages.MAIN)
+      })
   }
 
   return (
