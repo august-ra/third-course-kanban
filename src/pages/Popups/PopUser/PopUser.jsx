@@ -1,11 +1,11 @@
 import React from "react"
 import { useNavigate } from "react-router-dom"
-import { Pages } from "../../../lib/pages"
+import Pages from "../../../data/pages"
 import * as Styled from "./PopUser.styled"
-import { StyledButton } from "../../../components/Shared/Button/StyledButton"
+import StyledButton from "../../../components/Shared/Button/StyledButton"
 
 
-function PopUser({ theme, onToggleTheme }) {
+function PopUser({ authentication, theme, onToggleTheme }) {
   const navigate = useNavigate()
 
   function openPopupExit() {
@@ -15,8 +15,8 @@ function PopUser({ theme, onToggleTheme }) {
   return (
     <Styled.PopUser id="user-set-target">
       {/* <!-- <a href="">x</a> --> */}
-      <Styled.PopUserName>Ivan Ivanov</Styled.PopUserName>
-      <Styled.PopUserMail>ivan.ivanov@gmail.com</Styled.PopUserMail>
+      <Styled.PopUserName>{authentication.name}</Styled.PopUserName>
+      <Styled.PopUserMail>{authentication.login}</Styled.PopUserMail>
 
       <Styled.PopUserTheme>
         <Styled.PopUserThemeName>{theme === "light" ? "Светлая" : "Тёмная"} тема</Styled.PopUserThemeName>

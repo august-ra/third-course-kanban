@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { StyledButton } from "../../components/Shared/Button/StyledButton"
+import StyledButton from "../../components/Shared/Button/StyledButton"
 
 
 export const Modal = styled.div`
@@ -55,7 +55,7 @@ export const ModalInput = styled.input`
   width: 100%;
   min-width: 100%;
   border-radius: 8px;
-  border: 0.7px solid rgba(148, 166, 190, 0.4);
+  border: 0.7px solid ${(props) => props.$isError ? "#F84D4D" : "rgba(148, 166, 190, 0.4)"};
   outline: none;
   padding: 10px 8px;
 
@@ -71,6 +71,11 @@ export const ModalInput = styled.input`
   &:not(:last-child) {
     margin-bottom: 7px;
   }
+`
+
+export const ModalErrorMessage = styled.p`
+  color: #F84D4D;
+  text-align: center;
 `
 
 export const ModalSubmit = styled(StyledButton)`

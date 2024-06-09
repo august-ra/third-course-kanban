@@ -1,15 +1,30 @@
-import React from "react"
+import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
-import { Pages } from "../../../lib/pages"
+import Pages from "../../../data/pages"
 import * as Styled from "../Modal.styled"
 import * as Shared from "../../../components/SharedStyles"
 
 
-function SignUpPage({ setIsAuthenticated }) {
+function SignUpPage({ setAuthentication }) {
   const navigate = useNavigate()
+  const [error, setError] = useState("")
+  const [formData, setFormData] = useState({
+    name:     "",
+    login:    "",
+    password: "",
+  })
+
+  function handleChangeText(event) {
+    const { name, value } = event.target
+
+    setFormData({
+      ...formData,
+      [name]: value,
+    })
+  }
 
   function submit() {
-    setIsAuthenticated(true)
+    setAuthentication(true)
 
     navigate(Pages.MAIN)
   }
@@ -22,10 +37,11 @@ function SignUpPage({ setIsAuthenticated }) {
             <Styled.ModalTitle>Регистрация</Styled.ModalTitle>
 
             <Styled.ModalForm id="formLogIn" action="#">
-              <Styled.ModalInput type="text" name="first-name" id="first-name" placeholder="Имя" />
-              <Styled.ModalInput type="text" name="login" id="formlogin" placeholder="Эл. почта" />
-              <Styled.ModalInput type="password" name="password" id="formpassword" placeholder="Пароль" />
-              <Styled.ModalSubmit $hasAccent={true} $width={0} type="button" onClick={submit}>Зарегистрироваться</Styled.ModalSubmit>
+              <Styled.ModalInput $isError={Boolean(error)} type="text" name="name" id="first-name" placeholder="Имя" value={formData.name} onChange={handleChangeText} />
+              <Styled.ModalInput $isError={Boolean(error)} type="text" name="login" id="formlogin" placeholder="Эл. почта" value={formData.login} onChange={handleChangeText} />
+              <Styled.ModalInput $isError={Boolean(error)} type="password" name="password" id="formpassword" placeholder="Пароль" value={formData.password} onChange={handleChangeText} />
+              <Styled.ModalErrorMessage>{error}</Styled.ModalErrorMessage>
+              <Styled.ModalSubmit $hasAccent={true} $width={0} type="button" disabled={Boolean(error)} onClick={submit}>Зарегистрироваться</Styled.ModalSubmit>
 
               <Styled.ModalGroup>
                 <p>Уже есть аккаунт? <Link to={Pages.SIGN_IN}>Войдите здесь</Link></p>

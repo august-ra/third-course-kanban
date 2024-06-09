@@ -1,6 +1,6 @@
 import React from "react"
 import { Link } from "react-router-dom"
-import { Pages } from "../../lib/pages"
+import Pages from "../../data/pages"
 import * as Styled from "./Page404.styled"
 
 

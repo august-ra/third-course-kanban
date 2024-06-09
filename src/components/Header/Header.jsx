@@ -1,13 +1,14 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { Pages } from "../../lib/pages"
+import Pages from "../../data/pages"
 import * as Styled from "./Header.styled"
 import * as Shared from "../SharedStyles"
-import { StyledButton } from "../Shared/Button/StyledButton"
+import StyledButton from "../Shared/Button/StyledButton"
 import PopUser from "../../pages/Popups/PopUser/PopUser"
+import { prevent } from "../../lib/hooks"
 
 
-function Header({ theme, onToggleTheme }) {
+function Header({ authentication, theme, onToggleTheme }) {
   const navigate = useNavigate()
   const [isPopUserOpened, setIsPopUserOpened] = useState(false)
 
@@ -16,7 +17,7 @@ function Header({ theme, onToggleTheme }) {
   }
 
   function handleOpenPopUser(event) {
-    event.preventDefault()
+    prevent(event)
 
     setIsPopUserOpened((prev) => !prev)
   }
@@ -37,10 +38,10 @@ function Header({ theme, onToggleTheme }) {
             </StyledButton>
 
             <Styled.HeaderNavUser onClick={handleOpenPopUser}>
-              Ivan Ivanov
+              {authentication.name}
             </Styled.HeaderNavUser>
 
-            { isPopUserOpened && <PopUser theme={theme} onToggleTheme={onToggleTheme} /> }
+            { isPopUserOpened && <PopUser authentication={authentication} theme={theme} onToggleTheme={onToggleTheme} /> }
           </Styled.HeaderNav>
         </Styled.HeaderBlock>
       </Shared.Container>

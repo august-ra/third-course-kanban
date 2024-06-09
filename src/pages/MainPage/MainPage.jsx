@@ -6,7 +6,7 @@ import Loader from "../../components/Loader/Loader"
 import Main from "../../components/Main/Main"
 
 
-function MainPage({ tasks, theme, onToggleTheme }) {
+function MainPage({ tasks, authentication, theme, onToggleTheme }) {
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
@@ -18,7 +18,7 @@ function MainPage({ tasks, theme, onToggleTheme }) {
   return (
     <Shared.Wrapper>
       <Outlet />
-      <Header theme={theme} onToggleTheme={onToggleTheme} />
+      <Header authentication={authentication} theme={theme} onToggleTheme={onToggleTheme} />
       {
         isLoading
           ? <Loader />
