@@ -1,13 +1,5 @@
-import styled, { createGlobalStyle } from "styled-components"
+import { createGlobalStyle } from "styled-components"
 
-
-export const Wrapper = styled.div`
-  max-width: 100%;
-  width: 100vw;
-  min-height: 100vh;
-  overflow: hidden;
-  background-color: ${(props) => props.theme.body};
-`
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -31,6 +23,7 @@ const GlobalStyle = createGlobalStyle`
   ._btn {
     cursor: pointer;
     outline: none;
+    font-family: "Roboto", Arial, Helvetica, sans-serif;
   }
 
   ul li {

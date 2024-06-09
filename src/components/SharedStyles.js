@@ -1,6 +1,14 @@
 import styled, { css } from "styled-components"
 
 
+export const Wrapper = styled.div`
+  max-width: 100%;
+  width: 100vw;
+  min-height: 100vh;
+  overflow: hidden;
+  background-color: ${(props) => props.theme.body};
+`
+
 export const Container = styled.div`
   max-width: 1260px;
   width: 100%;
@@ -79,7 +87,7 @@ export const PopTarget = css`
   }
 `
 
-export const CommonSubtitle = css`
+export const Subtitle = css`
   color: ${(props) => props.theme.text};
   font-size: 14px;
   font-weight: 600;

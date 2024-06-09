@@ -1,8 +1,6 @@
 import styled from "styled-components"
-import * as Styled from "../SharedStyles"
+import * as Shared from "../SharedStyles"
 
-
-export const Container = Styled.Container
 
 export const Header = styled.header`
   width: 100%;
@@ -34,6 +32,7 @@ export const HeaderNav = styled.nav`
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 10px;
 `
 
 export const HeaderNavUser = styled.a`
@@ -46,7 +45,7 @@ export const HeaderNavUser = styled.a`
   line-height: 20px;
   color: ${(props) => props.theme.extra};
 
-  ${Styled.Hover02};
+  ${Shared.Hover02};
 
   &::after {
     content: "";

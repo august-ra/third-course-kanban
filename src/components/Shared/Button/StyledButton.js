@@ -1,9 +1,15 @@
 import styled, { css } from "styled-components"
-import * as Styled from "../../SharedStyles"
+import * as Shared from "../../SharedStyles"
 
 
 export const StyledButton = styled.button`
-  width: 153px;
+  ${(props) => props.$width
+    ? css`width: ${props.$width}px;`
+    : props.$width === 0
+      ? css`width: 100%;`
+      : props.$doWidth && css`width: 153px;`
+  };
+
   height: 30px;
   border-radius: 4px;
   outline: none;
@@ -22,7 +28,7 @@ export const StyledButton = styled.button`
   }
 
   ${(props) => {
-    return props.$isAccent
+    return props.$hasAccent
       ? MasterButton
       : SlaveButton
   }}
@@ -32,9 +38,8 @@ const MasterButton = css`
   color: #FFFFFF;
   background-color: #565EEF;
   border: none;
-  margin-right: 10px;
 
-  ${Styled.Hover01};
+  ${Shared.Hover01};
 
   @media only screen and (max-width: 375px) {
     width: 100%;
@@ -49,7 +54,7 @@ const SlaveButton = css`
   background-color: transparent;
   border: 0.7px solid ${(props) => props.theme.extra};
 
-  ${Styled.Hover03};
+  ${Shared.Hover03};
 
   @media only screen and (max-width: 375px) {
     width: 100%;

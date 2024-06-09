@@ -1,8 +1,17 @@
 import React from "react"
+import { useNavigate } from "react-router-dom"
+import { Pages } from "../../../lib/pages"
 import * as Styled from "./PopUser.styled"
+import { StyledButton } from "../../../components/Shared/Button/StyledButton"
 
 
 function PopUser({ theme, onToggleTheme }) {
+  const navigate = useNavigate()
+
+  function openPopupExit() {
+    navigate(Pages.SIGN_OUT)
+  }
+
   return (
     <Styled.PopUser id="user-set-target">
       {/* <!-- <a href="">x</a> --> */}
@@ -14,9 +23,7 @@ function PopUser({ theme, onToggleTheme }) {
         <Styled.PopUserThemeCheckbox type="checkbox" className="checkbox" name="checkbox" onChange={onToggleTheme} />
       </Styled.PopUserTheme>
 
-      <Styled.PopUserButtonExit $isAccent={false} type="button" className="_hover03">
-        <a href="#popExit">Выйти</a>
-      </Styled.PopUserButtonExit>
+      <StyledButton $hasAccent={false} $width={72} type="submit" onClick={openPopupExit}>Выйти</StyledButton>
     </Styled.PopUser>
   )
 }

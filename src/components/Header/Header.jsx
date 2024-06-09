@@ -1,25 +1,18 @@
 import { useState } from "react"
+import { useNavigate } from "react-router-dom"
+import { Pages } from "../../lib/pages"
 import * as Styled from "./Header.styled"
-import { StyledButton } from "../Shared/Button/StyledButton.js"
-import PopUser from "../Popups/PopUser/PopUser"
+import * as Shared from "../SharedStyles"
+import { StyledButton } from "../Shared/Button/StyledButton"
+import PopUser from "../../pages/Popups/PopUser/PopUser"
 
 
-function Header({ theme, onToggleTheme, onAddTask }) {
+function Header({ theme, onToggleTheme }) {
+  const navigate = useNavigate()
   const [isPopUserOpened, setIsPopUserOpened] = useState(false)
 
-  function handleAddTask(event) {
-    event.preventDefault()
-
-    const date = new Date()
-    const newTask = {
-      id:     date.getTime(),
-      topic:  "Web Design",
-      title:  "Test",
-      date:   date.printShort(),
-      status: "Без статуса",
-    }
-
-    onAddTask(newTask)
+  function handleAddTask() {
+    navigate(Pages.CREATE)
   }
 
   function handleOpenPopUser(event) {
@@ -30,7 +23,7 @@ function Header({ theme, onToggleTheme, onAddTask }) {
 
   return (
     <Styled.Header>
-      <Styled.Container>
+      <Shared.Container>
         <Styled.HeaderBlock>
           <Styled.HeaderLogoWrapper>
             <a href="" target="_self">
@@ -39,18 +32,18 @@ function Header({ theme, onToggleTheme, onAddTask }) {
           </Styled.HeaderLogoWrapper>
 
           <Styled.HeaderNav>
-            <StyledButton $isAccent={true} id="btnMainNew" onClick={handleAddTask}>
-              <a href="#popNewCard">Создать новую задачу</a>
+            <StyledButton $hasAccent={true} $width={178} type="button" onClick={handleAddTask}>
+              Создать новую задачу
             </StyledButton>
 
-            <Styled.HeaderNavUser href="#user-set-target" onClick={handleOpenPopUser}>
+            <Styled.HeaderNavUser onClick={handleOpenPopUser}>
               Ivan Ivanov
             </Styled.HeaderNavUser>
 
             { isPopUserOpened && <PopUser theme={theme} onToggleTheme={onToggleTheme} /> }
           </Styled.HeaderNav>
         </Styled.HeaderBlock>
-      </Styled.Container>
+      </Shared.Container>
     </Styled.Header>
   )
 }

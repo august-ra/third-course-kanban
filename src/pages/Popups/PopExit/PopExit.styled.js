@@ -1,9 +1,8 @@
 import styled from "styled-components"
-import * as Styled from "../../SharedStyles"
+import * as Shared from "../../../components/SharedStyles"
 
 
 export const PopExit = styled.div`
-  display: none;
   width: 100%;
   height: 100%;
   min-width: 320px;
@@ -13,7 +12,7 @@ export const PopExit = styled.div`
   left: 0;
   z-index: 5;
 
-  ${Styled.PopTarget};
+  ${Shared.PopTarget};
 `
 
 export const PopExitContainer = styled.div`
@@ -60,6 +59,7 @@ export const PopExitFormGroup = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 10px;
 
   @media only screen and (max-width: 375px) {
     display: block;
