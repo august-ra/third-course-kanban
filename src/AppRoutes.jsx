@@ -30,7 +30,7 @@ function AppRoutes({ theme, onToggleTheme }) {
   return (
     <Routes>
       <Route element={<PrivateRoutes isAuthenticated={authentication} />}>
-        <Route path={Pages.MAIN} element={<MainPage tasks={tasks} authentication={authentication} theme={theme} onToggleTheme={onToggleTheme} />}>
+        <Route path={Pages.MAIN} element={<MainPage tasks={tasks} setTasks={setTasks} authentication={authentication} theme={theme} onToggleTheme={onToggleTheme} />}>
           <Route path={Pages.CARD} element={<PopBrowse tasks={tasks} />} />
           <Route path={Pages.CREATE} element={<PopNewCard onAddTask={onAddTask} />} />
           <Route path={Pages.SIGN_OUT} element={<PopExit setAuthentication={updateAuthentication} />} />

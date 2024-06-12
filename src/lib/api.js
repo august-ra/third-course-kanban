@@ -1,5 +1,8 @@
+import UserInfo from "./userInfo"
+
 
 const API = {
+  tasksURI:  "https://wedev-api.sky.pro/api/kanban", // GET (read) + POST (send)
   signInURI: "https://wedev-api.sky.pro/api/user/login", // POST
   signUpURI: "https://wedev-api.sky.pro/api/user", // POST
 
@@ -25,6 +28,16 @@ const API = {
           return { error: true, code: statusCode, message: error.message }
       })
   },
+
+
+  readTasksFromServer() {
+    const params = {
+      headers: { Authorization: `Bearer ${UserInfo.data.token}` },
+    }
+
+    return this.getDataFromEndpoint(this.tasksURI, params)
+  },
+
 
   signIn(login, password) {
     const params = {
