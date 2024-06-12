@@ -8,28 +8,33 @@ import API from "../../../lib/api"
 
 function SignInPage({ setAuthentication }) {
   const navigate = useNavigate()
-  const [error, setError] = useState("")
+  const [error, setError] = useState(null)
   const [formData, setFormData] = useState({
     login:    "",
     password: "",
+    activity: false,
   })
 
   function handleChangeText(event) {
     const { name, value } = event.target
 
-    console.log(`${name}: ${value}`)
-
     setFormData({
       ...formData,
-      [name]: value,
+      [name]:   value,
+      activity: false,
     })
   }
 
   function submit() {
     API.signIn(formData.login, formData.password)
       .then((data) => {
-        if (data?.hasOwnProperty("error"))
-          return setError(`<b>код ошибки ${data.code}:</b> ${data.error}`)
+        if (data?.hasOwnProperty("error")) {
+          setFormData({
+            ...formData,
+            activity: true,
+          })
+          return setError(data)
+        }
 
         setError("")
         setAuthentication(data.user)
@@ -47,8 +52,11 @@ function SignInPage({ setAuthentication }) {
             <Styled.ModalForm id="formLogIn" action="#">
               <Styled.ModalInput $isError={Boolean(error)} type="text" name="login" id="formlogin" placeholder="Эл. почта" value={formData.login} onChange={handleChangeText} />
               <Styled.ModalInput $isError={Boolean(error)} type="password" name="password" id="formpassword" placeholder="Пароль" value={formData.password} onChange={handleChangeText} />
-              <Styled.ModalErrorMessage>{error}</Styled.ModalErrorMessage>
-              <Styled.ModalSubmit $hasAccent={true} $width={0} type="button" disabled={Boolean(error)} onClick={submit}>Войти</Styled.ModalSubmit>
+              {
+                error
+                  && <Styled.ModalErrorMessage><b>код ошибки {error.code}:</b> {error.message}</Styled.ModalErrorMessage>
+              }
+              <Styled.ModalSubmit $hasAccent={true} $width={0} type="button" disabled={formData.activity} onClick={submit}>Войти</Styled.ModalSubmit>
 
               <Styled.ModalGroup>
                 <p>Нужно зарегистрироваться? <Link to={Pages.SIGN_UP}>Регистрируйтесь здесь</Link></p>

@@ -20,9 +20,9 @@ const API = {
       })
       .catch((error) => {
         if (error.message === "Failed to fetch")
-          return { code: 499, error: "Запрос на сервер не выполнен, проверьте подключение к Интернет" }
+          return { error: true, code: 499, message: "Запрос на сервер не выполнен, проверьте подключение к Интернет" }
         else
-          return { code: statusCode, error: error.message }
+          return { error: true, code: statusCode, message: error.message }
       })
   },
 

@@ -11,7 +11,7 @@ function PopExit({ setAuthentication }) {
   const navigate = useNavigate()
 
   function signOut() {
-    UserInfo.save("")
+    UserInfo.clear()
     setAuthentication("")
 
     navigate(Pages.SIGN_IN)

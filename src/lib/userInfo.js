@@ -18,6 +18,12 @@ const UserInfo = {
 
     localStorage.setItem("userInfo", JSON.stringify(userInfo))
   },
+
+  clear() {
+    this.data = ""
+
+    localStorage.removeItem("userInfo")
+  },
 }
 
 export default UserInfo
