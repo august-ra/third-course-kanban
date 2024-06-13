@@ -1,3 +1,5 @@
+import * as Shared from "./SharedStyles.js"
+
 
 export const lightTheme = {
   name:     "light",
@@ -14,6 +16,19 @@ export const lightTheme = {
 
   isDark() {
     return false
+  },
+
+  getCSSForColor(color) {
+    switch (color) {
+      case "orange":
+        return Shared.Orange
+      case "purple":
+        return Shared.Purple
+      case "green":
+        return Shared.Green
+      default:
+        return Shared.Gray
+    }
   },
 }
 
@@ -32,5 +47,18 @@ export const darkTheme = {
 
   isDark() {
     return true
+  },
+
+  getCSSForColor(color) {
+    switch (color) {
+      case "orange":
+        return Shared.OrangeNegative
+      case "purple":
+        return Shared.PurpleNegative
+      case "green":
+        return Shared.GreenNegative
+      default:
+        return Shared.Gray
+    }
   },
 }

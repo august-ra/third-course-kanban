@@ -1,5 +1,4 @@
 import styled, { keyframes } from "styled-components"
-import { getCSSForColor } from "../../lib/hooks"
 
 
 const animation = keyframes`
@@ -46,7 +45,7 @@ export const CardTheme = styled.div`
   padding: 5px 14px;
   border-radius: 18px;
 
-  ${(props) => getCSSForColor(props.theme, props.$color)};
+  ${(props) => props.theme.getCSSForColor(props.$color)};
 `
 
 export const CardThemeText = styled.p`

@@ -2,7 +2,6 @@ import { Link } from "react-router-dom"
 import styled, { css } from "styled-components"
 import * as Shared from "../../../components/SharedStyles"
 import StyledButton from "../../../components/Shared/Button/StyledButton"
-import { getCSSForColor } from "../../../lib/hooks"
 
 
 export const PopNewCard = styled.div`
@@ -184,7 +183,7 @@ export const PopNewCardCategoriesTheme = styled.div`
   margin-right: 7px;
   opacity: ${(props) => props.$active ? "1 !important;" : "0.4;"};
 
-  ${(props) => getCSSForColor(props.theme, props.$color)};
+  ${(props) => props.theme.getCSSForColor(props.$color)};
 `
 
 export const PopNewCardCategoriesThemeText = styled.p`
