@@ -1,27 +1,16 @@
-import { useState } from "react"
+import React from "react"
 import AppRoutes from "./AppRoutes"
 import "./App.css"
-import { ThemeProvider } from "styled-components"
+import { UsedThemeProvider } from "./context/ThemeContext/ThemeContext"
 import GlobalStyle from "./components/Global.styled"
-import { darkTheme, lightTheme } from "./components/Themes"
 
 
 function App() {
-  const [theme, setTheme] = useState("light")
-
-  function onToggleTheme() {
-    if (theme === "light") {
-      setTheme("dark")
-    } else {
-      setTheme("light")
-    }
-  }
-
   return (
-    <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
+    <UsedThemeProvider>
       <GlobalStyle />
-      <AppRoutes theme={theme} onToggleTheme={onToggleTheme} />
-    </ThemeProvider>
+      <AppRoutes />
+    </UsedThemeProvider>
   )
 }
 

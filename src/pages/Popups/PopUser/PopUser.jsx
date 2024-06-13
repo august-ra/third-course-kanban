@@ -1,11 +1,13 @@
-import React from "react"
+import { useContext } from "react"
 import { useNavigate } from "react-router-dom"
 import Pages from "../../../data/pages"
+import { ThemeContext } from "../../../context/ThemeContext/ThemeContext"
 import * as Styled from "./PopUser.styled"
 import StyledButton from "../../../components/Shared/Button/StyledButton"
 
 
-function PopUser({ authentication, theme, onToggleTheme }) {
+function PopUser({ authentication }) {
+  const themeContext = useContext(ThemeContext)
   const navigate = useNavigate()
 
   function openPopupExit() {
@@ -19,8 +21,8 @@ function PopUser({ authentication, theme, onToggleTheme }) {
       <Styled.PopUserMail>{authentication.login}</Styled.PopUserMail>
 
       <Styled.PopUserTheme>
-        <Styled.PopUserThemeName>{theme === "light" ? "Светлая" : "Тёмная"} тема</Styled.PopUserThemeName>
-        <Styled.PopUserThemeCheckbox type="checkbox" className="checkbox" name="checkbox" onChange={onToggleTheme} />
+        <Styled.PopUserThemeName>{themeContext.printName()}</Styled.PopUserThemeName>
+        <Styled.PopUserThemeCheckbox type="checkbox" className="checkbox" name="checkbox" onChange={themeContext.toggleTheme} />
       </Styled.PopUserTheme>
 
       <StyledButton $hasAccent={false} $width={72} type="submit" onClick={openPopupExit}>Выйти</StyledButton>

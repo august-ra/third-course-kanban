@@ -1,4 +1,4 @@
-import * as Shared from "./SharedStyles.js"
+import * as Shared from "./SharedStyles"
 
 
 export const lightTheme = {

@@ -7,7 +7,7 @@ import Main from "../../components/Main/Main"
 import API from "../../lib/api"
 
 
-function MainPage({ tasks, setTasks, authentication, theme, onToggleTheme }) {
+function MainPage({ tasks, setTasks, authentication }) {
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState(null)
 
@@ -35,7 +35,7 @@ function MainPage({ tasks, setTasks, authentication, theme, onToggleTheme }) {
   return (
     <Shared.Wrapper>
       <Outlet />
-      <Header authentication={authentication} theme={theme} onToggleTheme={onToggleTheme} />
+      <Header authentication={authentication} />
       {
         isLoading && !error
           ? <Loader />

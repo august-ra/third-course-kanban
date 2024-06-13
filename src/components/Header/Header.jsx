@@ -1,5 +1,6 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { ThemeContext } from "../../context/ThemeContext/ThemeContext"
 import Pages from "../../data/pages"
 import * as Styled from "./Header.styled"
 import * as Shared from "../SharedStyles"
@@ -8,7 +9,8 @@ import PopUser from "../../pages/Popups/PopUser/PopUser"
 import { prevent } from "../../lib/hooks"
 
 
-function Header({ authentication, theme, onToggleTheme }) {
+function Header({ authentication }) {
+  const themeContext = useContext(ThemeContext)
   const navigate = useNavigate()
   const [isPopUserOpened, setIsPopUserOpened] = useState(false)
 
@@ -28,7 +30,7 @@ function Header({ authentication, theme, onToggleTheme }) {
         <Styled.HeaderBlock>
           <Styled.HeaderLogoWrapper>
             <a href="" target="_self">
-              <Styled.HeaderLogo src={`/images/logo${theme === "light" ? "" : "_dark"}.png`} alt="logo" />
+              <Styled.HeaderLogo src={themeContext.getLogoPath()} alt="logo" />
             </a>
           </Styled.HeaderLogoWrapper>
 
@@ -41,7 +43,7 @@ function Header({ authentication, theme, onToggleTheme }) {
               {authentication.name}
             </Styled.HeaderNavUser>
 
-            { isPopUserOpened && <PopUser authentication={authentication} theme={theme} onToggleTheme={onToggleTheme} /> }
+            { isPopUserOpened && <PopUser authentication={authentication} /> }
           </Styled.HeaderNav>
         </Styled.HeaderBlock>
       </Shared.Container>
