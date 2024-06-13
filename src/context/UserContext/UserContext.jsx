@@ -1,29 +1,38 @@
+import { createContext, useState } from "react"
 
-const UserInfo = {
-  data: "",
 
-  read() {
-    const data = localStorage.getItem("userInfo")
+export const UserContext = createContext(null)
 
-    if (data)
-      this.data = JSON.parse(data)
-    else
-      this.data = ""
+export function UserProvider({ children }) {
+  const [data, setData] = useState(read())
 
-    return this.data
-  },
+  function isAuthenticated() {
+    return data && data.login
+  }
 
-  save(userInfo) {
-    this.data = userInfo
+  function read() {
+    let userInfo = localStorage.getItem("userInfo")
 
+    if (userInfo)
+      userInfo = JSON.parse(userInfo)
+
+    if (!userInfo || typeof userInfo !== "object")
+      userInfo = {}
+
+    return userInfo
+  }
+
+  function save(userInfo) {
     localStorage.setItem("userInfo", JSON.stringify(userInfo))
-  },
 
-  clear() {
-    this.data = ""
+    setData(userInfo)
+  }
 
+  function clear() {
     localStorage.removeItem("userInfo")
-  },
-}
 
-export default UserInfo
+    setData("")
+  }
+
+  return <UserContext.Provider value={{ ...data, isAuthenticated, read, save, clear }}>{children}</UserContext.Provider>
+}

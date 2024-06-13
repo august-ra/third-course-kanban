@@ -10,18 +10,10 @@ import PopNewCard from "./pages/Popups/PopNewCard/PopNewCard"
 import SignInPage from "./pages/Modal/SignInPage/SignInPage"
 import SignUpPage from "./pages/Modal/SignUpPage/SignUpPage"
 import Tasks from "./data/tasks"
-import UserInfo from "./context/UserContext/UserContext"
 
 
 function AppRoutes() {
-  const [authentication, setAuthentication] = useState(UserInfo.read())
   const [tasks, setTasks] = useState(Tasks)
-
-  function updateAuthentication(data) {
-    UserInfo.save(data)
-
-    setAuthentication(data)
-  }
 
   function onAddTask(newTask) {
     setTasks([...tasks, newTask])
@@ -29,16 +21,16 @@ function AppRoutes() {
 
   return (
     <Routes>
-      <Route element={<PrivateRoutes isAuthenticated={authentication} />}>
-        <Route path={Pages.MAIN} element={<MainPage tasks={tasks} setTasks={setTasks} authentication={authentication} />}>
+      <Route element={<PrivateRoutes />}>
+        <Route path={Pages.MAIN} element={<MainPage tasks={tasks} setTasks={setTasks} />}>
           <Route path={Pages.CARD} element={<PopBrowse tasks={tasks} />} />
           <Route path={Pages.CREATE} element={<PopNewCard onAddTask={onAddTask} />} />
-          <Route path={Pages.SIGN_OUT} element={<PopExit setAuthentication={updateAuthentication} />} />
+          <Route path={Pages.SIGN_OUT} element={<PopExit />} />
         </Route>
       </Route>
 
-      <Route path={Pages.SIGN_IN} element={<SignInPage setAuthentication={updateAuthentication} />} />
-      <Route path={Pages.SIGN_UP} element={<SignUpPage setAuthentication={updateAuthentication} />} />
+      <Route path={Pages.SIGN_IN} element={<SignInPage />} />
+      <Route path={Pages.SIGN_UP} element={<SignUpPage />} />
       <Route path={Pages.NOT_FOUND} element={<Page404 />} />
     </Routes>
   )

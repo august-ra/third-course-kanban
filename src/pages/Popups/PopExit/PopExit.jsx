@@ -1,18 +1,18 @@
-import React from "react"
+import { useContext } from "react"
 import { useNavigate } from "react-router-dom"
 import Pages from "../../../data/pages"
+import { UserContext } from "../../../context/UserContext/UserContext"
 import * as Styled from "./PopExit.styled"
 import StyledButton from "../../../components/Shared/Button/StyledButton"
-import UserInfo from "../../../context/UserContext/UserContext"
 import { prevent } from "../../../lib/hooks"
 
 
-function PopExit({ setAuthentication }) {
+function PopExit() {
   const navigate = useNavigate()
+  const userContext = useContext(UserContext)
 
   function signOut() {
-    UserInfo.clear()
-    setAuthentication("")
+    userContext.clear()
 
     navigate(Pages.SIGN_IN)
   }

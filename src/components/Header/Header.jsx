@@ -1,7 +1,8 @@
 import { useContext, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { ThemeContext } from "../../context/ThemeContext/ThemeContext"
 import Pages from "../../data/pages"
+import { ThemeContext } from "../../context/ThemeContext/ThemeContext"
+import { UserContext } from "../../context/UserContext/UserContext"
 import * as Styled from "./Header.styled"
 import * as Shared from "../SharedStyles"
 import StyledButton from "../Shared/Button/StyledButton"
@@ -9,9 +10,10 @@ import PopUser from "../../pages/Popups/PopUser/PopUser"
 import { prevent } from "../../lib/hooks"
 
 
-function Header({ authentication }) {
-  const themeContext = useContext(ThemeContext)
+function Header() {
   const navigate = useNavigate()
+  const themeContext = useContext(ThemeContext)
+  const userContext = useContext(UserContext)
   const [isPopUserOpened, setIsPopUserOpened] = useState(false)
 
   function handleAddTask() {
@@ -40,10 +42,10 @@ function Header({ authentication }) {
             </StyledButton>
 
             <Styled.HeaderNavUser onClick={handleOpenPopUser}>
-              {authentication.name}
+              {userContext.name}
             </Styled.HeaderNavUser>
 
-            { isPopUserOpened && <PopUser authentication={authentication} /> }
+            { isPopUserOpened && <PopUser /> }
           </Styled.HeaderNav>
         </Styled.HeaderBlock>
       </Shared.Container>

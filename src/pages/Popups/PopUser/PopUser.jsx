@@ -2,13 +2,15 @@ import { useContext } from "react"
 import { useNavigate } from "react-router-dom"
 import Pages from "../../../data/pages"
 import { ThemeContext } from "../../../context/ThemeContext/ThemeContext"
+import { UserContext } from "../../../context/UserContext/UserContext"
 import * as Styled from "./PopUser.styled"
 import StyledButton from "../../../components/Shared/Button/StyledButton"
 
 
-function PopUser({ authentication }) {
-  const themeContext = useContext(ThemeContext)
+function PopUser() {
   const navigate = useNavigate()
+  const themeContext = useContext(ThemeContext)
+  const userContext = useContext(UserContext)
 
   function openPopupExit() {
     navigate(Pages.SIGN_OUT)
@@ -17,8 +19,8 @@ function PopUser({ authentication }) {
   return (
     <Styled.PopUser id="user-set-target">
       {/* <!-- <a href="">x</a> --> */}
-      <Styled.PopUserName>{authentication.name}</Styled.PopUserName>
-      <Styled.PopUserMail>{authentication.login}</Styled.PopUserMail>
+      <Styled.PopUserName>{userContext.name}</Styled.PopUserName>
+      <Styled.PopUserMail>{userContext.login}</Styled.PopUserMail>
 
       <Styled.PopUserTheme>
         <Styled.PopUserThemeName>{themeContext.printName()}</Styled.PopUserThemeName>

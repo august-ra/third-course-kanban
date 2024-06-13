@@ -1,13 +1,15 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import Pages from "../../../data/pages"
+import { UserContext } from "../../../context/UserContext/UserContext"
 import * as Styled from "../Modal.styled"
 import * as Shared from "../../../components/SharedStyles"
 import API from "../../../lib/api"
 
 
-function SignUpPage({ setAuthentication }) {
+function SignUpPage() {
   const navigate = useNavigate()
+  const userContext = useContext(UserContext)
   const [error, setError] = useState(null)
   const [formData, setFormData] = useState({
     name:     "",
@@ -29,7 +31,7 @@ function SignUpPage({ setAuthentication }) {
   function submit() {
     API.signUp(formData.name, formData.login, formData.password)
       .then((data) => {
-        if (data?.hasOwnProperty("error")) {
+        if (data && data.error) {
           setFormData({
             ...formData,
             activity: true,
@@ -38,7 +40,7 @@ function SignUpPage({ setAuthentication }) {
         }
 
         setError("")
-        setAuthentication(data.user)
+        userContext.save(data.user)
         navigate(Pages.MAIN)
       })
   }

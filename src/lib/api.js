@@ -1,5 +1,3 @@
-import UserInfo from "../context/UserContext/UserContext"
-
 
 const API = {
   tasksURI:  "https://wedev-api.sky.pro/api/kanban", // GET (read) + POST (send)
@@ -30,9 +28,9 @@ const API = {
   },
 
 
-  readTasksFromServer() {
+  readTasksFromServer(token) {
     const params = {
-      headers: { Authorization: `Bearer ${UserInfo.data.token}` },
+      headers: { Authorization: `Bearer ${token}` },
     }
 
     return this.getDataFromEndpoint(this.tasksURI, params)

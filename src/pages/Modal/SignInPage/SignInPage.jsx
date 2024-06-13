@@ -1,18 +1,20 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import Pages from "../../../data/pages"
+import { UserContext } from "../../../context/UserContext/UserContext"
 import * as Styled from "../Modal.styled"
 import * as Shared from "../../../components/SharedStyles"
 import API from "../../../lib/api"
 
 
-function SignInPage({ setAuthentication }) {
+function SignInPage() {
   const navigate = useNavigate()
+  const userContext = useContext(UserContext)
   const [error, setError] = useState(null)
   const [formData, setFormData] = useState({
     login:    "",
     password: "",
-    activity: false,
+    activity: true,
   })
 
   function handleChangeText(event) {
@@ -21,23 +23,23 @@ function SignInPage({ setAuthentication }) {
     setFormData({
       ...formData,
       [name]:   value,
-      activity: false,
+      activity: true,
     })
   }
 
   function submit() {
     API.signIn(formData.login, formData.password)
       .then((data) => {
-        if (data?.hasOwnProperty("error")) {
+        if (data && data.error) {
           setFormData({
             ...formData,
-            activity: true,
+            activity: false,
           })
           return setError(data)
         }
 
         setError("")
-        setAuthentication(data.user)
+        userContext.save(data.user)
         navigate(Pages.MAIN)
       })
   }
@@ -56,7 +58,7 @@ function SignInPage({ setAuthentication }) {
                 error
                   && <Styled.ModalErrorMessage><b>код ошибки {error.code}:</b> {error.message}</Styled.ModalErrorMessage>
               }
-              <Styled.ModalSubmit $hasAccent={true} $width={0} type="button" disabled={formData.activity} onClick={submit}>Войти</Styled.ModalSubmit>
+              <Styled.ModalSubmit $hasAccent={true} $width={0} type="button" disabled={!formData.activity} onClick={submit}>Войти</Styled.ModalSubmit>
 
               <Styled.ModalGroup>
                 <p>Нужно зарегистрироваться? <Link to={Pages.SIGN_UP}>Регистрируйтесь здесь</Link></p>
