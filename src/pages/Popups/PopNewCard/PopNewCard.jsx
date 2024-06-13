@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { Pages } from "../../../lib/pages"
+import Pages from "../../../data/pages"
 import * as Styled from "./PopNewCard.styled"
 import Calendar from "../../../components/Calendar/Calendar"
 import { Topics, TopicsColors } from "../../../data/topics"

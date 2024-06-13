@@ -5,20 +5,22 @@ import Column from "../Column/Column"
 import { Statuses } from "../../data/statuses"
 
 
-function Main({ tasks }) {
+function Main({ tasks, error }) {
   return (
     <Styled.Main>
       <Shared.Container>
         <Styled.MainBlock>
           <Styled.MainContent>
             {
-              Statuses.map((item, index) => {
-                const filteredTasks = tasks.filter((task) => task.status === item)
+              error
+                ? <Styled.MainError><h4>код ошибки {error.code}:</h4> {error.message}</Styled.MainError>
+                : Statuses.map((item, index) => {
+                  const filteredTasks = tasks.filter((task) => task.status === item)
 
-                return (
-                  <Column key={index} title={item} tasks={filteredTasks} />
-                )
-              })
+                  return (
+                    <Column key={index} title={item} tasks={filteredTasks} />
+                  )
+                })
             }
           </Styled.MainContent>
         </Styled.MainBlock>

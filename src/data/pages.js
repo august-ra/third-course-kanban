@@ -1,5 +1,5 @@
 
-export const Pages = {
+const Pages = {
   MAIN:      "/",
   SIGN_IN:   "/sign-in",
   SIGN_UP:   "/sign-up",
@@ -8,3 +8,5 @@ export const Pages = {
   CREATE:    "/create",
   NOT_FOUND: "/*",
 }
+
+export default Pages

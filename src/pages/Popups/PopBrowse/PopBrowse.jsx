@@ -1,8 +1,8 @@
 import React from "react"
 import { useNavigate, useParams } from "react-router-dom"
-import { Pages } from "../../../lib/pages"
+import Pages from "../../../data/pages"
 import Calendar from "../../../components/Calendar/Calendar"
-import { StyledButton } from "../../../components/Shared/Button/StyledButton"
+import StyledButton from "../../../components/Shared/Button/StyledButton"
 import { prevent } from "../../../lib/hooks"
 
 

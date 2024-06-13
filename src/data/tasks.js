@@ -1,5 +1,5 @@
 
-export const Tasks = [
+const Tasks = [
   {
     id:          1,
     topic:       "Web Design",
@@ -41,3 +41,5 @@ export const Tasks = [
     status:      "Готово",
   },
 ]
+
+export default Tasks

@@ -2,7 +2,7 @@ import styled, { css } from "styled-components"
 import * as Shared from "../../SharedStyles"
 
 
-export const StyledButton = styled.button`
+const StyledButton = styled.button`
   ${(props) => props.$width
     ? css`width: ${props.$width}px;`
     : props.$width === 0
@@ -41,6 +41,10 @@ const MasterButton = css`
 
   ${Shared.Hover01};
 
+  &:disabled {
+    color: #94A6BE;
+  }
+
   @media only screen and (max-width: 375px) {
     width: 100%;
     height: 40px;
@@ -61,3 +65,5 @@ const SlaveButton = css`
     height: 40px;
   }
 `
+
+export default StyledButton

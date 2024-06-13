@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 import styled, { css } from "styled-components"
 import * as Shared from "../../../components/SharedStyles"
-import { StyledButton } from "../../../components/Shared/Button/StyledButton"
+import StyledButton from "../../../components/Shared/Button/StyledButton"
 import { getCSSForColor } from "../../../lib/hooks"
 
 
