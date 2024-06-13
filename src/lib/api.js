@@ -1,4 +1,4 @@
-import UserInfo from "./UserContext"
+import UserInfo from "../context/UserContext/UserContext"
 
 
 const API = {

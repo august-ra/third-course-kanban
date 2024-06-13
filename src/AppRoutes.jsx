@@ -10,7 +10,7 @@ import PopNewCard from "./pages/Popups/PopNewCard/PopNewCard"
 import SignInPage from "./pages/Modal/SignInPage/SignInPage"
 import SignUpPage from "./pages/Modal/SignUpPage/SignUpPage"
 import Tasks from "./data/tasks"
-import UserInfo from "./lib/UserContext"
+import UserInfo from "./context/UserContext/UserContext"
 
 
 function AppRoutes() {

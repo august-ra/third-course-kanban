@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom"
 import Pages from "../../../data/pages"
 import * as Styled from "./PopExit.styled"
 import StyledButton from "../../../components/Shared/Button/StyledButton"
-import UserInfo from "../../../lib/UserContext"
+import UserInfo from "../../../context/UserContext/UserContext"
 import { prevent } from "../../../lib/hooks"
 
 
