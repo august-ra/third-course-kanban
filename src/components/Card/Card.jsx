@@ -5,18 +5,19 @@ import * as Graphics from "../Graphics/Graphics"
 import { TopicsColors } from "../../data/topics"
 
 
-function Card({ id, topic, title, date }) {
-  const color = TopicsColors[topic]
+function Card({ task }) {
+  const color = TopicsColors[task.topic]
+  const link = `/card/${task.id}`
 
   return (
     <Styled.CardItem>
       <Styled.Card>
         <Styled.CardGroup>
           <Styled.CardTheme $color={color}>
-            <Styled.CardThemeText>{topic}</Styled.CardThemeText>
+            <Styled.CardThemeText>{task.topic}</Styled.CardThemeText>
           </Styled.CardTheme>
 
-          <Link to={`/card/${id}`}>
+          <Link to={link}>
             <Styled.CardButton>
               <Styled.CardButtonDot />
               <Styled.CardButtonDot />
@@ -26,14 +27,14 @@ function Card({ id, topic, title, date }) {
         </Styled.CardGroup>
 
         <Styled.CardContent>
-          <Link to={`/card/${id}`}>
-            <Styled.CardTitle>{title}</Styled.CardTitle>
+          <Link to={link}>
+            <Styled.CardTitle>{task.title}</Styled.CardTitle>
           </Link>
 
           <Styled.CardDate>
             <Graphics.Calendar />
 
-            <Styled.CardDateValue>{date}</Styled.CardDateValue>
+            <Styled.CardDateValue>{task.date}</Styled.CardDateValue>
           </Styled.CardDate>
         </Styled.CardContent>
       </Styled.Card>

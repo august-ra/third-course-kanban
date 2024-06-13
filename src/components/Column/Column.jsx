@@ -3,7 +3,7 @@ import * as Styled from "./Column.styled"
 import Card from "../Card/Card"
 
 
-function Column({ title, tasks }) {
+function Column({ title, tasksInColumn }) {
   return (
     <Styled.Column>
       <Styled.ColumnTitle>
@@ -12,9 +12,9 @@ function Column({ title, tasks }) {
 
       <Styled.ColumnCards>
         {
-          tasks.map((item) => {
+          tasksInColumn.map((task) => {
             return (
-              <Card key={item.id} id={item.id} topic={item.topic} title={item.title} date={item.date} />
+              <Card key={task.id} task={task} />
             )
           })
         }

@@ -1,16 +1,17 @@
-import React from "react"
+import { useContext } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import Pages from "../../../data/pages"
+import { TasksContext } from "../../../context/TasksContext/TasksContext"
 import Calendar from "../../../components/Calendar/Calendar"
 import StyledButton from "../../../components/Shared/Button/StyledButton"
 import { prevent } from "../../../lib/hooks"
 
 
-function PopBrowse({ tasks }) {
+function PopBrowse() {
   const navigate = useNavigate()
+  const tasksContext = useContext(TasksContext)
   const { id } = useParams()
-  const numericId = Number(id)
-  const task = tasks.filter((task) => task.id === numericId)[0]
+  const task = tasksContext.getTaskById(Number(id))
 
   function closeThis() {
     navigate(Pages.MAIN)

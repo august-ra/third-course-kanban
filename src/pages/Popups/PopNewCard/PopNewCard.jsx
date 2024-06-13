@@ -1,14 +1,16 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import Pages from "../../../data/pages"
+import { TasksContext } from "../../../context/TasksContext/TasksContext"
 import * as Styled from "./PopNewCard.styled"
 import Calendar from "../../../components/Calendar/Calendar"
 import { Topics, TopicsColors } from "../../../data/topics"
 import { prevent } from "../../../lib/hooks"
 
 
-function PopNewCard({ onAddTask }) {
+function PopNewCard() {
   const navigate = useNavigate()
+  const tasksContext = useContext(TasksContext)
   const [formData, setFormData] = useState({
     topic:       "",
     title:       "",
@@ -51,7 +53,7 @@ function PopNewCard({ onAddTask }) {
       status:      "Без статуса",
     }
 
-    onAddTask(newTask)
+    tasksContext.addTask(newTask)
     closeThis()
   }
 
