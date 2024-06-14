@@ -11,7 +11,7 @@ function PopBrowse() {
   const navigate = useNavigate()
   const tasksContext = useContext(TasksContext)
   const { id } = useParams()
-  const task = tasksContext.getTaskById(Number(id))
+  const task = tasksContext.getTaskById(id)
 
   function closeThis() {
     navigate(Pages.MAIN)
