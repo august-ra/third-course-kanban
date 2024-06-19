@@ -15,7 +15,7 @@ function PopNewCard() {
     topic:       "",
     title:       "",
     description: "",
-    date:        "",
+    date:        null,
     isModified:  "",
   })
 
@@ -25,6 +25,10 @@ function PopNewCard() {
       [name]:     value,
       isModified: true,
     })
+  }
+
+  function setActiveDate(value) {
+    updateFormData("date", value)
   }
 
   function handleChangeText(event) {
@@ -49,7 +53,7 @@ function PopNewCard() {
       topic:       formData.topic,
       title:       formData.title,
       description: formData.description,
-      date:        date.printShort(), // TODO: take a date from the calendar
+      date:        formData.date,
       status:      "Без статуса",
     }
 
@@ -81,7 +85,7 @@ function PopNewCard() {
                 </Styled.PopNewCardFormBlock>
               </Styled.PopNewCardForm>
 
-              <Calendar />
+              <Calendar activeDate={formData.date} setActiveDate={setActiveDate} />
             </Styled.PopNewCardWrap>
 
             <Styled.PopNewCardCategories>

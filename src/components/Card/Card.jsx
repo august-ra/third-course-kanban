@@ -34,7 +34,7 @@ function Card({ task }) {
           <Styled.CardDate>
             <Graphics.Calendar />
 
-            <Styled.CardDateValue>{task.date}</Styled.CardDateValue>
+            <Styled.CardDateValue>{task.date.printShort()}</Styled.CardDateValue>
           </Styled.CardDate>
         </Styled.CardContent>
       </Styled.Card>

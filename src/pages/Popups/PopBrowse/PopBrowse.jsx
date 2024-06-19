@@ -44,7 +44,7 @@ function PopBrowse() {
                 </div>
               </form>
 
-              <Calendar activeDate={task.date.toDate()} />
+              <Calendar activeDate={task.date} />
             </div>
             <div className="theme-down__categories theme-down">
               <p className="categories__p subttl">Категория</p>

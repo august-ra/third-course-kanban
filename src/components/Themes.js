@@ -4,6 +4,7 @@ import * as Shared from "./SharedStyles"
 export const lightTheme = {
   name:     "light",
   body:     "#EAEEF6",
+  calendar: "#F6EEEA",
   back:     "#FFFFFF",
   text:     "#000000",
   extra:    "#565EEF",
@@ -35,6 +36,7 @@ export const lightTheme = {
 export const darkTheme = {
   name:     "dark",
   body:     "#151419",
+  calendar: "#151419",
   back:     "#20202C",
   text:     "#FFFFFF",
   extra:    "#FFFFFF",
