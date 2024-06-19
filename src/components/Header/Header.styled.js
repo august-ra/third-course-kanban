@@ -1,4 +1,4 @@
-import styled from "styled-components"
+import styled, { css } from "styled-components"
 import * as Shared from "../SharedStyles"
 
 
@@ -44,6 +44,7 @@ export const HeaderNavUser = styled.a`
   font-size: 14px;
   line-height: 20px;
   color: ${(props) => props.theme.extra};
+  user-select: none;
 
   ${Shared.Hover02};
 
@@ -55,8 +56,18 @@ export const HeaderNavUser = styled.a`
     border-radius: 1px;
     border-left: 1.9px solid ${(props) => props.theme.extra};
     border-bottom: 1.9px solid ${(props) => props.theme.extra};
-    transform: rotate(-45deg);
     margin: -6px 0 0 5px;
     padding: 0;
+
+    ${(props) => props.$opened ? ClosedUser : OpenedUser};
   }
+`
+
+const ClosedUser = css`
+  transform: rotate(-45deg);
+`
+
+const OpenedUser = css`
+  transform: rotate(135deg);
+  translate: 0 4px;
 `

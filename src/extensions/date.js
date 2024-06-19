@@ -60,7 +60,7 @@ Date.prototype.getBeggingOfDay = function () {
 }
 
 Date.prototype.getBeggingOfMonth = function () {
-  let date = this.getBeggingOfDay()
+  const date = this.getBeggingOfDay()
   date.setDate(1)
 
   return date

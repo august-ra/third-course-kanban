@@ -41,7 +41,7 @@ function Header() {
               Создать новую задачу
             </StyledButton>
 
-            <Styled.HeaderNavUser onClick={handleOpenPopUser}>
+            <Styled.HeaderNavUser $opened={isPopUserOpened} onClick={handleOpenPopUser}>
               {userContext.name}
             </Styled.HeaderNavUser>
 
