@@ -9,11 +9,10 @@ export function UsedThemeProvider({ children }) {
   const [theme, setTheme] = useState("light")
 
   function toggleTheme() {
-    if (theme === "light") {
+    if (theme === "light")
       setTheme("dark")
-    } else {
+    else
       setTheme("light")
-    }
   }
 
   function printName() {

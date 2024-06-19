@@ -27,7 +27,6 @@ export const Card = styled.div`
   align-items: flex-start;
   justify-content: stretch;
   padding: 15px 13px 19px;
-  /*margin-bottom: 10px;*/
 `
 
 export const CardGroup = styled.div`

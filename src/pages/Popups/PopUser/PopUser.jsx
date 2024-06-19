@@ -27,7 +27,7 @@ function PopUser() {
         <Styled.PopUserThemeCheckbox type="checkbox" className="checkbox" name="checkbox" onChange={themeContext.toggleTheme} />
       </Styled.PopUserTheme>
 
-      <StyledButton $hasAccent={false} $width={72} type="submit" onClick={openPopupExit}>Выйти</StyledButton>
+      <StyledButton $primary={false} $width={72} onClick={openPopupExit}>Выйти</StyledButton>
     </Styled.PopUser>
   )
 }

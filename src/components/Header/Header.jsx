@@ -37,7 +37,7 @@ function Header() {
           </Styled.HeaderLogoWrapper>
 
           <Styled.HeaderNav>
-            <StyledButton $hasAccent={true} $width={178} type="button" onClick={handleAddTask}>
+            <StyledButton $primary={true} $width={178} onClick={handleAddTask}>
               Создать новую задачу
             </StyledButton>
 

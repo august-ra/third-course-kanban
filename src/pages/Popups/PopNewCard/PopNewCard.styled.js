@@ -26,6 +26,7 @@ export const PopNewCardContainer = styled.div`
   height: 100%;
   min-height: 100vh;
   padding: 0 16px;
+  position: fixed;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -70,7 +71,7 @@ export const PopNewCardTitle = styled.h3`
   font-size: 20px;
   font-weight: 600;
   line-height: 24px;
-  margin-bottom: 20px;
+  ${(props) => props.$clearMargin || css`margin-bottom: 20px;`};
 `
 
 export const PopNewCardClose = styled(Link)`
@@ -120,7 +121,7 @@ const PopNewCardFormInput = css`
   outline: none;
   padding: 14px;
   color: inherit;
-  background: transparent;
+  background: ${(props) => props.$height ? "#EAEEF6" : "transparent"};
   border: 0.7px solid rgba(148, 166, 190, 0.4);
   border-radius: 8px;
   font-family: inherit;
@@ -152,9 +153,13 @@ export const PopNewCardFormTaskName = styled.input`
 export const PopNewCardFormTaskDescription = styled.textarea`
   max-width: 370px;
   margin-top: 14px;
-  height: 200px;
+  height: ${(props) => props.$height || 200}px;
 
   ${PopNewCardFormInput};
+
+  &[readonly] {
+    background: ${(props) => props.theme.body};
+  }
 `
 
 export const PopNewCardCategories = styled.div`
@@ -167,23 +172,29 @@ export const PopNewCardCategoriesSubtitle = styled.p`
   ${Shared.Subtitle};
 `
 
-export const PopNewCardCategoriesThemes = styled.div`
+export const PopNewCardCategoriesThemes = styled.fieldset`
   display: flex;
   flex-wrap: nowrap;
   align-items: flex-start;
   justify-content: flex-start;
+  border: none;
 `
 
-export const PopNewCardCategoriesTheme = styled.div`
+export const PopNewCardCategoriesTheme = styled.label`
   display: inline-block;
   width: auto;
   height: 30px;
   padding: 8px 20px;
   border-radius: 24px;
   margin-right: 7px;
+  cursor: pointer;
   opacity: ${(props) => props.$active ? "1 !important;" : "0.4;"};
 
   ${(props) => props.theme.getCSSForColor(props.$color)};
+
+  @media screen and (max-width: 495px) {
+    display: none;
+  }
 `
 
 export const PopNewCardCategoriesThemeText = styled.p`

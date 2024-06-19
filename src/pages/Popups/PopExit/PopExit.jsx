@@ -29,10 +29,10 @@ function PopExit() {
 
           <Styled.PopExitForm action="#">
             <Styled.PopExitFormGroup>
-              <StyledButton $hasAccent={true} $doWidth={true} type="button" onClick={signOut}>
+              <StyledButton $primary={true} $doWidth={true} onClick={signOut}>
                 Да, выйти
               </StyledButton>
-              <StyledButton $hasAccent={false} $doWidth={true} type="button" onClick={closeThis}>
+              <StyledButton $primary={false} $doWidth={true} onClick={closeThis}>
                 Нет, остаться
               </StyledButton>
             </Styled.PopExitFormGroup>

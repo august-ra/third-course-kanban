@@ -4,18 +4,19 @@ import Pages from "../../../data/pages"
 import { UserContext } from "../../../context/UserContext/UserContext"
 import * as Styled from "../Modal.styled"
 import * as Shared from "../../../components/SharedStyles"
+import ErrorBlock from "../../../components/Shared/ErrorBlock/ErrorBlock"
 import API from "../../../lib/api"
 
 
 function SignUpPage() {
   const navigate = useNavigate()
   const userContext = useContext(UserContext)
-  const [error, setError] = useState(null)
+  const [errorData, setErrorData] = useState(null)
   const [formData, setFormData] = useState({
     name:     "",
     login:    "",
     password: "",
-    activity: false,
+    activity: true,
   })
 
   function handleChangeText(event) {
@@ -24,7 +25,7 @@ function SignUpPage() {
     setFormData({
       ...formData,
       [name]:   value,
-      activity: false,
+      activity: true,
     })
   }
 
@@ -34,12 +35,12 @@ function SignUpPage() {
         if (data && data.error) {
           setFormData({
             ...formData,
-            activity: true,
+            activity: false,
           })
-          return setError(data)
+          return setErrorData(data)
         }
 
-        setError("")
+        setErrorData(null)
         userContext.save(data.user)
         navigate(Pages.MAIN)
       })
@@ -53,14 +54,14 @@ function SignUpPage() {
             <Styled.ModalTitle>Регистрация</Styled.ModalTitle>
 
             <Styled.ModalForm id="formLogIn" action="#">
-              <Styled.ModalInput $isError={Boolean(error)} type="text" name="name" id="first-name" placeholder="Имя" value={formData.name} onChange={handleChangeText} />
-              <Styled.ModalInput $isError={Boolean(error)} type="text" name="login" id="formlogin" placeholder="Эл. почта" value={formData.login} onChange={handleChangeText} />
-              <Styled.ModalInput $isError={Boolean(error)} type="password" name="password" id="formpassword" placeholder="Пароль" value={formData.password} onChange={handleChangeText} />
+              <Styled.ModalInput $isError={Boolean(errorData)} type="text" name="name" id="first-name" placeholder="Имя" value={formData.name} onChange={handleChangeText} />
+              <Styled.ModalInput $isError={Boolean(errorData)} type="text" name="login" id="formlogin" placeholder="Эл. почта" value={formData.login} onChange={handleChangeText} />
+              <Styled.ModalInput $isError={Boolean(errorData)} type="password" name="password" id="formpassword" placeholder="Пароль" value={formData.password} onChange={handleChangeText} />
               {
-                error
-                  && <Styled.ModalErrorMessage><b>код ошибки {error.code}:</b> {error.message}</Styled.ModalErrorMessage>
+                errorData
+                  && <ErrorBlock code={errorData.code} message={errorData.message} />
               }
-              <Styled.ModalSubmit $hasAccent={true} $width={0} type="button" disabled={formData.activity} onClick={submit}>Зарегистрироваться</Styled.ModalSubmit>
+              <Styled.ModalSubmit $primary={true} $width={0} disabled={!formData.activity} onClick={submit}>Зарегистрироваться</Styled.ModalSubmit>
 
               <Styled.ModalGroup>
                 <p>Уже есть аккаунт? <Link to={Pages.SIGN_IN}>Войдите здесь</Link></p>

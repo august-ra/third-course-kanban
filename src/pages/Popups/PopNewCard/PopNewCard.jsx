@@ -16,7 +16,7 @@ function PopNewCard() {
     title:       "",
     description: "",
     date:        null,
-    isModified:  "",
+    isModified:  false,
   })
 
   function updateFormData(name, value) {
@@ -109,7 +109,7 @@ function PopNewCard() {
               </Styled.PopNewCardCategoriesThemes>
             </Styled.PopNewCardCategories>
 
-            <Styled.PopNewCardButtonCreate $hasAccent={true} $width={132} type="button" onClick={handleAddTask}>Создать задачу</Styled.PopNewCardButtonCreate>
+            <Styled.PopNewCardButtonCreate $primary={true} $width={132} onClick={handleAddTask}>Создать задачу</Styled.PopNewCardButtonCreate>
           </Styled.PopNewCardContent>
         </Styled.PopNewCardBlock>
       </Styled.PopNewCardContainer>

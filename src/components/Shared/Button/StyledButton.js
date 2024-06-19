@@ -2,7 +2,9 @@ import styled, { css } from "styled-components"
 import * as Shared from "../../SharedStyles"
 
 
-const StyledButton = styled.button`
+const StyledButton = styled.button.attrs(() => ({
+  type: "button",
+}))`
   ${(props) => props.$width
     ? css`width: ${props.$width}px;`
     : props.$width === 0
@@ -28,7 +30,7 @@ const StyledButton = styled.button`
   }
 
   ${(props) => {
-    return props.$hasAccent
+    return props.$primary
       ? MasterButton
       : SlaveButton
   }}

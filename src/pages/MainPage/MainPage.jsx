@@ -13,25 +13,23 @@ function MainPage() {
   const userContext = useContext(UserContext)
   const tasksContext = useContext(TasksContext)
   const [isLoading, setIsLoading] = useState(true)
-  const [error, setError] = useState(null)
+  const [errorData, setErrorData] = useState(null)
 
   useEffect(() => {
     API.readTasksFromServer(userContext.token)
       .then((data) => {
         if (data && data.error)
-          return setError(data)
+          return setErrorData(data)
 
-        setError("")
-        tasksContext.setTasks(data.tasks.map((task) => {
-          return {
-            id:          task._id,
-            topic:       task.topic,
-            title:       task.title,
-            description: task.description,
-            date:        task.date,
-            status:      task.status,
-          }
-        }))
+        setErrorData(null)
+        tasksContext.setTasks(data.tasks.map((task) => ({
+          id:          task._id,
+          topic:       task.topic,
+          title:       task.title,
+          description: task.description,
+          date:        new Date(task.date),
+          status:      task.status,
+        })))
       })
       .finally(() => setIsLoading(false))
   }, [])
@@ -41,9 +39,9 @@ function MainPage() {
       <Outlet />
       <Header />
       {
-        isLoading && !error
+        isLoading && !errorData
           ? <Loader />
-          : <Main error={error} />
+          : <Main errorData={errorData} />
       }
     </Shared.Wrapper>
   )

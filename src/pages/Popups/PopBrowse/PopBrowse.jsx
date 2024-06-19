@@ -54,18 +54,18 @@ function PopBrowse() {
             </div>
             <div className="pop-browse__btn-browse ">
               <div className="btn-group">
-                <StyledButton $hasAccent={false} type="button">Редактировать задачу</StyledButton>
-                <StyledButton $hasAccent={false} type="button">Удалить задачу</StyledButton>
+                <StyledButton $primary={false}>Редактировать задачу</StyledButton>
+                <StyledButton $primary={false}>Удалить задачу</StyledButton>
               </div>
-              <StyledButton $hasAccent={true} type="button" onClick={closeThis}>Закрыть</StyledButton>
+              <StyledButton $primary={true} onClick={closeThis}>Закрыть</StyledButton>
             </div>
             <div className="pop-browse__btn-edit _hide">
               <div className="btn-group">
-                <StyledButton $hasAccent={true} type="button"><a href="#">Сохранить</a></StyledButton>
-                <StyledButton $hasAccent={false} type="button"><a href="#">Отменить</a></StyledButton>
-                <StyledButton $hasAccent={false} id="btnDelete" type="button">Удалить задачу</StyledButton>
+                <StyledButton $primary={true}><a href="#">Сохранить</a></StyledButton>
+                <StyledButton $primary={false}><a href="#">Отменить</a></StyledButton>
+                <StyledButton $primary={false} id="btnDelete">Удалить задачу</StyledButton>
               </div>
-              <StyledButton $hasAccent={true} type="button" onClick={closeThis}>Закрыть</StyledButton>
+              <StyledButton $primary={true} onClick={closeThis}>Закрыть</StyledButton>
             </div>
           </div>
         </div>
