@@ -53,7 +53,7 @@ Date.prototype.copy = function () {
 }
 
 Date.prototype.getBeggingOfDay = function () {
-  let date = this.copy()
+  const date = this.copy()
   date.setHours(0, 0, 0, 0)
 
   return date

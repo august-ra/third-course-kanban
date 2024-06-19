@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom"
 import Pages from "../../../data/pages"
 import { TasksContext } from "../../../context/TasksContext/TasksContext"
 import * as Styled from "../PopCard.styled"
+import TopicsRadioGroup from "../../../components/Shared/TopicsRadioGroup/TopicsRadioGroup"
 import Calendar from "../../../components/Calendar/Calendar"
-import { Topics, TopicsColors } from "../../../data/topics"
 import { prevent } from "../../../lib/hooks"
 
 
@@ -66,54 +66,38 @@ function PopNewCard() {
   }
 
   return (
-    <Styled.PopNewCard id="popNewCard">
-      <Styled.PopNewCardContainer onClick={closeThis}>
-        <Styled.PopNewCardBlock onClick={prevent}>
-          <Styled.PopNewCardContent>
-            <Styled.PopNewCardTitle>Создание задачи</Styled.PopNewCardTitle>
-            <Styled.PopNewCardClose to={Pages.MAIN}>&#10006;</Styled.PopNewCardClose>
+    <Styled.PopCard id="popNewCard">
+      <Styled.PopCardContainer onClick={closeThis}>
+        <Styled.PopCardBlock onClick={prevent}>
+          <Styled.PopCardContent>
+            <Styled.PopCardTitle>Создание задачи</Styled.PopCardTitle>
+            <Styled.PopCardClose to={Pages.MAIN}>&#10006;</Styled.PopCardClose>
 
-            <Styled.PopNewCardWrap>
-              <Styled.PopNewCardForm id="formNewCard" action="#">
-                <Styled.PopNewCardFormBlock>
-                  <Styled.PopNewCardFormLabel htmlFor="formTitle">Название задачи</Styled.PopNewCardFormLabel>
-                  <Styled.PopNewCardFormTaskName $name={true} type="text" name="title" id="formTitle" placeholder="Введите название задачи..." autoFocus={true} value={formData.title} onChange={handleChangeText} />
-                </Styled.PopNewCardFormBlock>
-                <Styled.PopNewCardFormBlock>
-                  <Styled.PopNewCardFormLabel htmlFor="textArea">Описание задачи</Styled.PopNewCardFormLabel>
-                  <Styled.PopNewCardFormTaskDescription $name={false} name="description" id="textArea" placeholder="Введите описание задачи..." value={formData.description} onChange={handleChangeText} />
-                </Styled.PopNewCardFormBlock>
-              </Styled.PopNewCardForm>
+            <Styled.PopCardWrap>
+              <Styled.PopCardForm id="formNewCard" action="#">
+                <Styled.PopCardFormBlock>
+                  <Styled.PopCardFormLabel htmlFor="formTitle">Название задачи</Styled.PopCardFormLabel>
+                  <Styled.PopCardFormTaskName $name={true} type="text" name="title" id="formTitle" placeholder="Введите название задачи..." autoFocus={true} value={formData.title} onChange={handleChangeText} />
+                </Styled.PopCardFormBlock>
+                <Styled.PopCardFormBlock>
+                  <Styled.PopCardFormLabel htmlFor="textArea">Описание задачи</Styled.PopCardFormLabel>
+                  <Styled.PopCardFormTaskDescription $name={false} name="description" id="textArea" placeholder="Введите описание задачи..." value={formData.description} onChange={handleChangeText} />
+                </Styled.PopCardFormBlock>
+              </Styled.PopCardForm>
 
               <Calendar activeDate={formData.date} setActiveDate={setActiveDate} />
-            </Styled.PopNewCardWrap>
+            </Styled.PopCardWrap>
 
-            <Styled.PopNewCardCategories>
-              <Styled.PopNewCardCategoriesSubtitle>Категория</Styled.PopNewCardCategoriesSubtitle>
+            <Styled.PopCardCategories>
+              <Styled.PopCardCategoriesSubtitle>Категория</Styled.PopCardCategoriesSubtitle>
+              <TopicsRadioGroup topic={formData.topic} handleChangeTopic={handleChangeTopic} />
+            </Styled.PopCardCategories>
 
-              <Styled.PopNewCardCategoriesThemes>
-                {
-                  Topics.map((item, index) => {
-                    const color = TopicsColors[item]
-                    const isActive = formData.topic === item
-
-                    const handleClick = () => handleChangeTopic(item)
-
-                    return (
-                      <Styled.PopNewCardCategoriesTheme key={index} $color={color} $active={isActive} onClick={handleClick}>
-                        <Styled.PopNewCardCategoriesThemeText onClick={handleClick}>{item}</Styled.PopNewCardCategoriesThemeText>
-                      </Styled.PopNewCardCategoriesTheme>
-                    )
-                  })
-                }
-              </Styled.PopNewCardCategoriesThemes>
-            </Styled.PopNewCardCategories>
-
-            <Styled.PopNewCardButtonCreate $primary={true} $width={132} onClick={handleAddTask}>Создать задачу</Styled.PopNewCardButtonCreate>
-          </Styled.PopNewCardContent>
-        </Styled.PopNewCardBlock>
-      </Styled.PopNewCardContainer>
-    </Styled.PopNewCard>
+            <Styled.PopCardButtonCreate $primary={true} $width={132} onClick={handleAddTask}>Создать задачу</Styled.PopCardButtonCreate>
+          </Styled.PopCardContent>
+        </Styled.PopCardBlock>
+      </Styled.PopCardContainer>
+    </Styled.PopCard>
   )
 }
 

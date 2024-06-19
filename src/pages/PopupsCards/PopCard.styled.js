@@ -4,7 +4,7 @@ import * as Shared from "../../components/SharedStyles"
 import StyledButton from "../../components/Shared/Button/StyledButton"
 
 
-export const PopNewCard = styled.div`
+export const PopCard = styled.div`
   width: 100%;
   min-width: 375px;
   height: 100%;
@@ -21,7 +21,7 @@ export const PopNewCard = styled.div`
   }
 `
 
-export const PopNewCardContainer = styled.div`
+export const PopCardContainer = styled.div`
   width: 100%;
   height: 100%;
   min-height: 100vh;
@@ -39,7 +39,7 @@ export const PopNewCardContainer = styled.div`
   }
 `
 
-export const PopNewCardBlock = styled.div`
+export const PopCardBlock = styled.div`
   display: block;
   margin: 0 auto;
   background-color: ${(props) => props.theme.back};
@@ -61,20 +61,26 @@ export const PopNewCardBlock = styled.div`
   }
 `
 
-export const PopNewCardContent = styled.div`
+export const PopCardContent = styled.div`
   display: block;
   text-align: left;
 `
 
-export const PopNewCardTitle = styled.h3`
-  //color: #000;
+export const PopCardTopBlock = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+`
+
+export const PopCardTitle = styled.h3`
   font-size: 20px;
   font-weight: 600;
   line-height: 24px;
   ${(props) => props.$clearMargin || css`margin-bottom: 20px;`};
 `
 
-export const PopNewCardClose = styled(Link)`
+export const PopCardClose = styled(Link)`
   position: absolute;
   top: 20px;
   right: 30px;
@@ -86,7 +92,7 @@ export const PopNewCardClose = styled(Link)`
   }
 `
 
-export const PopNewCardWrap = styled.div`
+export const PopCardWrap = styled.div`
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
@@ -96,7 +102,7 @@ export const PopNewCardWrap = styled.div`
   }
 `
 
-export const PopNewCardForm = styled.form`
+export const PopCardForm = styled.form`
   max-width: 370px;
   width: 100%;
   display: block;
@@ -107,16 +113,16 @@ export const PopNewCardForm = styled.form`
   }
 `
 
-export const PopNewCardFormBlock = styled.div`
+export const PopCardFormBlock = styled.div`
   display: flex;
   flex-direction: column;
 `
 
-export const PopNewCardFormLabel = styled.label`
+export const PopCardFormLabel = styled.label`
   ${Shared.Subtitle};
 `
 
-const PopNewCardFormInput = css`
+const PopCardFormInput = css`
   width: 100%;
   outline: none;
   padding: 14px;
@@ -144,35 +150,35 @@ const PopNewCardFormInput = css`
   }
 `
 
-export const PopNewCardFormTaskName = styled.input`
+export const PopCardFormTaskName = styled.input`
   margin: 20px 0;
 
-  ${PopNewCardFormInput};
+  ${PopCardFormInput};
 `
 
-export const PopNewCardFormTaskDescription = styled.textarea`
+export const PopCardFormTaskDescription = styled.textarea`
   max-width: 370px;
   margin-top: 14px;
   height: ${(props) => props.$height || 200}px;
 
-  ${PopNewCardFormInput};
+  ${PopCardFormInput};
 
   &[readonly] {
     background: ${(props) => props.theme.body};
   }
 `
 
-export const PopNewCardCategories = styled.div`
+export const PopCardCategories = styled.div`
   margin-bottom: 20px;
 `
 
-export const PopNewCardCategoriesSubtitle = styled.p`
+export const PopCardCategoriesSubtitle = styled.p`
   margin-bottom: 14px;
 
   ${Shared.Subtitle};
 `
 
-export const PopNewCardCategoriesThemes = styled.fieldset`
+export const PopCardCategoriesThemes = styled.fieldset`
   display: flex;
   flex-wrap: nowrap;
   align-items: flex-start;
@@ -180,7 +186,7 @@ export const PopNewCardCategoriesThemes = styled.fieldset`
   border: none;
 `
 
-export const PopNewCardCategoriesTheme = styled.label`
+export const PopCardCategoriesTheme = styled.label`
   display: inline-block;
   width: auto;
   height: 30px;
@@ -197,13 +203,79 @@ export const PopNewCardCategoriesTheme = styled.label`
   }
 `
 
-export const PopNewCardCategoriesThemeText = styled.p`
+export const PopCardCategoriesThemeText = styled.p`
   font-size: 14px;
   font-weight: 600;
   line-height: 14px;
   white-space: nowrap;
 `
 
-export const PopNewCardButtonCreate = styled(StyledButton)`
+export const PopCardButtonCreate = styled(StyledButton)`
   float: right;
+`
+
+/* status */
+
+export const PopCardStatus = styled.div`
+  margin-bottom: 11px;
+`
+
+export const PopCardStatusTitle = styled.p`
+  margin-bottom: 14px;
+
+  ${Shared.Subtitle};
+`
+
+export const PopCardStatusThemes = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: flex-start;
+`
+
+export const PopCardStatusTheme = styled.div`
+  border-radius: 24px;
+  border: 0.7px solid rgba(148, 166, 190, 0.4);
+  color: #94A6BE;
+  padding: 11px 14px 10px;
+  margin-right: 7px;
+  margin-bottom: 7px;
+
+  ${Shared.Gray};
+`
+
+export const PopCardStatusThemeText = styled.p`
+  font-size: 14px;
+  line-height: 1;
+  letter-spacing: -0.14px;
+`
+
+/* action buttons */
+
+export const PopCardButtonsGroup = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  
+  button {
+    height: 30px;
+    margin-bottom: 10px;
+    padding: 0 14px;
+  }
+
+  @media screen and (max-width: 495px) {
+    button {
+      width: 100%;
+      height: 40px;
+    }
+  }
+`
+
+export const PopCardButtonsGroupInner = styled.div`
+  display: flex;
+  gap: 8px;
+
+  @media screen and (max-width: 495px) {
+    width: 100%;
+  }
 `
