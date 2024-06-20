@@ -17,7 +17,7 @@ function Header() {
   const [isPopUserOpened, setIsPopUserOpened] = useState(false)
 
   function handleAddTask() {
-    navigate(Pages.CREATE)
+    navigate(`${Pages.CARDS}/${Pages.CREATE}`)
   }
 
   function handleOpenPopUser(event) {

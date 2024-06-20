@@ -16,6 +16,7 @@ function PopBrowse() {
   const { id } = useParams()
   const task = tasksContext.getTaskById(id)
   const color = TopicsColors[task.topic]
+  const location = window.location.pathname
 
   const [formData, setFormData] = useState({
     topic:       task.topic,
@@ -23,7 +24,7 @@ function PopBrowse() {
     description: task.description,
     date:        task.date,
     status:      task.status,
-    isEditing:   true,
+    isEditing:   location.endsWith(`/${Pages.EDIT}`),
     isModified:  false,
   })
 
@@ -53,6 +54,35 @@ function PopBrowse() {
       return
 
     updateFormData("topic", topic)
+  }
+
+  function handleBeginEditing() {
+    if (formData.isEditing)
+      return
+
+    navigate(`${location}/${Pages.EDIT}`)
+  }
+
+  function handleApplyEditing() {
+    if (!formData.isEditing)
+      return
+
+    // TODO: fetch changes to server
+
+    navigate(location.replace(`/${Pages.EDIT}`))
+  }
+
+  function handleCancelEditing() {
+    if (!formData.isEditing)
+      return
+
+    navigate(location.replace(`/${Pages.EDIT}`))
+  }
+
+  function handleDelete() {
+    // TODO: fetch deletion to server
+
+    closeThis()
   }
 
   function closeThis() {
@@ -109,16 +139,16 @@ function PopBrowse() {
               formData.isEditing
                 ? <Styled.PopCardButtonsGroup>
                   <Styled.PopCardButtonsGroupInner>
-                    <StyledButton $primary={true}><a href="#">Сохранить</a></StyledButton>
-                    <StyledButton $primary={false}><a href="#">Отменить</a></StyledButton>
-                    <StyledButton $primary={false} id="btnDelete">Удалить задачу</StyledButton>
+                    <StyledButton $primary={true} onClick={handleApplyEditing}>Сохранить</StyledButton>
+                    <StyledButton $primary={false} onClick={handleCancelEditing}>Отменить</StyledButton>
+                    <StyledButton $primary={false} onClick={handleDelete}>Удалить задачу</StyledButton>
                   </Styled.PopCardButtonsGroupInner>
                   <StyledButton $primary={true} onClick={closeThis}>Закрыть</StyledButton>
                 </Styled.PopCardButtonsGroup>
                 : <Styled.PopCardButtonsGroup>
                   <Styled.PopCardButtonsGroupInner>
-                    <StyledButton $primary={false} $width={198}>Редактировать задачу</StyledButton>
-                    <StyledButton $primary={false}>Удалить задачу</StyledButton>
+                    <StyledButton $primary={false} $width={198} onClick={handleBeginEditing}>Редактировать задачу</StyledButton>
+                    <StyledButton $primary={false} onClick={handleDelete}>Удалить задачу</StyledButton>
                   </Styled.PopCardButtonsGroupInner>
                   <StyledButton $primary={true} onClick={closeThis}>Закрыть</StyledButton>
                 </Styled.PopCardButtonsGroup>
