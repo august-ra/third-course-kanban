@@ -1,5 +1,5 @@
 import { useContext, useState } from "react"
-import { useNavigate, useParams } from "react-router-dom"
+import { useLocation, useNavigate, useParams } from "react-router-dom"
 import Pages from "../../../data/pages"
 import { TasksContext } from "../../../context/TasksContext/TasksContext"
 import Calendar from "../../../components/Calendar/Calendar"
@@ -16,7 +16,7 @@ function PopBrowse() {
   const { id } = useParams()
   const task = tasksContext.getTaskById(id)
   const color = TopicsColors[task.topic]
-  const location = window.location.pathname
+  const location = useLocation()
 
   const [formData, setFormData] = useState({
     topic:       task.topic,
@@ -24,7 +24,7 @@ function PopBrowse() {
     description: task.description,
     date:        task.date,
     status:      task.status,
-    isEditing:   location.endsWith(`/${Pages.EDIT}`),
+    isEditing:   location.pathname.endsWith(`/${Pages.EDIT}`),
     isModified:  false,
   })
 
@@ -60,23 +60,29 @@ function PopBrowse() {
     if (formData.isEditing)
       return
 
-    navigate(`${location}/${Pages.EDIT}`)
+    formData.isEditing = true
+
+    navigate(`${location.pathname}/${Pages.EDIT}`)
   }
 
   function handleApplyEditing() {
     if (!formData.isEditing)
       return
 
+    formData.isEditing = false
+
     // TODO: fetch changes to server
 
-    navigate(location.replace(`/${Pages.EDIT}`))
+    navigate(location.pathname.replace(`/${Pages.EDIT}`, ""))
   }
 
   function handleCancelEditing() {
     if (!formData.isEditing)
       return
 
-    navigate(location.replace(`/${Pages.EDIT}`))
+    formData.isEditing = false
+
+    navigate(location.pathname.replace(`/${Pages.EDIT}`, ""))
   }
 
   function handleDelete() {

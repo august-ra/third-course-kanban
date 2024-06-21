@@ -1,5 +1,5 @@
-import React from "react"
 import { Link } from "react-router-dom"
+import Pages from "../../data/pages"
 import * as Styled from "./Card.styled"
 import * as Graphics from "../Graphics/Graphics"
 import { TopicsColors } from "../../data/topics"
@@ -7,7 +7,7 @@ import { TopicsColors } from "../../data/topics"
 
 function Card({ task }) {
   const color = TopicsColors[task.topic]
-  const link = `/card/${task.id}`
+  const link = `${Pages.CARDS}/${task.id}`
 
   return (
     <Styled.CardItem>
