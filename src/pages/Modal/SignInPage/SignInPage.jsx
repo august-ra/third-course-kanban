@@ -13,22 +13,46 @@ function SignInPage() {
   const userContext = useContext(UserContext)
   const [errorData, setErrorData] = useState(null)
   const [formData, setFormData] = useState({
-    login:    "",
-    password: "",
-    activity: true,
+    login:         "",
+    password:      "",
+    loginEmpty:    false,
+    passwordEmpty: false,
+    activity:      true,
   })
 
   function handleChangeText(event) {
     const { name, value } = event.target
 
-    setFormData({
+    const data = {
       ...formData,
       [name]:   value,
       activity: true,
-    })
+    }
+
+    if (errorData) {
+      data.loginEmpty    = !data.login.trim()
+      data.passwordEmpty = !data.password.trim()
+
+      if (!data.loginEmpty && !data.passwordEmpty)
+        setErrorData(null)
+    }
+
+    setFormData(data)
   }
 
   function submit() {
+    formData.loginEmpty    = !formData.login.trim()
+    formData.passwordEmpty = !formData.password.trim()
+
+    if (formData.loginEmpty && formData.passwordEmpty)
+      return setErrorData({ code: null, message: "Введите корректные логин и пароль" })
+    else if (formData.loginEmpty)
+      return setErrorData({ code: null, message: "Введите корректный логин" })
+    else if (formData.passwordEmpty)
+      return setErrorData({ code: null, message: "Введите корректный пароль" })
+    else
+      setErrorData(null)
+
     API.signIn(formData.login, formData.password)
       .then((data) => {
         if (data && data.error) {
@@ -53,8 +77,8 @@ function SignInPage() {
             <Styled.ModalTitle>Вход</Styled.ModalTitle>
 
             <Styled.ModalForm id="formLogIn" action="#">
-              <Styled.ModalInput $isError={Boolean(errorData)} type="text" name="login" id="formlogin" placeholder="Эл. почта" value={formData.login} onChange={handleChangeText} />
-              <Styled.ModalInput $isError={Boolean(errorData)} type="password" name="password" id="formpassword" placeholder="Пароль" value={formData.password} onChange={handleChangeText} />
+              <Styled.ModalInput $isError={errorData && formData.loginEmpty} type="text" name="login" id="formlogin" placeholder="Эл. почта" value={formData.login} onChange={handleChangeText} />
+              <Styled.ModalInput $isError={errorData && formData.passwordEmpty} type="password" name="password" id="formpassword" placeholder="Пароль" value={formData.password} onChange={handleChangeText} />
               {
                 errorData
                   && <ErrorBlock code={errorData.code} message={errorData.message} />

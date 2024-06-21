@@ -13,23 +13,54 @@ function SignUpPage() {
   const userContext = useContext(UserContext)
   const [errorData, setErrorData] = useState(null)
   const [formData, setFormData] = useState({
-    name:     "",
-    login:    "",
-    password: "",
-    activity: true,
+    name:          "",
+    login:         "",
+    password:      "",
+    nameEmpty:     false,
+    loginEmpty:    false,
+    passwordEmpty: false,
+    activity:      true,
   })
 
   function handleChangeText(event) {
     const { name, value } = event.target
 
-    setFormData({
+    const data = {
       ...formData,
       [name]:   value,
       activity: true,
-    })
+    }
+
+    if (errorData) {
+      data.nameEmpty     = !data.name.trim()
+      data.loginEmpty    = !data.login.trim()
+      data.passwordEmpty = !data.password.trim()
+
+      if (!data.nameEmpty && !data.loginEmpty && !data.passwordEmpty)
+        setErrorData(null)
+    }
+
+    setFormData(data)
   }
 
   function submit() {
+    formData.nameEmpty     = !formData.name.trim()
+    formData.loginEmpty    = !formData.login.trim()
+    formData.passwordEmpty = !formData.password.trim()
+
+    const count = 0 + formData.nameEmpty + formData.loginEmpty + formData.passwordEmpty
+
+    if (count > 1)
+      return setErrorData({ code: null, message: "Введите корректные имя пользователя, логин и пароль" })
+    else if (formData.nameEmpty)
+      return setErrorData({ code: null, message: "Введите корректное имя пользователя" })
+    else if (formData.loginEmpty)
+      return setErrorData({ code: null, message: "Введите корректный логин" })
+    else if (formData.passwordEmpty)
+      return setErrorData({ code: null, message: "Введите корректный пароль" })
+    else
+      setErrorData(null)
+
     API.signUp(formData.name, formData.login, formData.password)
       .then((data) => {
         if (data && data.error) {
@@ -54,9 +85,9 @@ function SignUpPage() {
             <Styled.ModalTitle>Регистрация</Styled.ModalTitle>
 
             <Styled.ModalForm id="formLogIn" action="#">
-              <Styled.ModalInput $isError={Boolean(errorData)} type="text" name="name" id="first-name" placeholder="Имя" value={formData.name} onChange={handleChangeText} />
-              <Styled.ModalInput $isError={Boolean(errorData)} type="text" name="login" id="formlogin" placeholder="Эл. почта" value={formData.login} onChange={handleChangeText} />
-              <Styled.ModalInput $isError={Boolean(errorData)} type="password" name="password" id="formpassword" placeholder="Пароль" value={formData.password} onChange={handleChangeText} />
+              <Styled.ModalInput $isError={errorData && formData.nameEmpty} type="text" name="name" id="first-name" placeholder="Имя" value={formData.name} onChange={handleChangeText} />
+              <Styled.ModalInput $isError={errorData && formData.loginEmpty} type="text" name="login" id="formlogin" placeholder="Эл. почта" value={formData.login} onChange={handleChangeText} />
+              <Styled.ModalInput $isError={errorData && formData.passwordEmpty} type="password" name="password" id="formpassword" placeholder="Пароль" value={formData.password} onChange={handleChangeText} />
               {
                 errorData
                   && <ErrorBlock code={errorData.code} message={errorData.message} />
