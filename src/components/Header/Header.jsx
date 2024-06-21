@@ -1,8 +1,7 @@
-import { useContext, useState } from "react"
+import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import Pages from "../../data/pages"
-import { ThemeContext } from "../../context/ThemeContext/ThemeContext"
-import { UserContext } from "../../context/UserContext/UserContext"
+import { useThemeContext, useUserContext } from "../../context/hooks"
 import * as Styled from "./Header.styled"
 import * as Shared from "../SharedStyles"
 import StyledButton from "../Shared/Button/StyledButton"
@@ -12,8 +11,8 @@ import { prevent } from "../../lib/hooks"
 
 function Header() {
   const navigate = useNavigate()
-  const themeContext = useContext(ThemeContext)
-  const userContext = useContext(UserContext)
+  const themeContext = useThemeContext()
+  const userContext = useUserContext()
   const [isPopUserOpened, setIsPopUserOpened] = useState(false)
 
   function handleAddTask() {

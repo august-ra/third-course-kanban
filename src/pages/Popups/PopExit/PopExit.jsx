@@ -1,7 +1,6 @@
-import { useContext } from "react"
 import { useNavigate } from "react-router-dom"
 import Pages from "../../../data/pages"
-import { UserContext } from "../../../context/UserContext/UserContext"
+import { useUserContext } from "../../../context/hooks"
 import * as Styled from "./PopExit.styled"
 import StyledButton from "../../../components/Shared/Button/StyledButton"
 import { prevent } from "../../../lib/hooks"
@@ -9,7 +8,7 @@ import { prevent } from "../../../lib/hooks"
 
 function PopExit() {
   const navigate = useNavigate()
-  const userContext = useContext(UserContext)
+  const userContext = useUserContext()
 
   function signOut() {
     userContext.clear()

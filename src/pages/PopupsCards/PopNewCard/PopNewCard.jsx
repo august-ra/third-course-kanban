@@ -1,7 +1,7 @@
-import { useContext, useState } from "react"
+import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import Pages from "../../../data/pages"
-import { TasksContext } from "../../../context/TasksContext/TasksContext"
+import { useTasksContext } from "../../../context/hooks"
 import * as Styled from "../PopCard.styled"
 import TopicsRadioGroup from "../../../components/Shared/TopicsRadioGroup/TopicsRadioGroup"
 import Calendar from "../../../components/Calendar/Calendar"
@@ -10,7 +10,7 @@ import { prevent } from "../../../lib/hooks"
 
 function PopNewCard() {
   const navigate = useNavigate()
-  const tasksContext = useContext(TasksContext)
+  const tasksContext = useTasksContext()
   const [formData, setFormData] = useState({
     topic:       "",
     title:       "",

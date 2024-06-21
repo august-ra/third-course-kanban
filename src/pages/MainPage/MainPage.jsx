@@ -1,7 +1,6 @@
-import { useContext, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { Outlet } from "react-router-dom"
-import { UserContext } from "../../context/UserContext/UserContext"
-import { TasksContext } from "../../context/TasksContext/TasksContext"
+import { useTasksContext, useUserContext } from "../../context/hooks"
 import * as Shared from "../../components/SharedStyles"
 import Header from "../../components/Header/Header"
 import Loader from "../../components/Loader/Loader"
@@ -10,8 +9,8 @@ import API from "../../lib/api"
 
 
 function MainPage() {
-  const userContext = useContext(UserContext)
-  const tasksContext = useContext(TasksContext)
+  const userContext = useUserContext()
+  const tasksContext = useTasksContext()
   const [isLoading, setIsLoading] = useState(true)
   const [errorData, setErrorData] = useState(null)
 

@@ -1,11 +1,10 @@
-import { useContext } from "react"
 import { Navigate, Outlet } from "react-router-dom"
 import Pages from "../../data/pages"
-import { UserContext } from "../../context/UserContext/UserContext"
+import { useUserContext } from "../../context/hooks"
 
 
 function PrivateRoutes() {
-  const userContext = useContext(UserContext)
+  const userContext = useUserContext()
 
   return (
     userContext.isAuthenticated()

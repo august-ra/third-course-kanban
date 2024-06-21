@@ -1,16 +1,14 @@
-import { useContext } from "react"
 import { useNavigate } from "react-router-dom"
 import Pages from "../../../data/pages"
-import { ThemeContext } from "../../../context/ThemeContext/ThemeContext"
-import { UserContext } from "../../../context/UserContext/UserContext"
+import { useThemeContext, useUserContext } from "../../../context/hooks"
 import * as Styled from "./PopUser.styled"
 import StyledButton from "../../../components/Shared/Button/StyledButton"
 
 
 function PopUser() {
   const navigate = useNavigate()
-  const themeContext = useContext(ThemeContext)
-  const userContext = useContext(UserContext)
+  const themeContext = useThemeContext()
+  const userContext = useUserContext()
 
   function openPopupExit() {
     navigate(Pages.SIGN_OUT)

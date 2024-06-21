@@ -1,7 +1,7 @@
-import { useContext, useState } from "react"
+import { useEffect, useState } from "react"
 import { useLocation, useNavigate, useParams } from "react-router-dom"
 import Pages from "../../../data/pages"
-import { TasksContext } from "../../../context/TasksContext/TasksContext"
+import { useTasksContext } from "../../../context/hooks"
 import Calendar from "../../../components/Calendar/Calendar"
 import * as Styled from "../PopCard.styled"
 import StyledButton from "../../../components/Shared/Button/StyledButton"
@@ -12,7 +12,7 @@ import { prevent } from "../../../lib/hooks"
 
 function PopBrowse() {
   const navigate = useNavigate()
-  const tasksContext = useContext(TasksContext)
+  const tasksContext = useTasksContext()
   const { id } = useParams()
   const task = tasksContext.getTaskById(id)
   const color = TopicsColors[task.topic]

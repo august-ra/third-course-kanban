@@ -1,7 +1,7 @@
-import { useContext, useState } from "react"
+import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import Pages from "../../../data/pages"
-import { UserContext } from "../../../context/UserContext/UserContext"
+import { useUserContext } from "../../../context/hooks"
 import * as Styled from "../Modal.styled"
 import * as Shared from "../../../components/SharedStyles"
 import ErrorBlock from "../../../components/Shared/ErrorBlock/ErrorBlock"
@@ -10,7 +10,7 @@ import API from "../../../lib/api"
 
 function SignInPage() {
   const navigate = useNavigate()
-  const userContext = useContext(UserContext)
+  const userContext = useUserContext()
   const [errorData, setErrorData] = useState(null)
   const [formData, setFormData] = useState({
     login:         "",

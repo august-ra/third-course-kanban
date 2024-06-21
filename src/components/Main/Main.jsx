@@ -1,5 +1,4 @@
-import { useContext } from "react"
-import { TasksContext } from "../../context/TasksContext/TasksContext"
+import { useTasksContext } from "../../context/hooks"
 import * as Styled from "./Main.styled"
 import * as Shared from "../SharedStyles"
 import ErrorBlock from "../Shared/ErrorBlock/ErrorBlock"
@@ -8,7 +7,7 @@ import { Statuses } from "../../data/statuses"
 
 
 function Main({ errorData }) {
-  const tasksContext = useContext(TasksContext)
+  const tasksContext = useTasksContext()
 
   return (
     <Styled.Main>
