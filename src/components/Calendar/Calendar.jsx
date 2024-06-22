@@ -7,10 +7,10 @@ import { ShortDaysOfWeek } from "../../data/datesParts"
 
 function Calendar({ activeDate, setActiveDate }) {
   const [currentDate] = useState(new Date().getBeggingOfDay())
-  const [monthAsDate, setMonthAsDate] = useState(getDateFromTwo())
+  const [monthAsDate, setMonthAsDate] = useState(getDateFromTwo(activeDate, currentDate))
 
-  function getDateFromTwo() {
-    return (activeDate ? activeDate : currentDate).getBeggingOfMonth()
+  function getDateFromTwo(lhs, rhs) {
+    return (lhs ? lhs : rhs).getBeggingOfMonth()
   }
 
   function goToAnotherMonth(day) {
@@ -30,7 +30,7 @@ function Calendar({ activeDate, setActiveDate }) {
   function handleSelectDay(event) {
     event.preventDefault()
 
-    const date = getDateFromTwo()
+    const date = getDateFromTwo(monthAsDate, currentDate)
     date.setDate(event.target.innerText)
 
     setActiveDate(date)
