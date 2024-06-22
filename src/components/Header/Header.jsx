@@ -1,28 +1,19 @@
-import { useState } from "react"
+import React from "react"
 import { useNavigate } from "react-router-dom"
 import Pages from "../../data/pages"
-import { useThemeContext, useUserContext } from "../../context/hooks"
+import { useThemeContext } from "../../context/hooks"
 import * as Styled from "./Header.styled"
 import * as Shared from "../SharedStyles"
 import StyledButton from "../Shared/Button/StyledButton"
-import PopUser from "../../pages/Popups/PopUser/PopUser"
-import { prevent } from "../../lib/hooks"
+import UserLink from "./UserLink/UserLink"
 
 
 function Header() {
   const navigate = useNavigate()
   const themeContext = useThemeContext()
-  const userContext = useUserContext()
-  const [isPopUserOpened, setIsPopUserOpened] = useState(false)
 
   function handleAddTask() {
     navigate(`${Pages.CARDS}/${Pages.CREATE}`)
-  }
-
-  function handleOpenPopUser(event) {
-    prevent(event)
-
-    setIsPopUserOpened((prev) => !prev)
   }
 
   return (
@@ -40,11 +31,7 @@ function Header() {
               Создать новую задачу
             </StyledButton>
 
-            <Styled.HeaderNavUser $opened={isPopUserOpened} onClick={handleOpenPopUser}>
-              {userContext.name}
-            </Styled.HeaderNavUser>
-
-            { isPopUserOpened && <PopUser /> }
+            <UserLink />
           </Styled.HeaderNav>
         </Styled.HeaderBlock>
       </Shared.Container>

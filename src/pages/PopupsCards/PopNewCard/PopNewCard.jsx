@@ -5,9 +5,9 @@ import { useTasksContext, useUserContext } from "../../../context/hooks"
 import * as Styled from "../PopCard.styled"
 import TopicsRadioGroup from "../../../components/Shared/TopicsRadioGroup/TopicsRadioGroup"
 import Calendar from "../../../components/Calendar/Calendar"
+import ErrorBlock from "../../../components/Shared/ErrorBlock/ErrorBlock"
 import { prevent } from "../../../lib/hooks"
-import API from "../../../lib/api.js"
-import ErrorBlock from "../../../components/Shared/ErrorBlock/ErrorBlock.jsx"
+import API from "../../../lib/api"
 
 
 function PopNewCard() {
