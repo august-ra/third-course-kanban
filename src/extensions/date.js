@@ -86,12 +86,12 @@ Date.prototype.getFiveOrSixWeeks = function () {
     const day       = date.getDate()
     const dayOfWeek = date.getDay()
 
-    if (dayOfWeek > 1) {
+    if (dayOfWeek > 1 || dayOfWeek === 0) {
       const date2 = date.copy()
       fillLeftPart(new Date(date2.setDate(date2.getDate() - 1)), true)
     }
 
-    addDate(date, day, dayOfWeek, other)
+    addDate(date, day, dayOfWeek || 7, other)
   }
 
   date.setDate(1)
@@ -99,7 +99,7 @@ Date.prototype.getFiveOrSixWeeks = function () {
   let dayOfWeek = date.getDay()
   let day       = 1
 
-  if (dayOfWeek > 1)
+  if (dayOfWeek > 1 || dayOfWeek === 0)
     fillLeftPart(date)
   else
     addDate(date, day, dayOfWeek, false)
