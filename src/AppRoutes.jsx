@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom"
+import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom"
 import Pages from "./data/pages"
 import PrivateRoutes from "./components/PrivateRoutes/PrivateRoutes"
 import MainPage from "./pages/MainPage/MainPage"
@@ -16,9 +16,9 @@ function AppRoutes() {
       <Routes>
         <Route element={<PrivateRoutes />}>
           <Route path={Pages.MAIN} element={<MainPage />}>
-            <Route path={Pages.CARDS} element={<MainPage />}>
+            <Route path={Pages.CARDS} element={<Outlet />}>
               <Route path={Pages.CARD} element={<PopBrowse />}>
-                <Route path={Pages.EDIT} element={<PopBrowse />} />
+                <Route path={Pages.EDIT} element={<Outlet />} />
               </Route>
               <Route path={Pages.CREATE} element={<PopNewCard />} />
             </Route>

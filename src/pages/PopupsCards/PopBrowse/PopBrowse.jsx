@@ -11,19 +11,18 @@ import { prevent } from "../../../lib/hooks"
 
 
 function PopBrowse() {
+  const location = useLocation()
   const navigate = useNavigate()
   const tasksContext = useTasksContext()
   const { id } = useParams()
-  const task = tasksContext.getTaskById(id)
-  const color = TopicsColors[task.topic]
-  const location = useLocation()
 
   const [formData, setFormData] = useState({
-    topic:       task.topic,
-    title:       task.title,
-    description: task.description,
-    date:        task.date,
-    status:      task.status,
+    topic:       " ",
+    title:       "",
+    description: "",
+    date:        new Date(),
+    status:      "Без статуса",
+    color:       "",
     isEditing:   location.pathname.endsWith(`/${Pages.EDIT}`),
     isModified:  false,
   })
@@ -35,6 +34,26 @@ function PopBrowse() {
       isModified: true,
     })
   }
+
+  useEffect(() => {
+    if (tasksContext.tasks.length === 0)
+      return // <Navigate to={Pages.MAIN} />
+
+    const task = tasksContext.getTaskById(id)
+
+    if (!task)
+      return navigate(Pages.MAIN)
+
+    setFormData({
+      ...formData,
+      topic:       task.topic,
+      title:       task.title,
+      description: task.description,
+      date:        task.date,
+      status:      task.status,
+      color:       TopicsColors[task.topic],
+    })
+  }, [tasksContext.tasks])
 
   function setActiveDate(value) {
     if (!formData.isEditing)
@@ -104,7 +123,7 @@ function PopBrowse() {
               <Styled.PopCardTitle $clearMargin={true}>{formData.title}</Styled.PopCardTitle>
               {
                 !formData.isEditing && (
-                  <Styled.PopCardCategoriesTheme as={"div"} $color={color} $active={true}>
+                  <Styled.PopCardCategoriesTheme as={"div"} $color={formData.color} $active={true}>
                     <Styled.PopCardCategoriesThemeText>{formData.topic}</Styled.PopCardCategoriesThemeText>
                   </Styled.PopCardCategoriesTheme>
                 )
