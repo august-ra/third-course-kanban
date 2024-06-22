@@ -1,16 +1,20 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import Pages from "../../../data/pages"
-import { useTasksContext } from "../../../context/hooks"
+import { useTasksContext, useUserContext } from "../../../context/hooks"
 import * as Styled from "../PopCard.styled"
 import TopicsRadioGroup from "../../../components/Shared/TopicsRadioGroup/TopicsRadioGroup"
 import Calendar from "../../../components/Calendar/Calendar"
 import { prevent } from "../../../lib/hooks"
+import API from "../../../lib/api.js"
+import ErrorBlock from "../../../components/Shared/ErrorBlock/ErrorBlock.jsx"
 
 
 function PopNewCard() {
   const navigate = useNavigate()
+  const userContext = useUserContext()
   const tasksContext = useTasksContext()
+  const [errorData, setErrorData] = useState(null)
   const [formData, setFormData] = useState({
     topic:       "",
     title:       "",
@@ -47,18 +51,28 @@ function PopNewCard() {
   function handleAddTask(event) {
     event.preventDefault()
 
-    const date = new Date()
     const newTask = {
-      id:          date.getTime(),
-      topic:       formData.topic,
-      title:       formData.title,
-      description: formData.description,
-      date:        formData.date,
-      status:      "Без статуса",
+      ...formData,
+      status: "Без статуса",
     }
 
-    tasksContext.addTask(newTask)
-    closeThis()
+    API.createTaskOnServer(newTask, userContext.token)
+      .then((data) => {
+        if (data && data.error)
+          return setErrorData(data)
+
+        setErrorData(null)
+        tasksContext.setTasks(data.tasks.map((task) => ({
+          id:          task._id,
+          topic:       task.topic,
+          title:       task.title,
+          description: task.description,
+          date:        new Date(task.date),
+          status:      task.status,
+        })))
+
+        closeThis()
+      })
   }
 
   function closeThis() {
@@ -92,6 +106,11 @@ function PopNewCard() {
               <Styled.PopCardCategoriesSubtitle>Категория</Styled.PopCardCategoriesSubtitle>
               <TopicsRadioGroup topic={formData.topic} handleChangeTopic={handleChangeTopic} />
             </Styled.PopCardCategories>
+
+            {
+              errorData
+                && <ErrorBlock code={errorData.code} message={errorData.message}/>
+            }
 
             <Styled.PopCardButtonCreate $primary={true} $width={132} onClick={handleAddTask}>Создать задачу</Styled.PopCardButtonCreate>
           </Styled.PopCardContent>

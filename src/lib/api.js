@@ -36,6 +36,22 @@ const API = {
     return this.getDataFromEndpoint(this.tasksURI, params)
   },
 
+  createTaskOnServer(task, token) {
+    const params = {
+      method:  "POST",
+      headers: { Authorization: `Bearer ${token}` },
+      body:    JSON.stringify({
+        title:       task.title,
+        topic:       task.topic,
+        status:      task.status,
+        description: task.description,
+        date:        task.date,
+      }),
+    }
+
+    return this.getDataFromEndpoint(this.tasksURI, params)
+  },
+
 
   signIn(login, password) {
     const params = {
