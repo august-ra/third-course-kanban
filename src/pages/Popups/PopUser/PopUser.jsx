@@ -1,12 +1,14 @@
-import React from "react"
 import { useNavigate } from "react-router-dom"
 import Pages from "../../../data/pages"
+import { useThemeContext, useUserContext } from "../../../context/hooks"
 import * as Styled from "./PopUser.styled"
 import StyledButton from "../../../components/Shared/Button/StyledButton"
 
 
-function PopUser({ authentication, theme, onToggleTheme }) {
+function PopUser() {
   const navigate = useNavigate()
+  const themeContext = useThemeContext()
+  const userContext = useUserContext()
 
   function openPopupExit() {
     navigate(Pages.SIGN_OUT)
@@ -15,15 +17,15 @@ function PopUser({ authentication, theme, onToggleTheme }) {
   return (
     <Styled.PopUser id="user-set-target">
       {/* <!-- <a href="">x</a> --> */}
-      <Styled.PopUserName>{authentication.name}</Styled.PopUserName>
-      <Styled.PopUserMail>{authentication.login}</Styled.PopUserMail>
+      <Styled.PopUserName>{userContext.name}</Styled.PopUserName>
+      <Styled.PopUserMail>{userContext.login}</Styled.PopUserMail>
 
       <Styled.PopUserTheme>
-        <Styled.PopUserThemeName>{theme === "light" ? "Светлая" : "Тёмная"} тема</Styled.PopUserThemeName>
-        <Styled.PopUserThemeCheckbox type="checkbox" className="checkbox" name="checkbox" onChange={onToggleTheme} />
+        <Styled.PopUserThemeName>{themeContext.printName()}</Styled.PopUserThemeName>
+        <Styled.PopUserThemeCheckbox type="checkbox" className="checkbox" name="checkbox" onChange={themeContext.toggleTheme} />
       </Styled.PopUserTheme>
 
-      <StyledButton $hasAccent={false} $width={72} type="submit" onClick={openPopupExit}>Выйти</StyledButton>
+      <StyledButton $primary={false} $width={72} onClick={openPopupExit}>Выйти</StyledButton>
     </Styled.PopUser>
   )
 }

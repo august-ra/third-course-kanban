@@ -1,11 +1,13 @@
-import React from "react"
 import { Navigate, Outlet } from "react-router-dom"
 import Pages from "../../data/pages"
+import { useUserContext } from "../../context/hooks"
 
 
-function PrivateRoutes({ isAuthenticated }) {
+function PrivateRoutes() {
+  const userContext = useUserContext()
+
   return (
-    isAuthenticated
+    userContext.isAuthenticated()
       ? <Outlet />
       : <Navigate to={Pages.SIGN_IN} />
   )

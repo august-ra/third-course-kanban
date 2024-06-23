@@ -73,11 +73,6 @@ export const ModalInput = styled.input`
   }
 `
 
-export const ModalErrorMessage = styled.p`
-  color: #F84D4D;
-  text-align: center;
-`
-
 export const ModalSubmit = styled(StyledButton)`
   border-radius: 4px;
   margin-block: 20px;

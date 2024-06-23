@@ -1,24 +1,27 @@
-import React from "react"
+import { useTasksContext } from "../../context/hooks"
 import * as Styled from "./Main.styled"
 import * as Shared from "../SharedStyles"
+import ErrorBlock from "../Shared/ErrorBlock/ErrorBlock"
 import Column from "../Column/Column"
 import { Statuses } from "../../data/statuses"
 
 
-function Main({ tasks, error }) {
+function Main({ errorData }) {
+  const tasksContext = useTasksContext()
+
   return (
     <Styled.Main>
       <Shared.Container>
         <Styled.MainBlock>
           <Styled.MainContent>
             {
-              error
-                ? <Styled.MainError><h4>код ошибки {error.code}:</h4> {error.message}</Styled.MainError>
+              errorData
+                ? <ErrorBlock code={errorData.code} message={errorData.message} />
                 : Statuses.map((item, index) => {
-                  const filteredTasks = tasks.filter((task) => task.status === item)
+                  const filteredTasks = tasksContext.filterTasks("status", item)
 
                   return (
-                    <Column key={index} title={item} tasks={filteredTasks} />
+                    <Column key={index} title={item} tasksInColumn={filteredTasks} />
                   )
                 })
             }

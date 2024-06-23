@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { Outlet } from "react-router-dom"
+import { useTasksContext, useUserContext } from "../../context/hooks"
 import * as Shared from "../../components/SharedStyles"
 import Header from "../../components/Header/Header"
 import Loader from "../../components/Loader/Loader"
@@ -7,27 +8,27 @@ import Main from "../../components/Main/Main"
 import API from "../../lib/api"
 
 
-function MainPage({ tasks, setTasks, authentication, theme, onToggleTheme }) {
+function MainPage() {
+  const userContext = useUserContext()
+  const tasksContext = useTasksContext()
   const [isLoading, setIsLoading] = useState(true)
-  const [error, setError] = useState(null)
+  const [errorData, setErrorData] = useState(null)
 
   useEffect(() => {
-    API.readTasksFromServer()
+    API.readTasksFromServer(userContext.token)
       .then((data) => {
-        if (data?.hasOwnProperty("error"))
-          return setError(data)
+        if (data && data.error)
+          return setErrorData(data)
 
-        setError("")
-        setTasks(data.tasks.map((task) => {
-          return {
-            id:          task._id,
-            topic:       task.topic,
-            title:       task.title,
-            description: task.description,
-            date:        task.date,
-            status:      task.status,
-          }
-        }))
+        setErrorData(null)
+        tasksContext.setTasks(data.tasks.map((task) => ({
+          id:          task._id,
+          topic:       task.topic,
+          title:       task.title,
+          description: task.description,
+          date:        new Date(task.date),
+          status:      task.status,
+        })))
       })
       .finally(() => setIsLoading(false))
   }, [])
@@ -35,11 +36,11 @@ function MainPage({ tasks, setTasks, authentication, theme, onToggleTheme }) {
   return (
     <Shared.Wrapper>
       <Outlet />
-      <Header authentication={authentication} theme={theme} onToggleTheme={onToggleTheme} />
+      <Header />
       {
-        isLoading && !error
+        isLoading && !errorData
           ? <Loader />
-          : <Main tasks={tasks} error={error} />
+          : <Main errorData={errorData} />
       }
     </Shared.Wrapper>
   )

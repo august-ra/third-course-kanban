@@ -5,11 +5,36 @@ import CalendarCells from "./CalendarCells/CalendarCells"
 import { ShortDaysOfWeek } from "../../data/datesParts"
 
 
-function Calendar({ activeDate }) {
-  const [monthAsDate, setMonthAsDate] = useState(new Date())
+function Calendar({ activeDate, setActiveDate }) {
+  const [currentDate] = useState(new Date().getBeggingOfDay())
+  const [monthAsDate, setMonthAsDate] = useState(getDateFromTwo(activeDate, currentDate))
 
-  // TODO: 'prev' and 'next' buttons
-  // TODO: day click
+  function getDateFromTwo(lhs, rhs) {
+    return (lhs ? lhs : rhs).getBeggingOfMonth()
+  }
+
+  function goToAnotherMonth(day) {
+    monthAsDate.setDate(day)
+
+    setMonthAsDate(monthAsDate.getBeggingOfMonth())
+  }
+
+  function handleGoToPreviousMonth() {
+    goToAnotherMonth(0)
+  }
+
+  function handleGoToNextMonth() {
+    goToAnotherMonth(40)
+  }
+
+  function handleSelectDay(event) {
+    event.preventDefault()
+
+    const date = getDateFromTwo(monthAsDate, currentDate)
+    date.setDate(event.target.innerText)
+
+    setActiveDate(date)
+  }
 
   return (
     <Styled.Calendar>
@@ -18,10 +43,10 @@ function Calendar({ activeDate }) {
         <Styled.CalendarNav>
           <Styled.CalendarMonth>{monthAsDate.printMonthAndYear()}</Styled.CalendarMonth>
           <Styled.CalendarNavActions>
-            <Styled.CalendarNavAction data-action="prev">
+            <Styled.CalendarNavAction data-action="prev" onClick={handleGoToPreviousMonth}>
               <Graphics.LeftArrow />
             </Styled.CalendarNavAction>
-            <Styled.CalendarNavAction data-action="next">
+            <Styled.CalendarNavAction data-action="next" onClick={handleGoToNextMonth}>
               <Graphics.RightArrow />
             </Styled.CalendarNavAction>
           </Styled.CalendarNavActions>
@@ -38,7 +63,7 @@ function Calendar({ activeDate }) {
             }
           </Styled.CalendarDaysNames>
 
-          <CalendarCells activeDate={activeDate} monthAsDate={monthAsDate} />
+          <CalendarCells currentDate={currentDate} activeDate={activeDate} monthAsDate={monthAsDate} handleSelectDay={handleSelectDay} />
         </Styled.CalendarContent>
 
         <input type="hidden" id="datepick_value" value="08.09.2023" />

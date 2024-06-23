@@ -1,5 +1,3 @@
-import UserInfo from "./userInfo"
-
 
 const API = {
   tasksURI:  "https://wedev-api.sky.pro/api/kanban", // GET (read) + POST (send)
@@ -23,16 +21,32 @@ const API = {
       })
       .catch((error) => {
         if (error.message === "Failed to fetch")
-          return { error: true, code: 499, message: "Запрос на сервер не выполнен, проверьте подключение к Интернет" }
+          return { error: true, code: null, message: "Запрос на сервер не выполнен! Проверьте подключение к сети Интернет." }
         else
           return { error: true, code: statusCode, message: error.message }
       })
   },
 
 
-  readTasksFromServer() {
+  readTasksFromServer(token) {
     const params = {
-      headers: { Authorization: `Bearer ${UserInfo.data.token}` },
+      headers: { Authorization: `Bearer ${token}` },
+    }
+
+    return this.getDataFromEndpoint(this.tasksURI, params)
+  },
+
+  createTaskOnServer(task, token) {
+    const params = {
+      method:  "POST",
+      headers: { Authorization: `Bearer ${token}` },
+      body:    JSON.stringify({
+        title:       task.title,
+        topic:       task.topic,
+        status:      task.status,
+        description: task.description,
+        date:        task.date,
+      }),
     }
 
     return this.getDataFromEndpoint(this.tasksURI, params)

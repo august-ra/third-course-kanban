@@ -1,18 +1,17 @@
-import React from "react"
 import { useNavigate } from "react-router-dom"
 import Pages from "../../../data/pages"
+import { useUserContext } from "../../../context/hooks"
 import * as Styled from "./PopExit.styled"
 import StyledButton from "../../../components/Shared/Button/StyledButton"
-import UserInfo from "../../../lib/userInfo"
 import { prevent } from "../../../lib/hooks"
 
 
-function PopExit({ setAuthentication }) {
+function PopExit() {
   const navigate = useNavigate()
+  const userContext = useUserContext()
 
   function signOut() {
-    UserInfo.clear()
-    setAuthentication("")
+    userContext.clear()
 
     navigate(Pages.SIGN_IN)
   }
@@ -29,10 +28,10 @@ function PopExit({ setAuthentication }) {
 
           <Styled.PopExitForm action="#">
             <Styled.PopExitFormGroup>
-              <StyledButton $hasAccent={true} $doWidth={true} type="button" onClick={signOut}>
+              <StyledButton $primary={true} $doWidth={true} onClick={signOut}>
                 Да, выйти
               </StyledButton>
-              <StyledButton $hasAccent={false} $doWidth={true} type="button" onClick={closeThis}>
+              <StyledButton $primary={false} $doWidth={true} onClick={closeThis}>
                 Нет, остаться
               </StyledButton>
             </Styled.PopExitFormGroup>

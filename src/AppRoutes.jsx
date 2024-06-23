@@ -1,46 +1,36 @@
-import { useState } from "react"
-import { Route, Routes } from "react-router-dom"
+import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom"
 import Pages from "./data/pages"
 import PrivateRoutes from "./components/PrivateRoutes/PrivateRoutes"
 import MainPage from "./pages/MainPage/MainPage"
 import Page404 from "./pages/Page404/Page404"
-import PopBrowse from "./pages/Popups/PopBrowse/PopBrowse"
+import PopBrowse from "./pages/PopupsCards/PopBrowse/PopBrowse"
 import PopExit from "./pages/Popups/PopExit/PopExit"
-import PopNewCard from "./pages/Popups/PopNewCard/PopNewCard"
+import PopNewCard from "./pages/PopupsCards/PopNewCard/PopNewCard"
 import SignInPage from "./pages/Modal/SignInPage/SignInPage"
 import SignUpPage from "./pages/Modal/SignUpPage/SignUpPage"
-import Tasks from "./data/tasks"
-import UserInfo from "./lib/userInfo"
 
 
-function AppRoutes({ theme, onToggleTheme }) {
-  const [authentication, setAuthentication] = useState(UserInfo.read())
-  const [tasks, setTasks] = useState(Tasks)
-
-  function updateAuthentication(data) {
-    UserInfo.save(data)
-
-    setAuthentication(data)
-  }
-
-  function onAddTask(newTask) {
-    setTasks([...tasks, newTask])
-  }
-
+function AppRoutes() {
   return (
-    <Routes>
-      <Route element={<PrivateRoutes isAuthenticated={authentication} />}>
-        <Route path={Pages.MAIN} element={<MainPage tasks={tasks} setTasks={setTasks} authentication={authentication} theme={theme} onToggleTheme={onToggleTheme} />}>
-          <Route path={Pages.CARD} element={<PopBrowse tasks={tasks} />} />
-          <Route path={Pages.CREATE} element={<PopNewCard onAddTask={onAddTask} />} />
-          <Route path={Pages.SIGN_OUT} element={<PopExit setAuthentication={updateAuthentication} />} />
+    <BrowserRouter>
+      <Routes>
+        <Route element={<PrivateRoutes />}>
+          <Route path={Pages.MAIN} element={<MainPage />}>
+            <Route path={Pages.CARDS} element={<Outlet />}>
+              <Route path={Pages.CARD} element={<PopBrowse />}>
+                <Route path={Pages.EDIT} element={<Outlet />} />
+              </Route>
+              <Route path={Pages.CREATE} element={<PopNewCard />} />
+            </Route>
+            <Route path={Pages.SIGN_OUT} element={<PopExit />} />
+          </Route>
         </Route>
-      </Route>
 
-      <Route path={Pages.SIGN_IN} element={<SignInPage setAuthentication={updateAuthentication} />} />
-      <Route path={Pages.SIGN_UP} element={<SignUpPage setAuthentication={updateAuthentication} />} />
-      <Route path={Pages.NOT_FOUND} element={<Page404 />} />
-    </Routes>
+        <Route path={Pages.SIGN_IN} element={<SignInPage />} />
+        <Route path={Pages.SIGN_UP} element={<SignUpPage />} />
+        <Route path={Pages.NOT_FOUND} element={<Page404 />} />
+      </Routes>
+    </BrowserRouter>
   )
 }
 

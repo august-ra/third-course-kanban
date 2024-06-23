@@ -24,5 +24,3 @@ export const MainContent = styled.div`
     display: block;
   }
 `
-
-export const MainError = styled.div``

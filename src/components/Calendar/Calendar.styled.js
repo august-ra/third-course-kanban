@@ -57,6 +57,7 @@ export const CalendarNavAction = styled.div`
   width: 18px;
   height: 25px;
   cursor: pointer;
+  user-select: none;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -82,6 +83,7 @@ export const CalendarPeriodText = styled.p`
   color: #94A6BE;
   font-size: 10px;
   line-height: 1;
+  margin-bottom: 14px;
 
   & span {
     color: ${(props) => props.theme.text};
@@ -118,7 +120,7 @@ export const CalendarDayName = styled.div`
 
 export const CalendarCells = styled.div`
   width: 182px;
-  height: 126px;
+  height: ${(props) => props.$height}px;
   display: flex;
   flex-wrap: wrap;
 
@@ -144,9 +146,16 @@ export const CalendarCell = styled.div`
   letter-spacing: -0.2px;
   cursor: pointer;
 
-  ${(props) => props.$currentMonth ? CalendarNormalCell : CalendarOtherMonth};
-  ${(props) => props.$weekend && CalendarWeekend};
-  ${(props) => props.$active && CalendarActiveCell};
+  ${(props) => !props.$currentMonth
+    ? CalendarOtherMonth
+    : props.$weekend || CalendarNormalCell
+  };
+  ${(props) => props.$active && props.$weekend
+    ? CalendarActiveWeekend
+    : props.$weekend
+      ? CalendarWeekend
+      : props.$active && CalendarActiveCell
+  };
   ${(props) => props.$current && CalendarCurrentDay};
 
   @media screen and (max-width: 660px) {
@@ -158,14 +167,13 @@ export const CalendarCell = styled.div`
 
 export const CalendarNormalCell = css`
   &:hover {
-    color: #94A6BE;
     background-color: ${(props) => props.theme.body};
   }
 `
 
 export const CalendarActiveCell = css`
   background-color: #94A6BE;
-  color: ${(props) => props.theme.isLigth() ? "#FFFFFF" : "#151419"};
+  color: ${(props) => props.theme.isLight() ? "#FFFFFF" : "#151419"};
 `
 
 export const CalendarCurrentDay = css`
@@ -174,6 +182,15 @@ export const CalendarCurrentDay = css`
 
 export const CalendarWeekend = css`
   color: #BE94A6;
+
+  &:hover {
+    background-color: ${(props) => props.theme.calendar};
+  }
+`
+
+export const CalendarActiveWeekend = css`
+  background-color: #BE94A6;
+  color: ${(props) => props.theme.isLight() ? "#FFFFFF" : "#151419"};
 `
 
 export const CalendarOtherMonth = css`

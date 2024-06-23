@@ -1,43 +1,70 @@
 import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import Pages from "../../../data/pages"
+import { useUserContext } from "../../../context/hooks"
 import * as Styled from "../Modal.styled"
 import * as Shared from "../../../components/SharedStyles"
+import ErrorBlock from "../../../components/Shared/ErrorBlock/ErrorBlock"
 import API from "../../../lib/api"
 
 
-function SignInPage({ setAuthentication }) {
+function SignInPage() {
   const navigate = useNavigate()
-  const [error, setError] = useState(null)
+  const userContext = useUserContext()
+  const [errorData, setErrorData] = useState(null)
   const [formData, setFormData] = useState({
-    login:    "",
-    password: "",
-    activity: false,
+    login:         "",
+    password:      "",
+    loginEmpty:    false,
+    passwordEmpty: false,
+    activity:      true,
   })
 
   function handleChangeText(event) {
     const { name, value } = event.target
 
-    setFormData({
+    const data = {
       ...formData,
       [name]:   value,
-      activity: false,
-    })
+      activity: true,
+    }
+
+    if (errorData) {
+      data.loginEmpty    = !data.login.trim()
+      data.passwordEmpty = !data.password.trim()
+
+      if (!data.loginEmpty && !data.passwordEmpty)
+        setErrorData(null)
+    }
+
+    setFormData(data)
   }
 
   function submit() {
+    formData.loginEmpty    = !formData.login.trim()
+    formData.passwordEmpty = !formData.password.trim()
+
+    if (formData.loginEmpty && formData.passwordEmpty)
+      return setErrorData({ code: null, message: "Введите корректные логин и пароль" })
+    else if (formData.loginEmpty)
+      return setErrorData({ code: null, message: "Введите корректный логин" })
+    else if (formData.passwordEmpty)
+      return setErrorData({ code: null, message: "Введите корректный пароль" })
+    else
+      setErrorData(null)
+
     API.signIn(formData.login, formData.password)
       .then((data) => {
-        if (data?.hasOwnProperty("error")) {
+        if (data && data.error) {
           setFormData({
             ...formData,
-            activity: true,
+            activity: false,
           })
-          return setError(data)
+          return setErrorData(data)
         }
 
-        setError("")
-        setAuthentication(data.user)
+        setErrorData(null)
+        userContext.save(data.user)
         navigate(Pages.MAIN)
       })
   }
@@ -50,13 +77,13 @@ function SignInPage({ setAuthentication }) {
             <Styled.ModalTitle>Вход</Styled.ModalTitle>
 
             <Styled.ModalForm id="formLogIn" action="#">
-              <Styled.ModalInput $isError={Boolean(error)} type="text" name="login" id="formlogin" placeholder="Эл. почта" value={formData.login} onChange={handleChangeText} />
-              <Styled.ModalInput $isError={Boolean(error)} type="password" name="password" id="formpassword" placeholder="Пароль" value={formData.password} onChange={handleChangeText} />
+              <Styled.ModalInput $isError={errorData && formData.loginEmpty} type="text" name="login" id="formlogin" placeholder="Эл. почта" value={formData.login} onChange={handleChangeText} />
+              <Styled.ModalInput $isError={errorData && formData.passwordEmpty} type="password" name="password" id="formpassword" placeholder="Пароль" value={formData.password} onChange={handleChangeText} />
               {
-                error
-                  && <Styled.ModalErrorMessage><b>код ошибки {error.code}:</b> {error.message}</Styled.ModalErrorMessage>
+                errorData
+                  && <ErrorBlock code={errorData.code} message={errorData.message} />
               }
-              <Styled.ModalSubmit $hasAccent={true} $width={0} type="button" disabled={formData.activity} onClick={submit}>Войти</Styled.ModalSubmit>
+              <Styled.ModalSubmit $primary={true} $width={0} disabled={!formData.activity} onClick={submit}>Войти</Styled.ModalSubmit>
 
               <Styled.ModalGroup>
                 <p>Нужно зарегистрироваться? <Link to={Pages.SIGN_UP}>Регистрируйтесь здесь</Link></p>
