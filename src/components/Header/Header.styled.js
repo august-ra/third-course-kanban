@@ -1,5 +1,4 @@
 import styled, { css } from "styled-components"
-import * as Shared from "../SharedStyles"
 
 
 export const Header = styled.header`
@@ -46,7 +45,9 @@ export const HeaderNavUser = styled.a`
   color: ${(props) => props.theme.extra};
   user-select: none;
 
-  ${Shared.Hover02};
+  &:hover {
+    color: #33399b;
+  }
 
   &::after {
     content: "";
@@ -60,6 +61,11 @@ export const HeaderNavUser = styled.a`
     padding: 0;
 
     ${(props) => props.$opened ? ClosedUser : OpenedUser};
+  }
+
+  &:hover::after {
+    border-left-color: #33399b;
+    border-bottom-color: #33399b;
   }
 `
 

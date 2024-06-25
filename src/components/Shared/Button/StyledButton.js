@@ -1,5 +1,4 @@
 import styled, { css } from "styled-components"
-import * as Shared from "../../SharedStyles"
 
 
 const StyledButton = styled.button.attrs(() => ({
@@ -41,7 +40,9 @@ const MasterButton = css`
   background-color: #565EEF;
   border: none;
 
-  ${Shared.Hover01};
+  &:hover {
+    background-color: #33399b;
+  }
 
   &:disabled {
     color: #94A6BE;
@@ -60,7 +61,11 @@ const SlaveButton = css`
   background-color: transparent;
   border: 0.7px solid ${(props) => props.theme.extra};
 
-  ${Shared.Hover03};
+  &:hover {
+    color: #FFFFFF;
+    background-color: #33399b;
+    border-color: #33399b;
+  }
 
   @media only screen and (max-width: 375px) {
     width: 100%;

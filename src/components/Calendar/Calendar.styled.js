@@ -65,6 +65,11 @@ export const CalendarNavAction = styled.div`
   & svg {
     fill: #94A6BE;
   }
+  
+  &:hover svg {
+    fill: #87A9DD;
+    transform: scale(1.35);
+  }
 `
 
 export const CalendarContent = styled.div`
@@ -156,7 +161,7 @@ export const CalendarCell = styled.div`
       ? CalendarWeekend
       : props.$active && CalendarActiveCell
   };
-  ${(props) => props.$current && CalendarCurrentDay};
+  ${(props) => props.$current && (props.$active ? CalendarActiveCurrentDay : CalendarCurrentDay)};
 
   @media screen and (max-width: 660px) {
     width: 42px;
@@ -177,6 +182,17 @@ export const CalendarActiveCell = css`
 `
 
 export const CalendarCurrentDay = css`
+  color: #87A9CB;
+  font-weight: 700;
+
+  &:hover {
+    background-color: #DDF1FF;
+  }
+`
+
+export const CalendarActiveCurrentDay = css`
+  color: ${(props) => props.theme.isLight() ? "#FFFFFF" : "#151419"};
+  background-color: #87A9CB;
   font-weight: 700;
 `
 

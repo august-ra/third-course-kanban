@@ -20,31 +20,6 @@ export const Container = styled.div`
   }
 `
 
-export const Hover01 = css`
-  &:hover {
-    background-color: #33399b;
-  }
-`
-
-export const Hover02 = css`
-  &:hover {
-    //background-color: #33399b;
-    color: #33399b;
-  }
-  &:hover::after {
-    border-left-color: #33399b;
-    border-bottom-color: #33399b;
-  }
-`
-
-export const Hover03 = css`
-  &:hover {
-    color: #FFFFFF;
-    background-color: #33399b;
-    border-color: #33399b;
-  }
-`
-
 export const Orange = css`
   background-color: #FFE4C2;
   color: #FF6D00;
