@@ -127,7 +127,7 @@ const PopCardFormInput = css`
   outline: none;
   padding: 14px;
   color: inherit;
-  background: ${(props) => props.$height ? "#EAEEF6" : "transparent"};
+  background: transparent;
   border: 0.7px solid rgba(148, 166, 190, 0.4);
   border-radius: 8px;
   font-family: inherit;
@@ -241,7 +241,7 @@ export const PopCardStatusTheme = styled.div`
   margin-right: 7px;
   margin-bottom: 7px;
 
-  ${Shared.Gray};
+  ${(props) => props.$active && Shared.Gray};
 `
 
 export const PopCardStatusThemeText = styled.p`

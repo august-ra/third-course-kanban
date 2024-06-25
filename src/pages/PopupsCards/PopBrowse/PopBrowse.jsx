@@ -4,9 +4,10 @@ import Pages from "../../../data/pages"
 import { useTasksContext, useUserContext } from "../../../context/hooks"
 import * as Styled from "../PopCard.styled"
 import StyledButton from "../../../components/Shared/Button/StyledButton"
+import StatusRadioGroup from "../../../components/Shared/StatusRadioGroup/StatusRadioGroup"
+import TopicsRadioGroup from "../../../components/Shared/TopicsRadioGroup/TopicsRadioGroup"
 import ErrorBlock from "../../../components/Shared/ErrorBlock/ErrorBlock"
 import Calendar from "../../../components/Calendar/Calendar"
-import TopicsRadioGroup from "../../../components/Shared/TopicsRadioGroup/TopicsRadioGroup"
 import { TopicsColors } from "../../../data/topics"
 import { prevent } from "../../../lib/hooks"
 import API from "../../../lib/api"
@@ -77,6 +78,13 @@ function PopBrowse() {
     updateFormData(name, value)
   }
 
+  function handleChangeStatus(status) {
+    if (!status || formData.status === status)
+      return
+
+    updateFormData("status", status)
+  }
+
   function handleChangeTopic(topic) {
     if (!topic || formData.topic === topic)
       return
@@ -145,29 +153,25 @@ function PopBrowse() {
             <Styled.PopCardTopBlock>
               <Styled.PopCardTitle $clearMargin={true}>{formData.title}</Styled.PopCardTitle>
               {
-                !formData.isEditing && (
-                  <Styled.PopCardCategoriesTheme as={"div"} $color={formData.color} $active={true}>
-                    <Styled.PopCardCategoriesThemeText>{formData.topic}</Styled.PopCardCategoriesThemeText>
-                  </Styled.PopCardCategoriesTheme>
-                )
+                !formData.isEditing
+                  && (
+                    <Styled.PopCardCategoriesTheme as={"div"} $color={formData.color} $active={true}>
+                      <Styled.PopCardCategoriesThemeText>{formData.topic}</Styled.PopCardCategoriesThemeText>
+                    </Styled.PopCardCategoriesTheme>
+                  )
               }
             </Styled.PopCardTopBlock>
 
             <Styled.PopCardStatus>
               <Styled.PopCardStatusTitle>Статус</Styled.PopCardStatusTitle>
-
-              <Styled.PopCardStatusThemes>
-                <Styled.PopCardStatusTheme>
-                  <Styled.PopCardStatusThemeText>{formData.status}</Styled.PopCardStatusThemeText>
-                </Styled.PopCardStatusTheme>
-              </Styled.PopCardStatusThemes>
+              <StatusRadioGroup showAllStatuses={formData.isEditing} status={formData.status} handleChangeStatus={handleChangeStatus} />
             </Styled.PopCardStatus>
 
             <Styled.PopCardWrap>
               <Styled.PopCardForm id="formBrowseCard" action="#">
                 <Styled.PopCardFormBlock>
-                  <Styled.PopCardFormLabel htmlFor="textArea01">Описание задачи</Styled.PopCardFormLabel>
-                  <Styled.PopCardFormTaskDescription $height={240} name="text" id="textArea01" ref={descriptionInput} placeholder="Введите описание задачи..." value={formData.description} onChange={handleChangeText} />
+                  <Styled.PopCardFormLabel htmlFor="textArea">Описание задачи</Styled.PopCardFormLabel>
+                  <Styled.PopCardFormTaskDescription $name={false} $height={240} name="description" id="textArea" ref={descriptionInput} placeholder="Введите описание задачи..." value={formData.description} onChange={handleChangeText} />
                 </Styled.PopCardFormBlock>
               </Styled.PopCardForm>
 
