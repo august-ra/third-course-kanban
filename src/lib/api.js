@@ -52,6 +52,15 @@ const API = {
     return this.getDataFromEndpoint(this.tasksURI, params)
   },
 
+  deleteTaskOnServer(taskID, token) {
+    const params = {
+      method:  "DELETE",
+      headers: { Authorization: `Bearer ${token}` },
+    }
+
+    return this.getDataFromEndpoint(`${this.tasksURI}/${taskID}`, params)
+  },
+
 
   signIn(login, password) {
     const params = {

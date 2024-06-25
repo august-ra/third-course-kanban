@@ -1,21 +1,25 @@
 import { useEffect, useState } from "react"
 import { useLocation, useNavigate, useParams } from "react-router-dom"
 import Pages from "../../../data/pages"
-import { useTasksContext } from "../../../context/hooks"
+import { useTasksContext, useUserContext } from "../../../context/hooks"
 import * as Styled from "../PopCard.styled"
 import StyledButton from "../../../components/Shared/Button/StyledButton"
+import ErrorBlock from "../../../components/Shared/ErrorBlock/ErrorBlock"
 import Calendar from "../../../components/Calendar/Calendar"
 import TopicsRadioGroup from "../../../components/Shared/TopicsRadioGroup/TopicsRadioGroup"
 import { TopicsColors } from "../../../data/topics"
 import { prevent } from "../../../lib/hooks"
+import API from "../../../lib/api"
 
 
 function PopBrowse() {
   const location = useLocation()
   const navigate = useNavigate()
+  const userContext = useUserContext()
   const tasksContext = useTasksContext()
   const { id } = useParams()
 
+  const [errorData, setErrorData] = useState(null)
   const [formData, setFormData] = useState({
     topic:       " ",
     title:       "",
@@ -105,9 +109,16 @@ function PopBrowse() {
   }
 
   function handleDelete() {
-    // TODO: fetch deletion to server
+    API.deleteTaskOnServer(id, userContext.token)
+      .then((data) => {
+        if (data && data.error)
+          return setErrorData(data)
 
-    closeThis()
+        setErrorData(null)
+        tasksContext.updateTasksFromServer(data.tasks)
+
+        closeThis()
+      })
   }
 
   function closeThis() {
@@ -159,6 +170,11 @@ function PopBrowse() {
                     <TopicsRadioGroup topic={formData.topic} handleChangeTopic={handleChangeTopic} />
                   </Styled.PopCardCategories>
                 )
+            }
+
+            {
+              errorData
+                && <ErrorBlock code={errorData.code} message={errorData.message} />
             }
 
             <Styled.PopCardButtonsGroup>
