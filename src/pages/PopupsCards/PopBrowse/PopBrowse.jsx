@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { useLocation, useNavigate, useParams } from "react-router-dom"
 import Pages from "../../../data/pages"
 import { useTasksContext, useUserContext } from "../../../context/hooks"
@@ -18,6 +18,7 @@ function PopBrowse() {
   const userContext = useUserContext()
   const tasksContext = useTasksContext()
   const { id } = useParams()
+  const descriptionInput = useRef()
 
   const [errorData, setErrorData] = useState(null)
   const [formData, setFormData] = useState({
@@ -58,6 +59,10 @@ function PopBrowse() {
       color:       TopicsColors[task.topic],
     })
   }, [tasksContext.tasks])
+
+  useEffect(() => {
+    descriptionInput.current.readOnly = !formData.isEditing
+  }, [formData.isEditing])
 
   function setActiveDate(value) {
     if (!formData.isEditing)
@@ -162,7 +167,7 @@ function PopBrowse() {
               <Styled.PopCardForm id="formBrowseCard" action="#">
                 <Styled.PopCardFormBlock>
                   <Styled.PopCardFormLabel htmlFor="textArea01">Описание задачи</Styled.PopCardFormLabel>
-                  <Styled.PopCardFormTaskDescription $height={240} name="text" id="textArea01" readOnly placeholder="Введите описание задачи..." value={formData.description} onChange={handleChangeText} />
+                  <Styled.PopCardFormTaskDescription $height={240} name="text" id="textArea01" ref={descriptionInput} placeholder="Введите описание задачи..." value={formData.description} onChange={handleChangeText} />
                 </Styled.PopCardFormBlock>
               </Styled.PopCardForm>
 
