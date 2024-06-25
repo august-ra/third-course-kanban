@@ -94,9 +94,16 @@ function PopBrowse() {
 
     formData.isEditing = false
 
-    // TODO: fetch changes to server
+    API.updateTaskOnServer(id, formData, userContext.token)
+      .then((data) => {
+        if (data && data.error)
+          return setErrorData(data)
 
-    navigate(location.pathname.replace(`/${Pages.EDIT}`, ""))
+        setErrorData(null)
+        tasksContext.updateTasksFromServer(data.tasks)
+
+        navigate(location.pathname.replace(`/${Pages.EDIT}`, ""))
+      })
   }
 
   function handleCancelEditing() {
