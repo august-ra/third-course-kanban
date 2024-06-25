@@ -21,14 +21,7 @@ function MainPage() {
           return setErrorData(data)
 
         setErrorData(null)
-        tasksContext.setTasks(data.tasks.map((task) => ({
-          id:          task._id,
-          topic:       task.topic,
-          title:       task.title,
-          description: task.description,
-          date:        new Date(task.date),
-          status:      task.status,
-        })))
+        tasksContext.updateTasksFromServer(data.tasks)
       })
       .finally(() => setIsLoading(false))
   }, [])

@@ -8,6 +8,7 @@ import { ShortDaysOfWeek } from "../../data/datesParts"
 function Calendar({ activeDate, setActiveDate }) {
   const [currentDate] = useState(new Date().getBeggingOfDay())
   const [monthAsDate, setMonthAsDate] = useState(getDateFromTwo(activeDate, currentDate))
+  const formatedDate = activeDate.printShort()
 
   function getDateFromTwo(lhs, rhs) {
     return (lhs ? lhs : rhs).getBeggingOfMonth()
@@ -55,24 +56,22 @@ function Calendar({ activeDate, setActiveDate }) {
         <Styled.CalendarContent>
           <Styled.CalendarDaysNames>
             {
-              ShortDaysOfWeek.map((item, index) => {
-                return (
-                  <Styled.CalendarDayName key={index} $weekend={index > 4}>{item}</Styled.CalendarDayName>
-                )
-              })
+              ShortDaysOfWeek.map((item, index) => (
+                <Styled.CalendarDayName key={index} $weekend={index > 4}>{item}</Styled.CalendarDayName>
+              ))
             }
           </Styled.CalendarDaysNames>
 
           <CalendarCells currentDate={currentDate} activeDate={activeDate} monthAsDate={monthAsDate} handleSelectDay={handleSelectDay} />
         </Styled.CalendarContent>
 
-        <input type="hidden" id="datepick_value" value="08.09.2023" />
+        <input type="hidden" id="datepick_value" value={formatedDate} />
 
         <Styled.CalendarPeriod>
           <Styled.CalendarPeriodText>
             {
               activeDate
-                ? <>Срок исполнения: <span className="date-control">{activeDate.printShort()}</span></>
+                ? <>Срок исполнения: <span className="date-control">{formatedDate}</span></>
                 : <>Выберите срок исполнения <span className="date-control"></span>.</>
             }
           </Styled.CalendarPeriodText>

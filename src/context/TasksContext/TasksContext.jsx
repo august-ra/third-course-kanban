@@ -6,6 +6,17 @@ export const TasksContext = createContext(null)
 export function TasksProvider({ children }) {
   const [tasks, setTasks] = useState([])
 
+  function updateTasksFromServer(tasks) {
+    setTasks(tasks.map((task) => ({
+      id:          task._id,
+      topic:       task.topic,
+      title:       task.title,
+      description: task.description,
+      date:        new Date(task.date),
+      status:      task.status,
+    })))
+  }
+
   function addTask(newTask) {
     setTasks([...tasks, newTask])
   }
@@ -18,5 +29,5 @@ export function TasksProvider({ children }) {
     return tasks.filter((task) => task[key] === value)
   }
 
-  return <TasksContext.Provider value={{ tasks, setTasks, addTask, getTaskById, filterTasks }}>{children}</TasksContext.Provider>
+  return <TasksContext.Provider value={{ tasks, setTasks, updateTasksFromServer, getTaskById, filterTasks }}>{children}</TasksContext.Provider>
 }

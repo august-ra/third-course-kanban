@@ -37,7 +37,7 @@ function PopBrowse() {
 
   useEffect(() => {
     if (tasksContext.tasks.length === 0)
-      return // <Navigate to={Pages.MAIN} />
+      return
 
     const task = tasksContext.getTaskById(id)
 
@@ -152,32 +152,29 @@ function PopBrowse() {
             </Styled.PopCardWrap>
 
             {
-              formData.isEditing && (
-                <Styled.PopCardCategories>
-                  <Styled.PopCardCategoriesSubtitle>Категория</Styled.PopCardCategoriesSubtitle>
-                  <TopicsRadioGroup topic={formData.topic} handleChangeTopic={handleChangeTopic} />
-                </Styled.PopCardCategories>
-              )
+              formData.isEditing
+                && (
+                  <Styled.PopCardCategories>
+                    <Styled.PopCardCategoriesSubtitle>Категория</Styled.PopCardCategoriesSubtitle>
+                    <TopicsRadioGroup topic={formData.topic} handleChangeTopic={handleChangeTopic} />
+                  </Styled.PopCardCategories>
+                )
             }
 
-            {
-              formData.isEditing
-                ? <Styled.PopCardButtonsGroup>
-                  <Styled.PopCardButtonsGroupInner>
-                    <StyledButton $primary={true} onClick={handleApplyEditing}>Сохранить</StyledButton>
-                    <StyledButton $primary={false} onClick={handleCancelEditing}>Отменить</StyledButton>
-                    <StyledButton $primary={false} onClick={handleDelete}>Удалить задачу</StyledButton>
-                  </Styled.PopCardButtonsGroupInner>
-                  <StyledButton $primary={true} onClick={closeThis}>Закрыть</StyledButton>
-                </Styled.PopCardButtonsGroup>
-                : <Styled.PopCardButtonsGroup>
-                  <Styled.PopCardButtonsGroupInner>
-                    <StyledButton $primary={false} $width={198} onClick={handleBeginEditing}>Редактировать задачу</StyledButton>
-                    <StyledButton $primary={false} onClick={handleDelete}>Удалить задачу</StyledButton>
-                  </Styled.PopCardButtonsGroupInner>
-                  <StyledButton $primary={true} onClick={closeThis}>Закрыть</StyledButton>
-                </Styled.PopCardButtonsGroup>
-            }
+            <Styled.PopCardButtonsGroup>
+              <Styled.PopCardButtonsGroupInner>
+                {
+                  formData.isEditing
+                    ? <>
+                      <StyledButton $primary={true} onClick={handleApplyEditing}>Сохранить</StyledButton>
+                      <StyledButton $primary={false} onClick={handleCancelEditing}>Отменить</StyledButton>
+                    </>
+                    : <StyledButton $primary={false} $width={198} onClick={handleBeginEditing}>Редактировать задачу</StyledButton>
+                }
+                <StyledButton $primary={false} onClick={handleDelete}>Удалить задачу</StyledButton>
+              </Styled.PopCardButtonsGroupInner>
+              <StyledButton $primary={!formData.isEditing} onClick={closeThis}>Закрыть</StyledButton>
+            </Styled.PopCardButtonsGroup>
           </Styled.PopCardContent>
         </Styled.PopCardBlock>
       </Styled.PopCardContainer>

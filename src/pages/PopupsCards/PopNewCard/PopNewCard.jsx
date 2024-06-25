@@ -62,14 +62,7 @@ function PopNewCard() {
           return setErrorData(data)
 
         setErrorData(null)
-        tasksContext.setTasks(data.tasks.map((task) => ({
-          id:          task._id,
-          topic:       task.topic,
-          title:       task.title,
-          description: task.description,
-          date:        new Date(task.date),
-          status:      task.status,
-        })))
+        tasksContext.updateTasksFromServer(data.tasks)
 
         closeThis()
       })
@@ -109,7 +102,7 @@ function PopNewCard() {
 
             {
               errorData
-                && <ErrorBlock code={errorData.code} message={errorData.message}/>
+                && <ErrorBlock code={errorData.code} message={errorData.message} />
             }
 
             <Styled.PopCardButtonCreate $primary={true} $width={132} onClick={handleAddTask}>Создать задачу</Styled.PopCardButtonCreate>
