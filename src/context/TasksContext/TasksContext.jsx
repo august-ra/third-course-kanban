@@ -12,7 +12,7 @@ export function TasksProvider({ children }) {
       topic:       task.topic,
       title:       task.title,
       description: task.description,
-      date:        new Date(task.date),
+      date:        new Date(task.date).getBeggingOfDay(),
       status:      task.status,
     })))
   }

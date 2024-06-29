@@ -26,7 +26,7 @@ function PopBrowse() {
     topic:       " ",
     title:       "",
     description: "",
-    date:        new Date(),
+    date:        null,
     status:      "Без статуса",
     color:       "",
     isEditing:   location.pathname.endsWith(`/${Pages.EDIT}`),
@@ -175,7 +175,10 @@ function PopBrowse() {
                 </Styled.PopCardFormBlock>
               </Styled.PopCardForm>
 
-              <Calendar activeDate={formData.date.getBeggingOfDay()} setActiveDate={setActiveDate} />
+              {
+                formData.date
+                  && <Calendar activeDate={formData.date} setActiveDate={setActiveDate} />
+              }
             </Styled.PopCardWrap>
 
             {

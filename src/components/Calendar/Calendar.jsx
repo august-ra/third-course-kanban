@@ -8,7 +8,7 @@ import { ShortDaysOfWeek } from "../../data/datesParts"
 function Calendar({ activeDate, setActiveDate }) {
   const [currentDate] = useState(new Date().getBeggingOfDay())
   const [monthAsDate, setMonthAsDate] = useState(getDateFromTwo(activeDate, currentDate))
-  const formatedDate = activeDate.printShort()
+  const formatedDate = activeDate ? activeDate.printShort() : ""
 
   function getDateFromTwo(lhs, rhs) {
     return (lhs ? lhs : rhs).getBeggingOfMonth()

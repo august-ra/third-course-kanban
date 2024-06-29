@@ -1,9 +1,10 @@
 import React from "react"
 import * as Styled from "../Calendar.styled"
+import cachedMonths from "../../../extensions/date"
 
 
 function CalendarCells({ currentDate, activeDate, monthAsDate, handleSelectDay }) {
-  const days = monthAsDate.getFiveOrSixWeeks()
+  const days = cachedMonths.getCalendar(monthAsDate)
 
   return (
     <Styled.CalendarCells $height={days.length === 35 ? 126 : 152}>
