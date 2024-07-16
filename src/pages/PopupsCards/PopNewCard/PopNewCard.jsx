@@ -2,7 +2,9 @@ import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import Pages from "../../../data/pages"
 import { useTasksContext, useUserContext } from "../../../context/hooks"
+import { useFormData } from "../../../hooks/useFormData"
 import * as Styled from "../PopCard.styled"
+import StyledButton from "../../../components/Shared/Button/StyledButton"
 import TopicsRadioGroup from "../../../components/Shared/TopicsRadioGroup/TopicsRadioGroup"
 import Calendar from "../../../components/Calendar/Calendar"
 import ErrorBlock from "../../../components/Shared/ErrorBlock/ErrorBlock"
@@ -14,22 +16,16 @@ function PopNewCard() {
   const navigate = useNavigate()
   const userContext = useUserContext()
   const tasksContext = useTasksContext()
+
   const [errorData, setErrorData] = useState(null)
-  const [formData, setFormData] = useState({
+  const { formData, setFormData, updateFormData } = useFormData({
     topic:       "",
     title:       "",
     description: "",
     date:        null,
+    status:      "Без статуса",
     isModified:  false,
   })
-
-  function updateFormData(name, value) {
-    setFormData({
-      ...formData,
-      [name]:     value,
-      isModified: true,
-    })
-  }
 
   function setActiveDate(value) {
     updateFormData("date", value)
@@ -51,15 +47,15 @@ function PopNewCard() {
   function handleAddTask(event) {
     event.preventDefault()
 
-    const newTask = {
-      ...formData,
-      status: "Без статуса",
-    }
-
-    API.createTaskOnServer(newTask, userContext.token)
+    API.createTaskOnServer(formData, userContext.token)
       .then((data) => {
-        if (data && data.error)
+        if (data && data.error) {
+          setFormData({
+            ...formData,
+            activity: false,
+          })
           return setErrorData(data)
+        }
 
         setErrorData(null)
         tasksContext.updateTasksFromServer(data.tasks)
@@ -100,12 +96,14 @@ function PopNewCard() {
               <TopicsRadioGroup topic={formData.topic} handleChangeTopic={handleChangeTopic} />
             </Styled.PopCardCategories>
 
-            {
-              errorData
-                && <ErrorBlock code={errorData.code} message={errorData.message} />
-            }
+            <Styled.PopCardBottomLine>
+              <StyledButton $primary={true} $width={132} disabled={!formData.activity} onClick={handleAddTask}>Создать задачу</StyledButton>
 
-            <Styled.PopCardButtonCreate $primary={true} $width={132} onClick={handleAddTask}>Создать задачу</Styled.PopCardButtonCreate>
+              {
+                errorData
+                  && <ErrorBlock code={errorData.code} message={errorData.message} />
+              }
+            </Styled.PopCardBottomLine>
           </Styled.PopCardContent>
         </Styled.PopCardBlock>
       </Styled.PopCardContainer>

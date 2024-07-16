@@ -2,6 +2,7 @@ import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import Pages from "../../../data/pages"
 import { useUserContext } from "../../../context/hooks"
+import { useFormData } from "../../../hooks/useFormData"
 import * as Styled from "../Modal.styled"
 import * as Shared from "../../../components/SharedStyles"
 import ErrorBlock from "../../../components/Shared/ErrorBlock/ErrorBlock"
@@ -11,39 +12,28 @@ import API from "../../../lib/api"
 function SignInPage() {
   const navigate = useNavigate()
   const userContext = useUserContext()
+
   const [errorData, setErrorData] = useState(null)
-  const [formData, setFormData] = useState({
+  const { formData, setFormData, updateFormData } = useFormData({
     login:         "",
     password:      "",
-    loginEmpty:    false,
-    passwordEmpty: false,
+    loginEmpty:    true,
+    passwordEmpty: true,
     activity:      true,
   })
 
   function handleChangeText(event) {
     const { name, value } = event.target
 
-    const data = {
-      ...formData,
-      [name]:   value,
-      activity: true,
-    }
+    updateFormData(name, value)
 
     if (errorData) {
-      data.loginEmpty    = !data.login.trim()
-      data.passwordEmpty = !data.password.trim()
-
-      if (!data.loginEmpty && !data.passwordEmpty)
+      if (!formData.loginEmpty && !formData.passwordEmpty)
         setErrorData(null)
     }
-
-    setFormData(data)
   }
 
   function submit() {
-    formData.loginEmpty    = !formData.login.trim()
-    formData.passwordEmpty = !formData.password.trim()
-
     if (formData.loginEmpty && formData.passwordEmpty)
       return setErrorData({ code: null, message: "Введите корректные логин и пароль" })
     else if (formData.loginEmpty)

@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react"
 import { useLocation, useNavigate, useParams } from "react-router-dom"
 import Pages from "../../../data/pages"
 import { useTasksContext, useUserContext } from "../../../context/hooks"
+import { useFormData } from "../../../hooks/useFormData"
 import * as Styled from "../PopCard.styled"
 import StyledButton from "../../../components/Shared/Button/StyledButton"
 import StatusRadioGroup from "../../../components/Shared/StatusRadioGroup/StatusRadioGroup"
@@ -22,23 +23,19 @@ function PopBrowse() {
   const descriptionInput = useRef()
 
   const [errorData, setErrorData] = useState(null)
-  const [formData, setFormData] = useState({
-    topic:       " ",
-    title:       "",
-    description: "",
-    date:        null,
-    status:      "Без статуса",
-    color:       "",
-    isEditing:   location.pathname.endsWith(`/${Pages.EDIT}`),
-    isModified:  false,
-  })
+  const { formData, setFormData, updateFormData } = useFormData(initFormData())
 
-  function updateFormData(name, value) {
-    setFormData({
-      ...formData,
-      [name]:     value,
-      isModified: true,
-    })
+  function initFormData() {
+    return {
+      topic:       " ",
+      title:       "",
+      description: "",
+      date:        null,
+      status:      "Без статуса",
+      color:       "",
+      isEditing:   location.pathname.endsWith(`/${Pages.EDIT}`),
+      isModified:  false,
+    }
   }
 
   useEffect(() => {
@@ -96,7 +93,7 @@ function PopBrowse() {
     if (formData.isEditing)
       return
 
-    formData.isEditing = true
+    updateFormData("isEditing", true)
 
     navigate(`${location.pathname}/${Pages.EDIT}`)
   }
@@ -105,12 +102,17 @@ function PopBrowse() {
     if (!formData.isEditing)
       return
 
-    formData.isEditing = false
-
     API.updateTaskOnServer(id, formData, userContext.token)
       .then((data) => {
-        if (data && data.error)
+        if (data && data.error) {
+          setFormData({
+            ...formData,
+            activity: false,
+          })
           return setErrorData(data)
+        }
+
+        updateFormData("isEditing", false)
 
         setErrorData(null)
         tasksContext.updateTasksFromServer(data.tasks)
@@ -201,7 +203,7 @@ function PopBrowse() {
                 {
                   formData.isEditing
                     ? <>
-                      <StyledButton $primary={true} onClick={handleApplyEditing}>Сохранить</StyledButton>
+                      <StyledButton $primary={true} disabled={!formData.activity} onClick={handleApplyEditing}>Сохранить</StyledButton>
                       <StyledButton $primary={false} onClick={handleCancelEditing}>Отменить</StyledButton>
                     </>
                     : <StyledButton $primary={false} $width={198} onClick={handleBeginEditing}>Редактировать задачу</StyledButton>
