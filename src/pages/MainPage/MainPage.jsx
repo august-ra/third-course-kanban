@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { Outlet } from "react-router-dom"
 import { useTasksContext, useUserContext } from "../../context/hooks"
+import { useErrorData } from "../../hooks/useErrorData"
 import * as Shared from "../../components/SharedStyles"
 import Header from "../../components/Header/Header"
 import Loader from "../../components/Loader/Loader"
@@ -12,7 +13,7 @@ function MainPage() {
   const userContext = useUserContext()
   const tasksContext = useTasksContext()
   const [isLoading, setIsLoading] = useState(true)
-  const [errorData, setErrorData] = useState(null)
+  const { errorData, setErrorData, renderErrorBlock } = useErrorData()
 
   useEffect(() => {
     API.readTasksFromServer(userContext.token)
@@ -33,7 +34,7 @@ function MainPage() {
       {
         isLoading && !errorData
           ? <Loader />
-          : <Main errorData={errorData} />
+          : <Main errorData={errorData} renderErrorBlock={renderErrorBlock} />
       }
     </Shared.Wrapper>
   )

@@ -1,11 +1,11 @@
-import { useState } from "react"
+import React from "react"
 import { Link, useNavigate } from "react-router-dom"
 import Pages from "../../../data/pages"
 import { useUserContext } from "../../../context/hooks"
 import { useFormData } from "../../../hooks/useFormData"
+import { useErrorData } from "../../../hooks/useErrorData"
 import * as Styled from "../Modal.styled"
 import * as Shared from "../../../components/SharedStyles"
-import ErrorBlock from "../../../components/Shared/ErrorBlock/ErrorBlock"
 import API from "../../../lib/api"
 
 
@@ -13,7 +13,7 @@ function SignUpPage() {
   const navigate = useNavigate()
   const userContext = useUserContext()
 
-  const [errorData, setErrorData] = useState(null)
+  const { errorData, setErrorData, renderErrorBlock } = useErrorData()
   const { formData, setFormData, updateFormData } = useFormData({
     name:          "",
     login:         "",
@@ -77,8 +77,7 @@ function SignUpPage() {
               <Styled.ModalInput $isError={errorData && formData.loginEmpty} type="text" name="login" id="formlogin" placeholder="Эл. почта" value={formData.login} onChange={handleChangeText} />
               <Styled.ModalInput $isError={errorData && formData.passwordEmpty} type="password" name="password" id="formpassword" placeholder="Пароль" value={formData.password} onChange={handleChangeText} />
               {
-                errorData
-                  && <ErrorBlock code={errorData.code} message={errorData.message} />
+                renderErrorBlock()
               }
               <Styled.ModalSubmit $primary={true} $width={0} disabled={!formData.activity} onClick={submit}>Зарегистрироваться</Styled.ModalSubmit>
 

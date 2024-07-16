@@ -1,13 +1,13 @@
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useRef } from "react"
 import { useLocation, useNavigate, useParams } from "react-router-dom"
 import Pages from "../../../data/pages"
 import { useTasksContext, useUserContext } from "../../../context/hooks"
 import { useFormData } from "../../../hooks/useFormData"
+import { useErrorData } from "../../../hooks/useErrorData"
 import * as Styled from "../PopCard.styled"
 import StyledButton from "../../../components/Shared/Button/StyledButton"
 import StatusRadioGroup from "../../../components/Shared/StatusRadioGroup/StatusRadioGroup"
 import TopicsRadioGroup from "../../../components/Shared/TopicsRadioGroup/TopicsRadioGroup"
-import ErrorBlock from "../../../components/Shared/ErrorBlock/ErrorBlock"
 import Calendar from "../../../components/Calendar/Calendar"
 import { TopicsColors } from "../../../data/topics"
 import { prevent } from "../../../lib/hooks"
@@ -22,7 +22,7 @@ function PopBrowse() {
   const { id } = useParams()
   const descriptionInput = useRef()
 
-  const [errorData, setErrorData] = useState(null)
+  const { setErrorData, renderErrorBlock } = useErrorData()
   const { formData, setFormData, updateFormData } = useFormData(initFormData())
 
   function initFormData() {
@@ -194,8 +194,7 @@ function PopBrowse() {
             }
 
             {
-              errorData
-                && <ErrorBlock code={errorData.code} message={errorData.message} />
+              renderErrorBlock()
             }
 
             <Styled.PopCardButtonsGroup>

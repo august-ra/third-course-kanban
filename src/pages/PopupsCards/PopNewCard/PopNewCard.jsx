@@ -1,13 +1,13 @@
-import { useState } from "react"
+import React from "react"
 import { useNavigate } from "react-router-dom"
 import Pages from "../../../data/pages"
 import { useTasksContext, useUserContext } from "../../../context/hooks"
 import { useFormData } from "../../../hooks/useFormData"
+import { useErrorData } from "../../../hooks/useErrorData"
 import * as Styled from "../PopCard.styled"
 import StyledButton from "../../../components/Shared/Button/StyledButton"
 import TopicsRadioGroup from "../../../components/Shared/TopicsRadioGroup/TopicsRadioGroup"
 import Calendar from "../../../components/Calendar/Calendar"
-import ErrorBlock from "../../../components/Shared/ErrorBlock/ErrorBlock"
 import { prevent } from "../../../lib/hooks"
 import API from "../../../lib/api"
 
@@ -17,7 +17,7 @@ function PopNewCard() {
   const userContext = useUserContext()
   const tasksContext = useTasksContext()
 
-  const [errorData, setErrorData] = useState(null)
+  const { setErrorData, renderErrorBlock } = useErrorData()
   const { formData, setFormData, updateFormData } = useFormData({
     topic:       "",
     title:       "",
@@ -100,8 +100,7 @@ function PopNewCard() {
               <StyledButton $primary={true} $width={132} disabled={!formData.activity} onClick={handleAddTask}>Создать задачу</StyledButton>
 
               {
-                errorData
-                  && <ErrorBlock code={errorData.code} message={errorData.message} />
+                renderErrorBlock()
               }
             </Styled.PopCardBottomLine>
           </Styled.PopCardContent>
