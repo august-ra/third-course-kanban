@@ -19,8 +19,7 @@ const GlobalStyle = createGlobalStyle`
     cursor: pointer;
   }
 
-  button,
-  ._btn {
+  button {
     cursor: pointer;
     outline: none;
     font-family: "Roboto", Arial, Helvetica, sans-serif;
@@ -35,7 +34,7 @@ const GlobalStyle = createGlobalStyle`
     width: 100%;
     height: 100%;
     font-family: "Roboto", Arial, Helvetica, sans-serif;
-    color: ${(props) => props.theme.text};
+    color: ${(props) => props.theme.$text};
   }
 `
 

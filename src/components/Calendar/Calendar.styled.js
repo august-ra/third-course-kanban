@@ -58,14 +58,13 @@ export const CalendarNavAction = styled.div`
   height: 25px;
   cursor: pointer;
   user-select: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+
+  ${Shared.FlexCenter};
 
   & svg {
     fill: #94A6BE;
   }
-  
+
   &:hover svg {
     fill: #87A9DD;
     transform: scale(1.35);
@@ -91,7 +90,7 @@ export const CalendarPeriodText = styled.p`
   margin-bottom: 14px;
 
   & span {
-    color: ${(props) => props.theme.text};
+    color: ${(props) => props.theme.$text};
   }
 
   @media screen and (max-width: 660px) {
@@ -102,7 +101,6 @@ export const CalendarPeriodText = styled.p`
 
 export const CalendarDaysNames = styled.div`
   display: flex;
-  flex-wrap: nowrap;
   align-items: center;
   justify-content: space-between;
   margin: 7px 0;
@@ -141,27 +139,15 @@ export const CalendarCell = styled.div`
   height: 22px;
   margin: 2px;
   border-radius: 50%;
-  display: flex;
-  flex-wrap: nowrap;
-  align-items: center;
-  justify-content: center;
   color: #94A6BE;
   font-size: 10px;
   line-height: 1;
   letter-spacing: -0.2px;
   cursor: pointer;
 
-  ${(props) => !props.$currentMonth
-    ? CalendarOtherMonth
-    : props.$weekend || CalendarNormalCell
-  };
-  ${(props) => props.$active && props.$weekend
-    ? CalendarActiveWeekend
-    : props.$weekend
-      ? CalendarWeekend
-      : props.$active && CalendarActiveCell
-  };
-  ${(props) => props.$current && (props.$active ? CalendarActiveCurrentDay : CalendarCurrentDay)};
+  ${Shared.FlexCenter};
+
+  ${getCellStyle};
 
   @media screen and (max-width: 660px) {
     width: 42px;
@@ -170,45 +156,86 @@ export const CalendarCell = styled.div`
   }
 `
 
-export const CalendarNormalCell = css`
+export const CalendarNormalCell = (props) => css`
+  color: ${props.$color};
+
   &:hover {
-    background-color: ${(props) => props.theme.body};
+    background-color: ${props.$hover};
   }
 `
 
-export const CalendarActiveCell = css`
-  background-color: #94A6BE;
-  color: ${(props) => props.theme.isLight() ? "#FFFFFF" : "#151419"};
+export const CalendarActiveCell = (props) => css`
+  background-color: ${props.$color};
+  color: ${props.theme.isLight() ? "#FFFFFF" : "#151419"};
 `
 
-export const CalendarCurrentDay = css`
-  color: #87A9CB;
+export const CalendarCurrentDay = (props) => css`
+  color: ${props.$color};
   font-weight: 700;
 
   &:hover {
-    background-color: #DDF1FF;
+    background-color: ${props.$hover};
   }
 `
 
-export const CalendarActiveCurrentDay = css`
-  color: ${(props) => props.theme.isLight() ? "#FFFFFF" : "#151419"};
-  background-color: #87A9CB;
+export const CalendarActiveCurrentDay = (props) => css`
+  color: ${props.theme.isLight() ? "#FFFFFF" : "#151419"};
+  background-color: ${props.$color};
   font-weight: 700;
 `
 
-export const CalendarWeekend = css`
+export const CalendarWeekend = (props) => css`
   color: #BE94A6;
 
   &:hover {
-    background-color: ${(props) => props.theme.calendar};
+    background-color: ${props.theme.$calendar};
   }
-`
-
-export const CalendarActiveWeekend = css`
-  background-color: #BE94A6;
-  color: ${(props) => props.theme.isLight() ? "#FFFFFF" : "#151419"};
 `
 
 export const CalendarOtherMonth = css`
   opacity: 0;
 `
+
+/* style logics */
+
+function getCellStyle(props) {
+  if (!props.$currentMonth)
+    return CalendarOtherMonth
+
+  if (props.$current && props.$weekend)
+    props = {
+      ...props,
+      $color: "#CB87A9",
+      $hover: "#F6EEEA",
+    }
+  else if (props.$weekend)
+    props = {
+      ...props,
+      $color: "#BE94A6",
+      $hover: "#F6EEEA",
+    }
+  else if (props.$current)
+    props = {
+      ...props,
+      $color: "#87A9CB",
+      $hover: "#DDF1FF",
+    }
+  else
+    props = {
+      ...props,
+      $color: "#94A6BE",
+      $hover: "#EAEEF6",
+    }
+
+  if (props.theme.isDark())
+    props.$hover = "#151419"
+
+  if (props.$active && props.$current)
+    return CalendarActiveCurrentDay(props)
+  else if (props.$active)
+    return CalendarActiveCell(props)
+  else if (props.$current)
+    return CalendarCurrentDay(props)
+  else
+    return CalendarNormalCell(props)
+}
