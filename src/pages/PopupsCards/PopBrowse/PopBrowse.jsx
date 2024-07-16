@@ -4,11 +4,13 @@ import Pages from "../../../data/pages"
 import { useTasksContext, useUserContext } from "../../../context/hooks"
 import { useFormData } from "../../../hooks/useFormData"
 import { useErrorData } from "../../../hooks/useErrorData"
+import { useFlashData } from "../../../hooks/useFlashData"
 import * as Styled from "../PopCard.styled"
 import StyledButton from "../../../components/Shared/Button/StyledButton"
 import StatusRadioGroup from "../../../components/Shared/StatusRadioGroup/StatusRadioGroup"
 import TopicsRadioGroup from "../../../components/Shared/TopicsRadioGroup/TopicsRadioGroup"
 import Calendar from "../../../components/Calendar/Calendar"
+import FlashBox from "../../../components/Shared/FlashBox/FlashBox"
 import { TopicsColors } from "../../../data/topics"
 import { prevent } from "../../../lib/hooks"
 import API from "../../../lib/api"
@@ -22,6 +24,7 @@ function PopBrowse() {
   const { id } = useParams()
   const descriptionInput = useRef()
 
+  const { flashData, setFlashData, clearFlashData } = useFlashData()
   const { setErrorData, renderErrorBlock } = useErrorData()
   const { formData, setFormData, updateFormData } = useFormData(initFormData())
 
@@ -104,6 +107,8 @@ function PopBrowse() {
 
     API.updateTaskOnServer(id, formData, userContext.token)
       .then((data) => {
+        clearFlashData()
+
         if (data && data.error) {
           setFormData({
             ...formData,
@@ -115,9 +120,16 @@ function PopBrowse() {
         updateFormData("isEditing", false)
 
         setErrorData(null)
-        tasksContext.updateTasksFromServer(data.tasks)
 
-        navigate(location.pathname.replace(`/${Pages.EDIT}`, ""))
+        setFlashData({
+          timeout: 0,
+          message: "Задача успешно изменена",
+          action:  () => {
+            clearFlashData()
+            tasksContext.updateTasksFromServer(data.tasks)
+            navigate(location.pathname.replace(`/${Pages.EDIT}`, ""))
+          },
+        })
       })
   }
 
@@ -133,13 +145,21 @@ function PopBrowse() {
   function handleDelete() {
     API.deleteTaskOnServer(id, userContext.token)
       .then((data) => {
+        clearFlashData()
+
         if (data && data.error)
           return setErrorData(data)
 
         setErrorData(null)
-        tasksContext.updateTasksFromServer(data.tasks)
 
-        closeThis()
+        setFlashData({
+          timeout: 5,
+          message: "Задача успешно удалена",
+          action:  () => {
+            tasksContext.updateTasksFromServer(data.tasks)
+            closeThis()
+          },
+        })
       })
   }
 
@@ -194,7 +214,9 @@ function PopBrowse() {
             }
 
             {
-              renderErrorBlock()
+              flashData.message
+                ? <FlashBox timeout={flashData.timeout} caption={flashData.message} doAction={flashData.action} />
+                : renderErrorBlock()
             }
 
             <Styled.PopCardButtonsGroup>
