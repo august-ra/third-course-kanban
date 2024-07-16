@@ -5,6 +5,7 @@ export const TasksContext = createContext(null)
 
 export function TasksProvider({ children }) {
   const [tasks, setTasks] = useState([])
+  const [currentTask, setCurrentTask] = useState(null)
 
   function updateTasksFromServer(tasks) {
     setTasks(tasks.map((task) => ({
@@ -21,13 +22,17 @@ export function TasksProvider({ children }) {
     setTasks([...tasks, newTask])
   }
 
-  function getTaskById(id) {
-    return tasks.filter((task) => task.id === id)[0]
+  function setCurrentTaskById(id) {
+    const task = tasks.filter((task) => task.id === id)[0]
+
+    setCurrentTask(task)
+
+    return task
   }
 
   function filterTasks(key, value) {
     return tasks.filter((task) => task[key] === value)
   }
 
-  return <TasksContext.Provider value={{ tasks, setTasks, updateTasksFromServer, getTaskById, filterTasks }}>{children}</TasksContext.Provider>
+  return <TasksContext.Provider value={{ tasks, currentTask, setTasks, updateTasksFromServer, setCurrentTaskById, filterTasks }}>{children}</TasksContext.Provider>
 }

@@ -1,13 +1,22 @@
-import { Link } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import Pages from "../../data/pages"
+import { useTasksContext } from "../../context/hooks"
 import * as Styled from "./Card.styled"
 import * as Graphics from "../Graphics/Graphics"
 import { TopicsColors } from "../../data/topics"
 
 
 function Card({ task }) {
+  const navigate = useNavigate()
+  const tasksContext = useTasksContext()
   const color = TopicsColors[task.topic]
   const link = `${Pages.CARDS}/${task.id}`
+
+  function handleTaskOpen(e) {
+    e.preventDefault()
+    navigate(link)
+    tasksContext.setCurrentTaskById(task.id)
+  }
 
   return (
     <Styled.CardItem>
@@ -17,19 +26,19 @@ function Card({ task }) {
             <Styled.CardThemeText>{task.topic}</Styled.CardThemeText>
           </Styled.CardTheme>
 
-          <Link to={link}>
+          <a href="#" onClick={handleTaskOpen}>
             <Styled.CardButton>
               <Styled.CardButtonDot />
               <Styled.CardButtonDot />
               <Styled.CardButtonDot />
             </Styled.CardButton>
-          </Link>
+          </a>
         </Styled.CardGroup>
 
         <Styled.CardContent>
-          <Link to={link}>
+          <a href="#" onClick={handleTaskOpen}>
             <Styled.CardTitle>{task.title}</Styled.CardTitle>
-          </Link>
+          </a>
 
           <Styled.CardDate>
             <Graphics.Calendar />

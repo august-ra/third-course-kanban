@@ -45,7 +45,7 @@ function PopBrowse() {
     if (tasksContext.tasks.length === 0)
       return
 
-    const task = tasksContext.getTaskById(id)
+    const task = tasksContext.currentTask ? tasksContext.currentTask : tasksContext.setCurrentTaskById(id)
 
     if (!task)
       return navigate(Pages.MAIN)
