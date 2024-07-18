@@ -1,28 +1,28 @@
 import styled from "styled-components"
 import StyledButton from "../../components/Shared/Button/StyledButton"
+import * as Shared from "../../components/SharedStyles"
 
 
-export const Modal = styled.div`
+export const Modal = styled.div.attrs({
+  $column: true,
+})`
   width: 100%;
   height: 100%;
   min-width: 320px;
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+
+  ${Shared.FlexCenter};
+
+  @media screen and (max-width: 375px) {
+    min-width: auto;
+  }
 `
 
 export const ModalBlock = styled.div`
-  display: block;
-  margin: 0 auto;
-  background-color: ${(props) => props.theme.back};
   max-width: 368px;
-  width: 100%;
   padding: 50px 60px;
-  border-radius: 10px;
-  border: 0.7px solid ${(props) => props.theme.popBlock};
-  box-shadow: 0 4px 67px -12px rgba(0, 0, 0, 0.13);
+
+  ${Shared.Modal};
 
   @media screen and (max-width: 375px) {
     max-width: 368px;
@@ -43,12 +43,12 @@ export const ModalTitle = styled.h2`
   margin-bottom: 20px;
 `
 
-export const ModalForm = styled.form`
+export const ModalForm = styled.form.attrs({
+  $column: true,
+})`
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+
+  ${Shared.FlexCenter};
 `
 
 export const ModalInput = styled.input`

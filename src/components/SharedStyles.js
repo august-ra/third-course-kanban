@@ -1,12 +1,14 @@
 import styled, { css } from "styled-components"
 
 
+/* shared styled components */
+
 export const Wrapper = styled.div`
   max-width: 100%;
   width: 100vw;
   min-height: 100vh;
   overflow: hidden;
-  background-color: ${(props) => props.theme.body};
+  background-color: ${(props) => props.theme.$body};
 `
 
 export const Container = styled.div`
@@ -20,29 +22,31 @@ export const Container = styled.div`
   }
 `
 
-export const Hover01 = css`
-  &:hover {
-    background-color: #33399b;
-  }
+/* shared styles */
+
+export const Modal = (props) => css`
+  display: block;
+  margin: 0 auto;
+  background-color: ${(props) => props.theme.$back};
+  width: 100%;
+  border-radius: 10px;
+  border: 0.7px solid ${(props) => props.theme.$popBlock};
+
+  ${props.$hasShadow && css`box-shadow: 0 4px 67px -12px rgba(0, 0, 0, 0.13);`};
 `
 
-export const Hover02 = css`
-  &:hover {
-    //background-color: #33399b;
-    color: #33399b;
-  }
-  &:hover::after {
-    border-left-color: #33399b;
-    border-bottom-color: #33399b;
-  }
+export const FlexCenter = (props) => css`
+  display: flex;
+  ${props.$column && css`flex-direction: column;`};
+  justify-content: center;
+  align-items: center;
 `
 
-export const Hover03 = css`
-  &:hover {
-    color: #FFFFFF;
-    background-color: #33399b;
-    border-color: #33399b;
-  }
+export const Subtitle = (props) => css`
+  color: ${props.theme.$text};
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
 `
 
 export const Orange = css`
@@ -78,18 +82,4 @@ export const PurpleNegative = css`
 export const Gray = css`
   background: #94A6BE;
   color: #FFFFFF;
-`
-
-
-export const PopTarget = css`
-  &:target {
-    display: block;
-  }
-`
-
-export const Subtitle = css`
-  color: ${(props) => props.theme.text};
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 1;
 `

@@ -1,45 +1,51 @@
-import { useEffect, useState } from "react"
+import { useEffect, useRef } from "react"
 import { useLocation, useNavigate, useParams } from "react-router-dom"
 import Pages from "../../../data/pages"
-import { useTasksContext } from "../../../context/hooks"
+import { useTasksContext, useUserContext } from "../../../context/hooks"
+import { useFormData } from "../../../hooks/useFormData"
+import { useErrorData } from "../../../hooks/useErrorData"
+import { useFlashData } from "../../../hooks/useFlashData"
 import * as Styled from "../PopCard.styled"
 import StyledButton from "../../../components/Shared/Button/StyledButton"
-import Calendar from "../../../components/Calendar/Calendar"
+import StatusRadioGroup from "../../../components/Shared/StatusRadioGroup/StatusRadioGroup"
 import TopicsRadioGroup from "../../../components/Shared/TopicsRadioGroup/TopicsRadioGroup"
+import Calendar from "../../../components/Calendar/Calendar"
+import FlashBox from "../../../components/Shared/FlashBox/FlashBox"
 import { TopicsColors } from "../../../data/topics"
 import { prevent } from "../../../lib/hooks"
+import API from "../../../lib/api"
 
 
 function PopBrowse() {
   const location = useLocation()
   const navigate = useNavigate()
+  const userContext = useUserContext()
   const tasksContext = useTasksContext()
   const { id } = useParams()
+  const descriptionInput = useRef()
 
-  const [formData, setFormData] = useState({
-    topic:       " ",
-    title:       "",
-    description: "",
-    date:        new Date(),
-    status:      "Без статуса",
-    color:       "",
-    isEditing:   location.pathname.endsWith(`/${Pages.EDIT}`),
-    isModified:  false,
-  })
+  const { flashData, setFlashData, clearFlashData } = useFlashData()
+  const { setErrorData, renderErrorBlock } = useErrorData()
+  const { formData, setFormData, updateFormData } = useFormData(initFormData())
 
-  function updateFormData(name, value) {
-    setFormData({
-      ...formData,
-      [name]:     value,
-      isModified: true,
-    })
+  function initFormData() {
+    return {
+      topic:       " ",
+      title:       "",
+      description: "",
+      date:        null,
+      status:      "Без статуса",
+      color:       "",
+      isEditing:   location.pathname.endsWith(`/${Pages.EDIT}`),
+      isModified:  false,
+    }
   }
 
   useEffect(() => {
     if (tasksContext.tasks.length === 0)
-      return // <Navigate to={Pages.MAIN} />
+      return
 
-    const task = tasksContext.getTaskById(id)
+    const task = tasksContext.currentTask ? tasksContext.currentTask : tasksContext.setCurrentTaskById(id)
 
     if (!task)
       return navigate(Pages.MAIN)
@@ -55,6 +61,10 @@ function PopBrowse() {
     })
   }, [tasksContext.tasks])
 
+  useEffect(() => {
+    descriptionInput.current.readOnly = !formData.isEditing
+  }, [formData.isEditing])
+
   function setActiveDate(value) {
     if (!formData.isEditing)
       return
@@ -68,6 +78,13 @@ function PopBrowse() {
     updateFormData(name, value)
   }
 
+  function handleChangeStatus(status) {
+    if (!status || formData.status === status)
+      return
+
+    updateFormData("status", status)
+  }
+
   function handleChangeTopic(topic) {
     if (!topic || formData.topic === topic)
       return
@@ -79,7 +96,7 @@ function PopBrowse() {
     if (formData.isEditing)
       return
 
-    formData.isEditing = true
+    updateFormData("isEditing", true)
 
     navigate(`${location.pathname}/${Pages.EDIT}`)
   }
@@ -88,11 +105,32 @@ function PopBrowse() {
     if (!formData.isEditing)
       return
 
-    formData.isEditing = false
+    API.updateTaskOnServer(id, formData, userContext.token)
+      .then((data) => {
+        clearFlashData()
 
-    // TODO: fetch changes to server
+        if (data && data.error) {
+          setFormData({
+            ...formData,
+            activity: false,
+          })
+          return setErrorData(data)
+        }
 
-    navigate(location.pathname.replace(`/${Pages.EDIT}`, ""))
+        updateFormData("isEditing", false)
+
+        setErrorData(null)
+
+        setFlashData({
+          timeout: 0,
+          message: "Задача успешно изменена",
+          action:  () => {
+            clearFlashData()
+            tasksContext.updateTasksFromServer(data.tasks)
+            navigate(location.pathname.replace(`/${Pages.EDIT}`, ""))
+          },
+        })
+      })
   }
 
   function handleCancelEditing() {
@@ -105,9 +143,24 @@ function PopBrowse() {
   }
 
   function handleDelete() {
-    // TODO: fetch deletion to server
+    API.deleteTaskOnServer(id, userContext.token)
+      .then((data) => {
+        clearFlashData()
 
-    closeThis()
+        if (data && data.error)
+          return setErrorData(data)
+
+        setErrorData(null)
+
+        setFlashData({
+          timeout: 5,
+          message: "Задача успешно удалена",
+          action:  () => {
+            tasksContext.updateTasksFromServer(data.tasks)
+            closeThis()
+          },
+        })
+      })
   }
 
   function closeThis() {
@@ -122,62 +175,64 @@ function PopBrowse() {
             <Styled.PopCardTopBlock>
               <Styled.PopCardTitle $clearMargin={true}>{formData.title}</Styled.PopCardTitle>
               {
-                !formData.isEditing && (
-                  <Styled.PopCardCategoriesTheme as={"div"} $color={formData.color} $active={true}>
-                    <Styled.PopCardCategoriesThemeText>{formData.topic}</Styled.PopCardCategoriesThemeText>
-                  </Styled.PopCardCategoriesTheme>
-                )
+                !formData.isEditing
+                  && (
+                    <Styled.PopCardCategoriesTheme as={"div"} $color={formData.color} $active={true}>
+                      <Styled.PopCardCategoriesThemeText>{formData.topic}</Styled.PopCardCategoriesThemeText>
+                    </Styled.PopCardCategoriesTheme>
+                  )
               }
             </Styled.PopCardTopBlock>
 
             <Styled.PopCardStatus>
               <Styled.PopCardStatusTitle>Статус</Styled.PopCardStatusTitle>
-
-              <Styled.PopCardStatusThemes>
-                <Styled.PopCardStatusTheme>
-                  <Styled.PopCardStatusThemeText>{formData.status}</Styled.PopCardStatusThemeText>
-                </Styled.PopCardStatusTheme>
-              </Styled.PopCardStatusThemes>
+              <StatusRadioGroup showAllStatuses={formData.isEditing} status={formData.status} handleChangeStatus={handleChangeStatus} />
             </Styled.PopCardStatus>
 
             <Styled.PopCardWrap>
               <Styled.PopCardForm id="formBrowseCard" action="#">
                 <Styled.PopCardFormBlock>
-                  <Styled.PopCardFormLabel htmlFor="textArea01">Описание задачи</Styled.PopCardFormLabel>
-                  <Styled.PopCardFormTaskDescription $height={240} name="text" id="textArea01" readOnly placeholder="Введите описание задачи..." value={formData.description} onChange={handleChangeText} />
+                  <Styled.PopCardFormLabel htmlFor="textArea">Описание задачи</Styled.PopCardFormLabel>
+                  <Styled.PopCardFormTaskDescription $name={false} $height={240} name="description" id="textArea" ref={descriptionInput} placeholder="Введите описание задачи..." value={formData.description} onChange={handleChangeText} />
                 </Styled.PopCardFormBlock>
               </Styled.PopCardForm>
 
-              <Calendar activeDate={formData.date.getBeggingOfDay()} setActiveDate={setActiveDate} />
+              {
+                formData.date
+                  && <Calendar activeDate={formData.date} setActiveDate={setActiveDate} />
+              }
             </Styled.PopCardWrap>
 
             {
-              formData.isEditing && (
-                <Styled.PopCardCategories>
-                  <Styled.PopCardCategoriesSubtitle>Категория</Styled.PopCardCategoriesSubtitle>
-                  <TopicsRadioGroup topic={formData.topic} handleChangeTopic={handleChangeTopic} />
-                </Styled.PopCardCategories>
-              )
+              formData.isEditing
+                && (
+                  <Styled.PopCardCategories>
+                    <Styled.PopCardCategoriesSubtitle>Категория</Styled.PopCardCategoriesSubtitle>
+                    <TopicsRadioGroup topic={formData.topic} handleChangeTopic={handleChangeTopic} />
+                  </Styled.PopCardCategories>
+                )
             }
 
             {
-              formData.isEditing
-                ? <Styled.PopCardButtonsGroup>
-                  <Styled.PopCardButtonsGroupInner>
-                    <StyledButton $primary={true} onClick={handleApplyEditing}>Сохранить</StyledButton>
-                    <StyledButton $primary={false} onClick={handleCancelEditing}>Отменить</StyledButton>
-                    <StyledButton $primary={false} onClick={handleDelete}>Удалить задачу</StyledButton>
-                  </Styled.PopCardButtonsGroupInner>
-                  <StyledButton $primary={true} onClick={closeThis}>Закрыть</StyledButton>
-                </Styled.PopCardButtonsGroup>
-                : <Styled.PopCardButtonsGroup>
-                  <Styled.PopCardButtonsGroupInner>
-                    <StyledButton $primary={false} $width={198} onClick={handleBeginEditing}>Редактировать задачу</StyledButton>
-                    <StyledButton $primary={false} onClick={handleDelete}>Удалить задачу</StyledButton>
-                  </Styled.PopCardButtonsGroupInner>
-                  <StyledButton $primary={true} onClick={closeThis}>Закрыть</StyledButton>
-                </Styled.PopCardButtonsGroup>
+              flashData.message
+                ? <FlashBox timeout={flashData.timeout} caption={flashData.message} doAction={flashData.action} />
+                : renderErrorBlock()
             }
+
+            <Styled.PopCardButtonsGroup>
+              <Styled.PopCardButtonsGroupInner>
+                {
+                  formData.isEditing
+                    ? <>
+                      <StyledButton $primary={true} disabled={!formData.activity} onClick={handleApplyEditing}>Сохранить</StyledButton>
+                      <StyledButton $primary={false} onClick={handleCancelEditing}>Отменить</StyledButton>
+                    </>
+                    : <StyledButton $primary={false} $width={198} onClick={handleBeginEditing}>Редактировать задачу</StyledButton>
+                }
+                <StyledButton $primary={false} onClick={handleDelete}>Удалить задачу</StyledButton>
+              </Styled.PopCardButtonsGroupInner>
+              <StyledButton $primary={!formData.isEditing} onClick={closeThis}>Закрыть</StyledButton>
+            </Styled.PopCardButtonsGroup>
           </Styled.PopCardContent>
         </Styled.PopCardBlock>
       </Styled.PopCardContainer>

@@ -2,15 +2,10 @@ import styled, { css } from "styled-components"
 import * as Shared from "../../SharedStyles"
 
 
-const StyledButton = styled.button.attrs(() => ({
+const StyledButton = styled.button.attrs({
   type: "button",
-}))`
-  ${(props) => props.$width
-    ? css`width: ${props.$width}px;`
-    : props.$width === 0
-      ? css`width: 100%;`
-      : props.$doWidth && css`width: 153px;`
-  };
+})`
+  ${getWidth};
 
   height: 30px;
   border-radius: 4px;
@@ -24,24 +19,25 @@ const StyledButton = styled.button.attrs(() => ({
     width: 100%;
     height: 100%;
     color: inherit;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+
+    ${Shared.FlexCenter};
   }
 
-  ${(props) => {
-    return props.$primary
-      ? MasterButton
-      : SlaveButton
-  }}
+  ${(props) => (
+    props.$primary
+      ? MasterButton(props)
+      : SlaveButton(props)
+  )};
 `
 
-const MasterButton = css`
+const MasterButton = (props) => css`
   color: #FFFFFF;
   background-color: #565EEF;
   border: none;
 
-  ${Shared.Hover01};
+  &:hover {
+    background-color: #33399b;
+  }
 
   &:disabled {
     color: #94A6BE;
@@ -52,20 +48,37 @@ const MasterButton = css`
     height: 40px;
     margin-right: 0;
     margin-bottom: 10px;
+    padding-inline: 4px;
   }
 `
 
-const SlaveButton = css`
-  color: ${(props) => props.theme.extra};
+const SlaveButton = (props) => css`
+  color: ${props.theme.$extra};
   background-color: transparent;
-  border: 0.7px solid ${(props) => props.theme.extra};
+  border: 0.7px solid ${props.theme.$extra};
 
-  ${Shared.Hover03};
+  &:hover {
+    color: #FFFFFF;
+    background-color: #33399b;
+    border-color: #33399b;
+  }
 
   @media only screen and (max-width: 375px) {
     width: 100%;
     height: 40px;
+    padding-inline: 4px;
   }
 `
+
+/* style logics */
+
+function getWidth(props) {
+  if (props.$width)
+    return css`width: ${props.$width}px;`
+  else if (props.$width === 0)
+    return css`width: 100%;`
+  else if (props.$doWidth)
+    return css`width: 153px;`
+}
 
 export default StyledButton

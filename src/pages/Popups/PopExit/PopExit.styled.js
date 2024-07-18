@@ -12,31 +12,28 @@ export const PopExit = styled.div`
   left: 0;
   z-index: 5;
 
-  ${Shared.PopTarget};
+  @media screen and (max-width: 375px) {
+    min-width: auto;
+  }
 `
 
-export const PopExitContainer = styled.div`
+export const PopExitContainer = styled.div.attrs({
+  $column: true,
+})`
   width: 100%;
   height: 100%;
   min-height: 100vh;
   padding: 0 16px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   background: rgba(0, 0, 0, 0.${(props) => props.theme.isLight() ? "4" : "8"});
+
+  ${Shared.FlexCenter};
 `
 
 export const PopExitBlock = styled.div`
-  display: block;
-  margin: 0 auto;
-  background-color: ${(props) => props.theme.back};
   max-width: 370px;
-  width: 100%;
   padding: 50px 60px;
-  border-radius: 10px;
-  border: 0.7px solid ${(props) => props.theme.popBlock};
-  box-shadow: 0 4px 67px -12px rgba(0, 0, 0, 0.13);
+
+  ${Shared.Modal};
 
   @media only screen and (max-width: 375px) {
     padding: 50px 20px;

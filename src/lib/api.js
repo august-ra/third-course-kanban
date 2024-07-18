@@ -52,6 +52,31 @@ const API = {
     return this.getDataFromEndpoint(this.tasksURI, params)
   },
 
+  updateTaskOnServer(taskID, task, token) {
+    const params = {
+      method:  "PUT",
+      headers: { Authorization: `Bearer ${token}` },
+      body:    JSON.stringify({
+        title:       task.title,
+        topic:       task.topic,
+        status:      task.status,
+        description: task.description,
+        date:        task.date,
+      }),
+    }
+
+    return this.getDataFromEndpoint(`${this.tasksURI}/${taskID}`, params)
+  },
+
+  deleteTaskOnServer(taskID, token) {
+    const params = {
+      method:  "DELETE",
+      headers: { Authorization: `Bearer ${token}` },
+    }
+
+    return this.getDataFromEndpoint(`${this.tasksURI}/${taskID}`, params)
+  },
+
 
   signIn(login, password) {
     const params = {

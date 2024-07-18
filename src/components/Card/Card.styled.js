@@ -20,7 +20,7 @@ export const CardItem = styled.div`
 export const Card = styled.div`
   width: 220px;
   height: 130px;
-  background-color: ${(props) => props.theme.back};
+  background-color: ${(props) => props.theme.$back};
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -81,7 +81,7 @@ export const CardTitle = styled.h3`
   font-size: 14px;
   font-weight: 500;
   line-height: 18px;
-  color: ${(props) => props.theme.text};
+  color: ${(props) => props.theme.$text};
   margin-bottom: 10px;
 `
 

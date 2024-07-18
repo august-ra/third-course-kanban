@@ -12,8 +12,8 @@ export const Page404TextBlock = styled.div`
   position: absolute;
   top: 400px;
   display: flex;
-  gap: 16px;
   flex-direction: column;
+  gap: 16px;
 `
 
 export const Page404Title = styled.h3`

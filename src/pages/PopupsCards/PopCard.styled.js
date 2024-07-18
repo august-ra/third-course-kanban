@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom"
 import styled, { css } from "styled-components"
 import * as Shared from "../../components/SharedStyles"
-import StyledButton from "../../components/Shared/Button/StyledButton"
 
 
 export const PopCard = styled.div`
@@ -14,24 +13,22 @@ export const PopCard = styled.div`
   left: 0;
   z-index: 6;
 
-  ${Shared.PopTarget};
-
   @media screen and (max-width: 660px) {
     top: 70px;
   }
 `
 
-export const PopCardContainer = styled.div`
+export const PopCardContainer = styled.div.attrs({
+  $column: true,
+})`
   width: 100%;
   height: 100%;
   min-height: 100vh;
   padding: 0 16px;
   position: fixed;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   background: rgba(0, 0, 0, 0.${(props) => props.theme.isLight() ? "4" : "8"});
+
+  ${Shared.FlexCenter};
 
   @media screen and (max-width: 660px) {
     padding: 0;
@@ -39,18 +36,14 @@ export const PopCardContainer = styled.div`
   }
 `
 
-export const PopCardBlock = styled.div`
-  display: block;
-  margin: 0 auto;
-  background-color: ${(props) => props.theme.back};
+export const PopCardBlock = styled.div.attrs((props) => {
+  $hasNoShadow: props.theme.isLight()
+})`
   max-width: 630px;
-  width: 100%;
   padding: 40px 30px 48px;
-  border-radius: 10px;
-  border: 0.7px solid ${(props) => props.theme.popBlock};
   position: relative;
 
-  ${(props) => props.theme.isDark() && css`box-shadow: 0 4px 67px -12px rgba(0, 0, 0, 0.13);`};
+  ${Shared.Modal};
 
   @media screen and (max-width: 660px) {
     border-radius: 0;
@@ -127,7 +120,7 @@ const PopCardFormInput = css`
   outline: none;
   padding: 14px;
   color: inherit;
-  background: ${(props) => props.$height ? "#EAEEF6" : "transparent"};
+  background: transparent;
   border: 0.7px solid rgba(148, 166, 190, 0.4);
   border-radius: 8px;
   font-family: inherit;
@@ -164,7 +157,7 @@ export const PopCardFormTaskDescription = styled.textarea`
   ${PopCardFormInput};
 
   &[readonly] {
-    background: ${(props) => props.theme.body};
+    background: ${(props) => props.theme.$body};
   }
 `
 
@@ -180,7 +173,6 @@ export const PopCardCategoriesSubtitle = styled.p`
 
 export const PopCardCategoriesThemes = styled.fieldset`
   display: flex;
-  flex-wrap: nowrap;
   align-items: flex-start;
   justify-content: flex-start;
   border: none;
@@ -197,10 +189,6 @@ export const PopCardCategoriesTheme = styled.label`
   opacity: ${(props) => props.$active ? "1 !important;" : "0.4;"};
 
   ${(props) => props.theme.getCSSForColor(props.$color)};
-
-  @media screen and (max-width: 495px) {
-    display: none;
-  }
 `
 
 export const PopCardCategoriesThemeText = styled.p`
@@ -210,8 +198,16 @@ export const PopCardCategoriesThemeText = styled.p`
   white-space: nowrap;
 `
 
-export const PopCardButtonCreate = styled(StyledButton)`
-  float: right;
+export const PopCardBottomLine = styled.div`
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  align-items: center;
+
+  &>*:nth-child(2) {
+    flex-grow: 1;
+    align-self: stretch;
+  }
 `
 
 /* status */
@@ -241,7 +237,7 @@ export const PopCardStatusTheme = styled.div`
   margin-right: 7px;
   margin-bottom: 7px;
 
-  ${Shared.Gray};
+  ${(props) => props.$active && Shared.Gray};
 `
 
 export const PopCardStatusThemeText = styled.p`
@@ -256,6 +252,7 @@ export const PopCardButtonsGroup = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  margin-top: 20px;
   
   button {
     height: 30px;

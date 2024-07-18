@@ -127,3 +127,25 @@ Date.prototype.getFiveOrSixWeeks = function () {
 
   return result
 }
+
+/* cache */
+
+const cachedMonths = {
+  length: 0,
+
+  getCalendar(date) {
+    const print = date.shortBackwardPrint()
+
+    if (this.hasOwnProperty(print))
+      return this[print]
+
+    const result = date.getFiveOrSixWeeks()
+
+    cachedMonths[print] = result
+    ++cachedMonths.length
+
+    return result
+  },
+}
+
+export default cachedMonths

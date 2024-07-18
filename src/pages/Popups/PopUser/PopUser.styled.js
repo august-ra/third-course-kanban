@@ -1,5 +1,4 @@
 import styled, { css } from "styled-components"
-import * as Shared from "../../../components/SharedStyles"
 
 
 export const PopUser = styled.div`
@@ -22,12 +21,10 @@ export const PopUser = styled.div`
     background: #202229;
     box-shadow: 0 10px 39px 0 rgba(148, 166, 190, 0.40);
   `};
-
-  ${Shared.PopTarget};
 `
 
 export const PopUserName = styled.p`
-  color: ${(props) => props.theme.text};
+  color: ${(props) => props.theme.$text};
   font-size: 14px;
   font-weight: 500;
   line-height: 21px;
@@ -51,7 +48,7 @@ export const PopUserTheme = styled.div`
 `
 
 export const PopUserThemeName = styled.p`
-  color: ${(props) => props.theme.text};
+  color: ${(props) => props.theme.$text};
   font-size: 14px;
   line-height: 21px;
   letter-spacing: -0.14px;
@@ -62,7 +59,7 @@ export const PopUserThemeCheckbox = styled.input`
   width: 24px;
   height: 13px;
   border-radius: 100px;
-  background: ${(props) => props.theme.body};
+  background: ${(props) => props.theme.$body};
   outline: none;
   appearance: none;
 

@@ -1,11 +1,15 @@
-import { useState } from "react"
+import React from "react"
 import { useNavigate } from "react-router-dom"
 import Pages from "../../../data/pages"
 import { useTasksContext, useUserContext } from "../../../context/hooks"
+import { useFormData } from "../../../hooks/useFormData"
+import { useErrorData } from "../../../hooks/useErrorData"
+import { useFlashData } from "../../../hooks/useFlashData"
 import * as Styled from "../PopCard.styled"
+import StyledButton from "../../../components/Shared/Button/StyledButton"
 import TopicsRadioGroup from "../../../components/Shared/TopicsRadioGroup/TopicsRadioGroup"
 import Calendar from "../../../components/Calendar/Calendar"
-import ErrorBlock from "../../../components/Shared/ErrorBlock/ErrorBlock"
+import FlashBox from "../../../components/Shared/FlashBox/FlashBox"
 import { prevent } from "../../../lib/hooks"
 import API from "../../../lib/api"
 
@@ -14,22 +18,17 @@ function PopNewCard() {
   const navigate = useNavigate()
   const userContext = useUserContext()
   const tasksContext = useTasksContext()
-  const [errorData, setErrorData] = useState(null)
-  const [formData, setFormData] = useState({
+
+  const { flashData, setFlashData, clearFlashData } = useFlashData()
+  const { setErrorData, renderErrorBlock } = useErrorData()
+  const { formData, setFormData, updateFormData } = useFormData({
     topic:       "",
     title:       "",
     description: "",
     date:        null,
+    status:      "Без статуса",
     isModified:  false,
   })
-
-  function updateFormData(name, value) {
-    setFormData({
-      ...formData,
-      [name]:     value,
-      isModified: true,
-    })
-  }
 
   function setActiveDate(value) {
     updateFormData("date", value)
@@ -51,27 +50,28 @@ function PopNewCard() {
   function handleAddTask(event) {
     event.preventDefault()
 
-    const newTask = {
-      ...formData,
-      status: "Без статуса",
-    }
-
-    API.createTaskOnServer(newTask, userContext.token)
+    API.createTaskOnServer(formData, userContext.token)
       .then((data) => {
-        if (data && data.error)
+        clearFlashData()
+
+        if (data && data.error) {
+          setFormData({
+            ...formData,
+            activity: false,
+          })
           return setErrorData(data)
+        }
 
         setErrorData(null)
-        tasksContext.setTasks(data.tasks.map((task) => ({
-          id:          task._id,
-          topic:       task.topic,
-          title:       task.title,
-          description: task.description,
-          date:        new Date(task.date),
-          status:      task.status,
-        })))
 
-        closeThis()
+        setFlashData({
+          timeout: 5,
+          message: "Задача успешно создана",
+          action:  () => {
+            tasksContext.updateTasksFromServer(data.tasks)
+            closeThis()
+          },
+        })
       })
   }
 
@@ -107,15 +107,21 @@ function PopNewCard() {
               <TopicsRadioGroup topic={formData.topic} handleChangeTopic={handleChangeTopic} />
             </Styled.PopCardCategories>
 
-            {
-              errorData
-                && <ErrorBlock code={errorData.code} message={errorData.message}/>
-            }
+            <Styled.PopCardBottomLine>
+              <StyledButton $primary={true} $width={132} disabled={!formData.activity} onClick={handleAddTask}>Создать задачу</StyledButton>
 
-            <Styled.PopCardButtonCreate $primary={true} $width={132} onClick={handleAddTask}>Создать задачу</Styled.PopCardButtonCreate>
+              {
+                renderErrorBlock()
+              }
+            </Styled.PopCardBottomLine>
           </Styled.PopCardContent>
         </Styled.PopCardBlock>
       </Styled.PopCardContainer>
+
+      {
+        flashData.message
+          && <FlashBox timeout={flashData.timeout} caption={flashData.message} doAction={flashData.action} />
+      }
     </Styled.PopCard>
   )
 }
